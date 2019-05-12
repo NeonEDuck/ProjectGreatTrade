@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('t0505:server');
+var debug = require('debug')('GT:server');
 var http = require('http');
 
 /**

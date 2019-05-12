@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapapapapa</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+    </head>
+
+    <body>
+        <div class = "container">
+            <div class = "header">           
+            </div>
+
+            <div class = "navbar">
+            </div>
+
+            <div class = "content">
+                <h1>商品清單</h1>
+
+                <form action = "/product/query" method = "get">
+                    <div class="form">
+                        <span class="name">商品名稱: </span>
+                        <span class="value"><input type="text" name="proname"></span>
+                        <br/>    
+                                        
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="查詢" ></span>    
+                    </div>    
+                </form>   
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="25%"></th>
+                            <th width="15%">商品名稱</th>
+                            <th width="15%">標籤</th>
+                            <th width="20%">商品介紹</th>
+                            <th width="15%">單價</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i<items.length; i++) {%>
+                            <tr>
+                                <img src = "/imgs/item.jpg"> 
+                                <td><a href="/product/one/<%= items[i].proname %>"><%= items[i].proname %></a></td>
+                                <td><%= items[i].label %></td>
+                                <td><%= items[i].description %></td>
+                                <td><%= items[i].price %></td>
+                            </tr> 
+                        <% } %> 
+                    </tbody>
+                </table>
+            </div>
+
+            <div class = "footer">
+            </div>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src = "/js/public_div.js"></script>
+</html>

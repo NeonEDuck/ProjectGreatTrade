@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapapapapa</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+    </head>
+
+    <body>
+        <div class = "container">
+            <div class = "header">           
+            </div>
+
+            <div class = "navbar">
+            </div>
+
+            <div class = "content">
+                <h2>產品新增 </h2>
+
+                
+                <form class = "form" action = "/product/add" method = "post">
+                    <div class="form">
+                        <div class = "left">
+                        <div id="gallery"></div>
+                        <input type="file" id = "fileinput" accept = "image/*" style = "display: none;" />
+                        <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+                        </div>
+                        
+                        <span class="name">商品名稱: </span>
+                        <span class="value"><input type="text" name="proname" placeholder="請輸入名稱"></span>
+                        <br/>
+                                        
+                        <span class="name">單價: </span>
+                        <span class="value"><input type="text" name="price" placeholder="請顯示價格"></span>
+                        <br/>
+                                                            
+                        <span class="name">標籤: </span>
+                        <span class="value"><input type="number" name="label" placeholder="請選擇標籤"></span>
+                        <br/>
+                                                
+                        <span class="name">商品介紹: </span>
+                        <span class="value"><input type="text" name="description" placeholder="請輸入文字"></span>
+                        <br/>	    
+                        
+                        <span class="name">付費方式: </span>
+                        <span class="value"><input type="button" name="paymethod" value="請輸入可行方法" ></span>
+                        <br/>	
+
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="新增" ></span>    
+                    </div>
+                </form>  
+
+            </div>
+
+            <div class = "footer">
+            </div>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script>
+        $("div.form").css("width", $("form.form").css("width"));
+    </script>
+    <script src = "/js/public_div.js"></script>
+    <script src = "/js/preview_image.js"></script>
+
+</html>
