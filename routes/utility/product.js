@@ -9,7 +9,7 @@ const sql = require('./asyncDB');
 var add = async function(newData){
     var result;
 
-    await sql('INSERT INTO product (price, label, description, paymethod, picture) VALUES ($1, $2, $3, $4, $5)', [newData.price, newData.label, newData.description, newData.paymethod, newData.picture])
+    await sql('INSERT INTO product (proname, price, label, description, paymethod, picture) VALUES ($1, $2, $3, $4, $5)', [newData.price, newData.label, newData.description, newData.paymethod, newData.picture])
         .then((data) => {
             result = 0;  
         }, (error) => {

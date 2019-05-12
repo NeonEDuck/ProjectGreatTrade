@@ -151,28 +151,33 @@ ul.pagination:after{
 /*---------------------*/
 div.form{
     border: 1px dotted #666;
+    position: relative;
+    display: inline-block;
     padding: 10px 20px;
     margin: 10px 0;
+    box-sizing: border-box;
+}
+div.aaa{
+    float: left;
+    position: relative;
 }
 
-div.form span{
-    height:40px;
-    line-height:40px;
+div.left{
+    float: left;
+    position: relative;
 }
 
-div.form select{
-    height:27px;
-    line-height:40px;
+div.left:before,
+div.left:after {
+    content: "";
+    display:block;
+}
+div.left:after {
+    clear: both;
 }
 
 #gallery{
     border: 2px solid #444;
     width: 400px;
     height: 520px;
-}
-
-div.left:after {
-    clear: both;
-    display: table;
-    content: '';
 }
