@@ -7,6 +7,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//------------------------------------------------------------
+// 增加引用模組
+//------------------------------------------------------------
+var product_add_form = require('./routes/product_add_form');
+var product_add = require('./routes/product_add');
+//------------------------------------------------------------
+
 var app = express();
 
 // view engine setup
@@ -18,7 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//-----------------------------------------
+// 設定模組使用方式
+//-----------------------------------------
+app.use('/product/add/form', product_add_form);
+app.use('/product/add', product_add);
+//-----------------------------------------
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

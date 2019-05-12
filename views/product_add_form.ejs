@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapapapapa</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+    </head>
+
+    <body>
+        <div class = "container">
+            <div class = "header">           
+            </div>
+
+            <div class = "navbar">
+            </div>
+
+            <div class = "content">
+                <h2>產品新增 </h2>
+
+                <form action = "/product/add" method = "post">
+                    <div class="form">
+                        <div id="gallery"></div>
+                        <input type="file" id = "fileinput" accept = "image/*" style = "display: none;" />
+                        <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+                        <br/>
+                        
+                        <span class="name">產品編號: </span>
+                        <span class="value"><input type="text" name="prono" maxlength="4"></span>
+                        <br/>
+                                        
+                        <span class="name">產品名稱: </span>
+                        <span class="value"><input type="text" name="proname" ></span>
+                        <br/>
+                                                            
+                        <span class="name">單價: </span>
+                        <span class="value"><input type="number" name="price" ></span>
+                        <br/>
+                                                
+                        <span class="name">盤點日期: </span>
+                        <span class="value"><input type="date" name="inventorydate" ></span>
+                        <br/>	    
+                                        
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="新增" ></span>    
+                    </div>
+                </form>  
+
+            </div>
+
+            <div class = "footer">
+            </div>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src = "js/public_div.js"></script>
+    <script src = "js/preview_image.js"></script>
+
+</html>

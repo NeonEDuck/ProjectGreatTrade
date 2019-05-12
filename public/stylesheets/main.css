@@ -4,6 +4,7 @@
 /* 編排網頁                   */
 /*---------------------------*/
 html, body{
+    box-sizing: border-box;
     font-family: 'Noto Sans TC', sans-serif; 
     padding: 0px;
     margin: 0px;
@@ -14,12 +15,14 @@ html, body{
 /* 編排<容器>區塊             */
 /*---------------------------*/
 div.container{
+    box-sizing: border-box;
 }
 
 /*---------------------------*/
 /* 編排<標題>區塊             */
 /*---------------------------*/
 div.header{
+    box-sizing: border-box;
     height:80px;
     background:url(../images/header.jpg);
 }
@@ -29,18 +32,35 @@ div.header{
 /* 編排<內文>區塊             */
 /*---------------------------*/
 div.content{
+    box-sizing: border-box;
     background:#fff;
     width:1000px;
     margin:0px auto 0px auto;
     box-shadow:0px 0px 10px 0px #000;
+    min-height: calc(100vh - 80px - 80px - 3em);
     padding:20px 30px;    
     line-height:30px;
     text-align:justify;
 }
 div.navbar{
+    box-sizing: border-box;
     text-align: center;
     background: #000;
     height: 3em;
+}
+
+div.footer{
+    box-sizing: border-box;
+    height:80px;
+    background: #666;
+    color: #fff;
+    text-align: center;
+    padding: 20px 30px;
+    margin: 0px auto 0px auto;
+}
+
+div.footer p{
+    margin-top: 0px;
 }
 
 /*---------------------*/
@@ -145,15 +165,14 @@ div.form select{
     line-height:40px;
 }
 
-/*---------------------------*/
-/* 編排<表尾>區塊             */
-/*---------------------------*/
-div.footer{
-    height:50px;
-    line-height:50px;
-    background:#555;
-    color:#fff;
-    font-size:13px;
-    text-align:center;
-    letter-spacing:1px;
+#gallery{
+    border: 2px solid #444;
+    width: 400px;
+    height: 520px;
+}
+
+div.left:after {
+    clear: both;
+    display: table;
+    content: '';
 }
