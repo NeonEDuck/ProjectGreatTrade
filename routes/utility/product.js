@@ -19,5 +19,51 @@ var add = async function(newData){
     return result;
 }
 
+var query = async function(prono){
+    var result={};
+    
+    await sql('SELECT * FROM product WHERE prono = $1', [prono])
+        .then((data) => {
+            if(data.rows.length > 0){
+                result = data.rows[0];   
+            }else{
+                result = -1;
+            }    
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+
+var list = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM product ORDER BY prono')
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+
+var remove = async function(prono){
+    var result;
+
+    await sql('DELETE FROM product WHERE prono = $1', [prono])
+        .then((data) => {
+            result = data.rowCount;  
+        }, (error) => {
+            result = -1;
+        });
+		
+    return result;
+}
+
 //匯出
 module.exports = {add};
+module.exports = {remove};
+module.exports = {list};
+module.exports = {query};

@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 //------------------------------------------------------------
 var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
+var product_list = require('./routes/product_list');
 //------------------------------------------------------------
 
 var app = express();
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //-----------------------------------------
 app.use('/product/add/form', product_add_form);
 app.use('/product/add', product_add);
+app.use('/product/list', product_list);
 //-----------------------------------------
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
