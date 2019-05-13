@@ -4,7 +4,30 @@
         <title>papapapapapa</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
-        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+        <link href="/stylesheets/main.css" rel="stylesheet"/>
+        <style>
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button{ 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+            input{
+                box-sizing: border-box;
+            }
+
+            span.hint{
+                position: relative;
+                color: #757575;
+                font-size: 15px;
+                display: block;
+                line-height:15px;
+            }
+            div.item{
+                margin: 0;
+                padding: 0;
+                margin-bottom: 0.5em;
+            }
+        </style>
     </head>
 
     <body>
@@ -27,25 +50,40 @@
                         <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                         </div>
                         
-                        <span class="name">商品名稱: </span>
-                        <span class="value"><input type="text" name="proname" placeholder="請輸入名稱"></span>
-                        <br/>
-                                        
-                        <span class="name">單價: </span>
-                        <span class="value"><input type="text" name="price" placeholder="請顯示價格"></span>
-                        <br/>
-                                                            
-                        <span class="name">標籤: </span>
-                        <span class="value"><input type="number" name="label" placeholder="請選擇標籤"></span>
-                        <br/>
-                                                
-                        <span class="name">商品介紹: </span>
-                        <span class="value"><input type="text" name="description" placeholder="請輸入文字"></span>
-                        <br/>	    
+                        <div class = "item">   
+                            <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" style = "font-size: 30px"></span>
+                        </div>
+
+                        <div class = "item">          
+                            <span class="name">單價: </span>
+                            <span class="value"><input type="number" name="price" placeholder="" style = "width: 50px"></span>
+                            <br/>
+                            <span class="hint" style = "left: 40px;">(請輸入價格)</span>
+                        </div>
+
+                        <div class = "item">          
+                            <span class="name">數量: </span>
+                            <span class="value"><input type="number" name="amt" placeholder="" style = "width: 50px"></span>
+                            <br/>
+                            <span class="hint" style = "left: 40px;">(請輸入數量)</span>
+                        </div>
+
+                        <div class = "item">                     
+                            <span class="name">標籤: </span>
+                            <span class="value"><input type="button" name="label" value="選擇標籤"></span>
+                        </div>
+
+                        <div class = "item">
+                            <span class="name" style = "vertical-align: top">商品介紹: </span>
+                            <span class="value"><textarea name="description" placeholder="請輸入文字" textarea cols="40" rows="7" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
+                            <br/>
+                            <span class="hint" style = "left: 72px;">(最大字數限制為255個字)</span>
+                        </div>
                         
-                        <span class="name">付費方式: </span>
-                        <span class="value"><input type="button" name="paymethod" value="請輸入可行方法" ></span>
-                        <br/>	
+                        <div class = "item">
+                            <span class="name">付費方式: </span>
+                            <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
+                        </div>
 
                         <span class="name"></span>
                         <span class="value"><input type="submit" value="新增" ></span>    

@@ -157,14 +157,11 @@ div.form{
     margin: 10px 0;
     box-sizing: border-box;
 }
-div.aaa{
-    float: left;
-    position: relative;
-}
 
 div.left{
     float: left;
     position: relative;
+    margin-right: 2em;
 }
 
 div.left:before,

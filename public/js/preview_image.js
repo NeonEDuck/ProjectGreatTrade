@@ -13,12 +13,14 @@ function previewImage(file) {
 
     var img = document.createElement("img");
     img.file = file;
-    img.width = 300;
+    _gw = parseInt($("#gallery").css("width"));
+    alert(_gw);
+    img.width = _gw;
     _img = new Image();
     var _URL = window.URL || window.webkitURL;
     _img.src = _URL.createObjectURL(file);
     _img.onload = function () {
-        var n = this.height * (300 / this.width);
+        var n = this.height * (_gw / this.width);
         $("#gallery").css("height" ,n);
     };
 

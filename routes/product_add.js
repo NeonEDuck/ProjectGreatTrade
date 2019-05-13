@@ -6,18 +6,19 @@ const product = require('./utility/product');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
-    var price = Number(req.body.price);                   
-    var label = req.body.label;              
+    var proname = req.body.proname;
+    var price = Number(req.body.price);
+    var amt = Number(req.body.amt);
     var description = req.body.description;
-    var picture = req.body.picture;  //取得盤點日期
+
+    //var picture = req.body.picture;
 
     // 建立一個新資料物件
-    var newData={
+    var newData={        
+        proname:proname,
+        amt:amt,
         price:price,
-        label:label,
-        description:description,
-        paymethod:paymethod,
-        picture:picture
+        description:description
     } 
     
     product.add(newData).then(d => {
