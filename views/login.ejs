@@ -9,26 +9,22 @@
 
     <body>
          <div class = "content">
-                <h2>登入</h2>
+            <h2>登入</h2>
 
-                    <div class="form">
-                        <div id="gallery"></div>
-                        <input type="file" id = "fileinput" accept = "image/*" style = "display: none;" />
-                        <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
-                        <br/>
-                        
-                        <span class="name">帳號: </span>
-                        <span class="value"><input type="text" name="memid" maxlength="4"></span>
-                        <br/>
-                                        
-                        <span class="name">密碼: </span>
-                        <span class="value"><input type="text" name="mempassword" ></span>
-                        <br/>
-                                                            
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="登入" ></span>  
-                        <br/>   
-                    </div>
+            <table>
+                <tr>
+                    <td>帳號</td>
+                    <td><%= item.account %></td>
+                </tr>
+                <tr>
+                    <td>密碼</td>
+                    <td><%= item.password %></td>
+                </tr>
+
+                <span class="name"></span>
+                <span class="value"><input type="submit" value="登入" ></span>                                                                                    
+            </table>  
+        </div>
                 </form>  
 
             </div>

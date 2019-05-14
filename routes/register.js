@@ -6,25 +6,29 @@ const register = require('./utility/register');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
-    var price = Number(req.body.price);                   
+    var Name = req.body.Name;                  
     var label = req.body.label;              
-    var description = req.body.description;
-    var picture = req.body.picture;  //取得盤點日期
+    var Nick = req.body.Nick;
+    var Email = req.body.Email;  
+    var password = Number(req.body.password);
+    var Birthday = Number(req.body.Telephone);
+    var Telephone = Number(req.body.Telephone);
 
     // 建立一個新資料物件
     var newData={
-        price:price,
-        label:label,
-        description:description,
-        paymethod:paymethod,
-        picture:picture
+        Name:Name,
+        Nick:Nick,
+        Email:Email,
+        password:password,
+        Birthday:Birthday,
+        Telephone:Telephone
     } 
     
-    product.add(newData).then(d => {
+    register.add(newData).then(d => {
         if (d==0){
-            res.render('addSuccess');  //傳至成功頁面
+            res.render('registerSuccess');  //傳至成功頁面
         }else{
-            res.render('addFail');     //導向錯誤頁面
+            res.render('registerFail');     //導向錯誤頁面
         }  
     })
 });
