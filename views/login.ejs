@@ -9,21 +9,20 @@
 
     <body>
          <div class = "content">
-            <h2>登入</h2>
+            <h2>使用者登入 </h2>
 
-            <table>
-                <tr>
-                    <td>帳號</td>
-                    <td><%= item.account %></td>
-                </tr>
-                <tr>
-                    <td>密碼</td>
-                    <td><%= item.password %></td>
-                </tr>
-
-                <span class="name"></span>
-                <span class="value"><input type="submit" value="登入" ></span>                                                                                    
-            </table>  
+<form action = "/user/login" method = "post">
+    <div class="form">
+        <span class="name">帳號 </span>
+        <span class="value"><input type="text" name="id"></span>
+        <br/>
+                                    
+        <span class="name">密碼 </span>
+        <span class="value"><input type="password" name="password"></span>
+        <br/>
+                    
+        <span class="name"></span>
+        <span class="value"><input type="submit" value="登入" ></span>    
         </div>
                 </form>  
 

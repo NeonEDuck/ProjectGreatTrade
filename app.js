@@ -13,6 +13,12 @@ var usersRouter = require('./routes/users');
 var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
+
+var login_form = require('./routes/login_form');
+var login = require('./routes/login');
+var log_out = require('./routes/log_out');
+var login_show = require('./routes/login_show');
+//------------------------------------------------------------
 //------------------------------------------------------------
 
 var app = express();
@@ -20,6 +26,12 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+//--------------------------------------------------------------------
+// 增加引用express-session
+//--------------------------------------------------------------------
+var session = require('express-session');
+app.use(session({secret: '請更改成一個隨機字串用來加密產生的signedCookie', cookie: { maxAge: 60000 }}));
+//--------------------------------------------------------------------
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,6 +44,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/product/add/form', product_add_form);
 app.use('/product/add', product_add);
 app.use('/product/list', product_list);
+
+app.use('/user/login/form', login_form);
+app.use('/user/login', login);
+app.use('/user/logout', log_out);
+app.use('/user/show', login_show);
+//-----------------------------------------
+
 //-----------------------------------------
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
