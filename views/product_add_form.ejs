@@ -42,54 +42,57 @@
                 <h2>產品新增 </h2>
 
                 
-                <form class = "form" action = "/product/add" method = "post">
+                <form class = "form" enctype="multipart/form-data" action = "/product/add" method = "post">
                     <div class="form">
+
                         <div class = "left">
-                        <div id="gallery"></div>
-                        <input type="file" id = "fileinput" accept = "image/*" style = "display: none;" />
-                        <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+                            <div id="gallery"></div>
+                            <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" style = "display: none;" /></span>
+                            <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                         </div>
                         
-                        <div class = "item">   
-                            <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" style = "font-size: 30px"></span>
-                        </div>
+                        <div class = "right">
+                            <div class = "item">   
+                                <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" autocomplete="off" style="font-size: 30px;"></span>
+                            </div>
 
-                        <div class = "item">          
-                            <span class="name">單價: </span>
-                            <span class="value"><input type="number" name="price" placeholder="" style = "width: 50px"></span>
-                            <br/>
-                            <span class="hint" style = "left: 40px;">(請輸入價格)</span>
-                        </div>
+                            <div class = "item">          
+                                <span class="name">單價: </span>
+                                <span class="value"><input type="number" name="price" placeholder="" style = "width: 50px"></span>
+                                <br/>
+                                <span class="hint" style = "left: 40px;">(請輸入價格)</span>
+                            </div>
 
-                        <div class = "item">          
-                            <span class="name">數量: </span>
-                            <span class="value"><input type="number" name="amt" placeholder="" style = "width: 50px"></span>
-                            <br/>
-                            <span class="hint" style = "left: 40px;">(請輸入數量)</span>
-                        </div>
+                            <div class = "item">          
+                                <span class="name">數量: </span>
+                                <span class="value"><input type="number" name="amt" placeholder="" style = "width: 50px"></span>
+                                <br/>
+                                <span class="hint" style = "left: 40px;">(請輸入數量)</span>
+                            </div>
 
-                        <div class = "item">                     
-                            <span class="name">標籤: </span>
-                            <span class="value"><input type="button" name="label" value="選擇標籤"></span>
-                        </div>
+                            <div class = "item">                     
+                                <span class="name">標籤: </span>
+                                <span class="value"><input type="button" name="label" value="選擇標籤"></span>
+                            </div>
 
-                        <div class = "item">
-                            <span class="name" style = "vertical-align: top">商品介紹: </span>
-                            <span class="value"><textarea name="description" placeholder="請輸入文字" textarea cols="40" rows="7" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
-                            <br/>
-                            <span class="hint" style = "left: 72px;">(最大字數限制為255個字)</span>
-                        </div>
-                        
-                        <div class = "item">
-                            <span class="name">付費方式: </span>
-                            <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
+                            <div class = "item">
+                                <span class="name" style = "vertical-align: top">商品介紹: </span>
+                                <span class="value"><textarea name="description" placeholder="請輸入文字" textarea cols="40" rows="7" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
+                                <br/>
+                                <span class="hint" style = "left: 72px;">(最大字數限制為255個字)</span>
+                            </div>
+                            
+                            <div class = "item">
+                                <span class="name">付費方式: </span>
+                                <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
+                            </div>
                         </div>
 
                         <span class="name"></span>
                         <span class="value"><input type="submit" value="新增" ></span>    
                     </div>
+                    
                 </form>  
-
             </div>
 
             <div class = "footer">
