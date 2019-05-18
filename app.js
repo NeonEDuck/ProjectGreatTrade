@@ -6,14 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
-//------------------------------------------------------------
-// 增加引用模組
-//------------------------------------------------------------
 var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
-//------------------------------------------------------------
+var product_one = require('./routes/product_one');
 
 var app = express();
 
@@ -26,15 +22,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//-----------------------------------------
-// 設定模組使用方式
-//-----------------------------------------
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 app.use('/product/add/form', product_add_form);
 app.use('/product/add', product_add);
 app.use('/product/list', product_list);
-//-----------------------------------------
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/product/one', product_one);
+
+app.use(express.static('public/picture'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
