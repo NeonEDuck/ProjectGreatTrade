@@ -14,7 +14,6 @@ function previewImage(file) {
     var img = document.createElement("img");
     img.file = file;
     _gw = parseInt($("#gallery").css("width"));
-    alert(_gw);
     img.width = _gw;
     _img = new Image();
     var _URL = window.URL || window.webkitURL;

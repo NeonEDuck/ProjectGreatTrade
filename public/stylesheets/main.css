@@ -163,9 +163,15 @@ div.left{
     position: relative;
     margin-right: 2em;
 }
+div.right{
+    float: left;
+    position: relative;
+}
 
 div.left:before,
-div.left:after {
+div.left:after,
+div.right:before,
+div.right:after {
     content: "";
     display:block;
 }
