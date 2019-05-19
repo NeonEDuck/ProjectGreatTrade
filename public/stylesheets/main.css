@@ -41,6 +41,7 @@ div.content{
     padding:20px 30px;    
     line-height:30px;
     text-align:justify;
+    display: inline-block;
 }
 div.navbar{
     box-sizing: border-box;

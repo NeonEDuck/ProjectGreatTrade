@@ -18,28 +18,25 @@
             <div class = "content">
                 <h1>商品清單</h1>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th width="25%">商品名稱</th>
-                            <th width="15%">標籤</th>
-                            <th width="15%">商品介紹</th>
-                            <th width="20%">單價</th>
-                            <th width="15%">單價</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i=0; i<items.length; i++) {%>
-                            <tr>
-                                <img src = "/imgs/item.jpg"> 
-                                <td><a href="/product/one/<%= items[i].prono %>"><%= items[i].proname %></a></td>
-                                <!--<td><%= items[i].label %></td>-->
-                                <td><%= items[i].description %></td>
-                                <td><%= items[i].price %></td>
-                            </tr> 
-                        <% } %> 
-                    </tbody>
-                </table>
+                <form action = "/product/query" method = "get">
+                    <div class="form">
+                        <span class="name">商品名稱: </span>
+                        <span class="value"><input type="text" name="pronname"></span>
+                        <br/>    
+                                        
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="查詢" ></span>    
+                    </div>    
+                </form>                    
+
+                <% for(var i=0; i<items.length; i++) {%>
+                    <div class = "list">
+                            <img src = "pictures/item[i].jpg" , height = "150">
+                            <a href="/product/one/<%= items[i].prono %>"> <h1>商品名稱: <%= items[i].proname %></h1></a>
+                            <p>售價: <%= items[i].price %></p>
+                            <h2>商品介紹: <%= items[i].description %></h2>
+                    </div>
+                <% } %>
             </div>
 
             <div class = "footer">
