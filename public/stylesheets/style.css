@@ -6,33 +6,3 @@ body {
 a {
   text-decoration: none;
 }
-
-div.list{
-	border: 2px solid #000;
-	margin-bottom: 20px;
-}
-
-div.item {
-	border: 2px solid #000;
-	width: 1050px;
-	height: 200px;
-	margin:10px auto;
-	padding: 25px;
-	box-sizing: border-box;
-}
-
-div.item img{
-	float:left;
-	margin-right: 20px;
-}
-
-div.item h1{
-	margin-top: 0;
-}
-
-div.list:before,
-div.list:after{
-	display: block;
-	content: '';
-	clear: both;
-}
