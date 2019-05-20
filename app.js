@@ -15,7 +15,7 @@ var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
 
 var login_form = require('./routes/login_form');
-var login = require('./routes/login');
+var login = require('./routes/login_form');
 var log_out = require('./routes/log_out');
 var login_show = require('./routes/login_show');
 //------------------------------------------------------------
@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 // 增加引用express-session
 //--------------------------------------------------------------------
 var session = require('express-session');
-app.use(session({secret: '請更改成一個隨機字串用來加密產生的signedCookie', cookie: { maxAge: 60000 }}));
+app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60000 }}));
 //--------------------------------------------------------------------
 
 app.use(logger('dev'));
