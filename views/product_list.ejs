@@ -36,7 +36,6 @@
 
             <div class = "content">
                 <h1>商品清單</h1>
-
                 <form action = "/product/query" method = "get">
                     <div class="form">
                         <span class="name">商品名稱: </span>
@@ -49,19 +48,19 @@
                 </form>                    
 
                 <% for(var i=0; i<items.length; i++) {%>
-                        <a href="/product/one/<%= items[i].prono %>"> 
-                            <div class = "section">
-                                    <img src = "/picture/<%= items[i].picture %>" height="100%">
-                                    <div class = "right">
-                                        <span>商品名稱: <%= items[i].proname %></span>
-                                        <br/>
-                                        <span>售價: <%= items[i].price %></span>
-                                        <br/>
-                                        <span>商品介紹: <%= items[i].description %></span>
-                                    </div>
+                    <a href="/product/one/<%= items[i].prono %>"> 
+                        <div class = "section">
+                            <img src = "/picture/<%= items[i].picture %>" height="100%">
+                            <div class = "right">
+                                <span>商品名稱: <%= items[i].proname %></span>
+                                <br/>
+                                <span>售價: <%= items[i].price %></span>
+                                <br/>
+                                <span>商品介紹: <%= items[i].description %></span>
                             </div>
-                        </a>
-                    <% } %>
+                        </div>
+                    </a>
+                <% } %>
             </div>
 
             <div class = "footer">
