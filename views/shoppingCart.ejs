@@ -35,17 +35,7 @@
             </div>
 
             <div class = "content">
-                <h1>商品清單</h1>
-                <form action = "/product/query" method = "get">
-                    <div class="form">
-                        <span class="name">商品名稱: </span>
-                        <span class="value"><input type="text" name="pronname"></span>
-                        <br/>    
-                                        
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="查詢" ></span>    
-                    </div>    
-                </form>                    
+                <h1>我的購物車</h1>
 
                 <% for(var i=0; i<items.length; i++) {%>
                     <a href="/product/one/<%= items[i].prono %>"> 
@@ -56,9 +46,6 @@
                                 <br/>
                                 <span>售價: <%= items[i].price %></span>
                                 <br/>
-                                <span>商品介紹: <%= items[i].description %></span>
-                                <br/>
-                                <span>上架日期: <%= items[i].date %></span>
                             </div>
                         </div>
                     </a>
