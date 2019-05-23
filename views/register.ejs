@@ -27,35 +27,46 @@
 
     <body>
          <div class = "content">
+
             <h2>註冊</h2>
 
-            <table>
-                <tr>
-                    <td>名字</td>
-                    <td><%= item.Name %></td>
-                </tr>
-                <tr>
-                    <td>暱稱</td>
-                    <td><%= item.Nick %></td>
-                </tr>
-                
-                <tr>
-                    <td>電子郵件</td>
-                    <td><%= item.Email %></td>
-                </tr>
-                <tr>
-                    <td>密碼</td>
-                    <td><%= item.password %></td>
-                </tr>
+            <form action = "/user/register" method = "post">
+                <div class="form">
+                    <span class="name">名字 </span>
+                    <span class="value"><input type="text" name="id"></span>
+                    <br/>
 
-                <tr>
-                    <td>生日</td>
-                    <td><%= item.Birthday %></td>
-                </tr>
-                <tr>
-                    <td>電話</td>
-                    <td><%= item.Telephone %></td>
-                </tr>
+                    <span class="name">暱稱 </span>
+                    <span class="value"><input type="text" name="id"></span>
+                    <br/>
+
+                    <span class="name">Email </span>
+                    <span class="value"><input type="text" name="id"></span>
+                    <br/>
+
+                    <span class="name">密碼 </span>
+                    <span class="value"><input type="text" name="id"></span>
+                    <br/>
+                                                
+                    <span class="name">密碼 </span>
+                    <span class="value"><input type="password" name="password"></span>
+                    <br/>
+
+                    <span class="name">密碼確認 </span>
+                    <span class="value"><input type="password" name="password"></span>
+                    <br/>
+                         
+                    <span class="name">性別 </span>
+                    <span class="value"><input type="text" name="password"></span>
+                    <br/>
+
+                    <span class="name">電話 </span>
+                    <span class="value"><input type="password" name="password"></span>
+                    <br/>
+
+                    <span class="name">地址 </span>
+                    <span class="value"><input type="text" name="id"></span>
+                    <br/>
 
                 <span class="name"></span>
                 <span class="value"><input type="submit" value="註冊" ></span>                                                                                    

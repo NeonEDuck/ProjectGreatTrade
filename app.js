@@ -49,6 +49,11 @@ app.use('/user/login/form', login_form);
 app.use('/user/login', login);
 app.use('/user/logout', log_out);
 app.use('/user/show', login_show);
+
+app.use('/user/login/form', login_form);
+app.use('/user/login', login);
+app.use('/user/logout', log_out);
+app.use('/user/show', login_show);
 //-----------------------------------------
 
 //-----------------------------------------
