@@ -27,6 +27,11 @@
                 padding: 0;
                 margin-bottom: 0.5em;
             }
+            div.multiselect__tags,
+            ul.multiselect__content{
+                border-color: #aaa;
+                padding-top:4px;
+            }
         </style>
     </head>
 
@@ -72,7 +77,14 @@
 
                             <div class = "item">                     
                                 <span class="name">標籤: </span>
-                                <span class="value"><input type="button" name="label" value="選擇標籤"></span>
+                                <span class="value">
+                                    <div id="app-vue" style="width:350px;display:inline-block;">
+                                        <multiselect width="300px" 
+                                            v-model="selected"
+                                            :options="options" :multiple="true" :taggable="true" @tag="addTag">
+                                        </multiselect>
+                                    </div>
+                                </span>
                             </div>
 
                             <div class = "item">
@@ -101,6 +113,14 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/vue.multiselect/2.0.0-beta.13/vue-multiselect.min.js'></script>
+
+    
+
+    <script  src="/js/multiselect.js"></script>
+    
     <script>
         $("div.form").css("width", $("form.form").css("width"));
     </script>

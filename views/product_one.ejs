@@ -19,7 +19,7 @@
                 <div class = "inline-block">
                     <div class = "left">
                         <div id="gallery">
-                            <img id="preview" src='/picture/<%= item.picture %>' width="100%">
+                            <img id="preview" src='/<%= item.picture %>' width="100%">
                         </div>
                     </div>
                     
@@ -41,7 +41,9 @@
 
                         <div class = "item">                     
                             <span class="name">標籤: </span>
-                            <span class="value"><input type="button" name="label" value="選擇標籤"></span>
+                            <% for(var i=0; i<item.lblname.length; i++) {%>
+                                <span><%= item.lblname[i] %></span>
+                            <% } %>
                         </div>
 
                         <div class = "item">

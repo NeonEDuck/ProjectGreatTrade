@@ -35,34 +35,48 @@
             </div>
 
             <div class = "content">
-                <h1>商品清單</h1>
-                <form action = "/product/query" method = "get">
-                    <div class="form">
-                        <span class="name">商品名稱: </span>
-                        <span class="value"><input type="text" name="pronname"></span>
-                        <br/>    
-                                        
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="查詢" ></span>    
-                    </div>    
-                </form>                    
+                <div class="searchbar">
+                    <span class="name">查詢: </span>
+                    <span class="value"><input type="text" name="proname"></span>
 
-                <% for(var i=0; i<items.length; i++) {%>
-                    <a href="/product/one/<%= items[i].prono %>"> 
+                    <span class="name"></span>
+                    <span class="value"><input type="submit" value="查詢" ></span>
+                </div>
+
+                <% for(var i=0; i<items.data.length; i++) {%>
+                    <a href="/product/one/<%= items.data[i].prono %>"> 
                         <div class = "section">
-                            <img src = "/picture/<%= items[i].picture %>" height="100%">
+                            <img src = "/<%= items.data[i].picture %>" height="100%">
                             <div class = "right">
-                                <span>商品名稱: <%= items[i].proname %></span>
+                                <span>商品名稱: <%= items.data[i].proname %></span>
                                 <br/>
-                                <span>售價: <%= items[i].price %></span>
+                                <span>售價: <%= items.data[i].price %></span>
                                 <br/>
-                                <span>商品介紹: <%= items[i].description %></span>
+                                <span>商品介紹: <%= items.data[i].description %></span>
                                 <br/>
-                                <span>上架日期: <%= items[i].date %></span>
+                                <span>上架日期: <%= items.data[i].date %></span>
                             </div>
                         </div>
                     </a>
                 <% } %>
+
+                <ul class="pagination">
+                    <li>第 <%=items.pageNo%> 頁</li>
+    
+                    <% if(items.startPage>1){ %>
+                        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
+                    <% } %> 
+    
+                    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
+                        <% if(i<=items.totalPage){ %>
+                            <li><a href="/product/page/<%=i%>"><%=i%></a></li>
+                        <% } %> 
+                    <% } %>
+    
+                    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
+                        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
+                    <% } %>
+                </ul>
             </div>
 
             <div class = "footer">

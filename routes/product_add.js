@@ -35,6 +35,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var amt = Number(req.body.amt);
     var description = req.body.description;
     var picture;
+    var label;
 
     console.log(typeof(req.file));
     if (typeof(req.file) != 'undefined'){
@@ -47,7 +48,8 @@ router.post('/', upload.single('picture'), function(req, res, next) {
         amt:amt,
         price:price,
         description:description,
-        picture:picture
+        picture:picture,
+        label:label
     } 
     
     product.add(newData).then(d => {

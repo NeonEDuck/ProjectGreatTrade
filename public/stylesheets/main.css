@@ -215,3 +215,18 @@ a{
     color: #000;
     text-decoration: none;
 }
+
+.searchbar{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 1em 0;
+}
+.searchbar input[name="proname"]{
+    width: 600px;
+    font-size: 30px;
+    height: 40px;
+}
+.searchbar span{
+    font-size: 30px;
+}

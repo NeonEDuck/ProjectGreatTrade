@@ -1,4 +1,3 @@
-
 node_modules/
-routes/utility/asyncDB.js
+package-lock.json
 public/picture/
