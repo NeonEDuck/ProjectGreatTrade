@@ -28,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/product/add/form', product_add_form);
 app.use('/product/add', product_add);
 app.use('/product/list', product_list);
+app.use('/product/page', product_list);
 app.use('/product/one', product_one);
 //app.use('/shopping_cart', shoppingCart);
 
