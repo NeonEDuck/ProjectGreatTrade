@@ -15,7 +15,8 @@ var login_form = require('./routes/login_form');
 var login = require('./routes/login');
 var log_out = require('./routes/log_out');
 var login_show = require('./routes/login_show');
-var checkAuth = require('./routes/checkAuth
+var register = require('./routes/register_form');
+var checkAuth = require('./routes/checkAuth');
 //var shoppingCart = require('./routes/shoppingCart');
 
 var app = express();
@@ -34,14 +35,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/product/add/form', checkAuth, product_add_form);
-app.use('/product/add', checkAuth, product_add);
-app.use('/product/list', checkAuth, product_list);
+app.use('/product/add', product_add);
+app.use('/product/list', product_list);
 app.use('/product/page', product_list);
-app.use('/product/one', product_one);
-app.use('/user/login/form', login_form);
+app.use('/product/', product_one);
+app.use('/login', login_form);
 app.use('/user/login', login);
 app.use('/user/log_out', log_out);
 app.use('/user/login_show', login_show);
+app.use('/register', register);
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 

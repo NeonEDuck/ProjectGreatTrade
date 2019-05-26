@@ -6,11 +6,11 @@ const sql = require('./asyncDB');
 //---------------------------------------------
 // 使用者登入
 //---------------------------------------------
-var login = async function(id, password){   
+var login = async function(account, password){   
     var result;
 
     //取得員工資料
-    await sql('SELECT * FROM employee WHERE empno=$1 and password=$2', [id, password])
+    await sql('SELECT * FROM member WHERE account=$1 and password=$2', [account, password])
         .then((data) => {
             if(data.rows.length > 0){
                 result = data.rows[0];
