@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
         if (d==null){
             req.session.empno = null;
             req.session.name = null;           
-            res.render('loginFail');  //傳至登入失敗
+            res.render('login_Fail');  //傳至登入失敗
         }else{
             req.session.empno = d.empno;
             req.session.name = d.empname;

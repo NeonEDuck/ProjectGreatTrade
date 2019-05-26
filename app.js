@@ -15,9 +15,19 @@ var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
 
 var login_form = require('./routes/login_form');
-var login = require('./routes/login_form');
+var login = require('./routes/login');
 var log_out = require('./routes/log_out');
 var login_show = require('./routes/login_show');
+
+//--------------------------------------------------------------------
+// 增加引用模組 
+// protectedPage代表需要被保護服務對應的程式
+//--------------------------------------------------------------------
+var product_list = require('./routes/product_list');
+var product_add = require('./routes/product_add');
+var product_add_form = require('./routes/product_add_form');
+var checkAuth = require('./routes/checkAuth');
+//--------------------------------------------------------------------
 //------------------------------------------------------------
 //------------------------------------------------------------
 
@@ -49,6 +59,10 @@ app.use('/user/login/form', login_form);
 app.use('/user/login', login);
 app.use('/user/log_out', log_out);
 app.use('/user/login_show', login_show);
+
+app.use('/product/add/form', checkAuth, product_add_form);
+app.use('/product/add', checkAuth, product_add);
+app.use('/product/list', checkAuth, product_list);
 //-----------------------------------------
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
