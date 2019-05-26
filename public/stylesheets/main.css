@@ -24,7 +24,6 @@ div.container{
 div.header{
     box-sizing: border-box;
     height:80px;
-    background:url(../images/header.jpg);
 }
 
 
@@ -47,6 +46,26 @@ div.navbar{
     text-align: center;
     background: #000;
     height: 3em;
+}
+
+span.login{
+    position:absolute;
+    left:50%;
+    margin-left:450px;
+    top:20px;
+	font-size: 20px;
+	font-weight: 400;
+	color: #fff;
+}
+
+span.register{
+    position:absolute;
+    left:50%;
+    margin-left:450px;
+    top:50px;
+	font-size: 20px;
+	font-weight: 400;
+	color: #fff;
 }
 
 div.footer{
