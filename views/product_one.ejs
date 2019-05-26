@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapapapapa</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>
+        <style>
+            span.tag{
+                position: relative;
+                display: inline-block;
+                padding: 4px 10px 4px 10px;
+                border-radius: 5px;
+                margin-right: 10px;
+                color: #fff;
+                line-height: 1;
+                background: #41b883;
+                margin-bottom: 8px;
+                white-space: nowrap;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class = "container">
+            <div class = "header">           
+            </div>
+
+            <div class = "navbar">
+            </div>
+
+            <div class = "content">
+                <div class = "inline-block">
+                    <div class = "left">
+                        <div id="gallery">
+                            <img id="preview" src='/<%= item.picture %>' width="100%">
+                        </div>
+                    </div>
+                    
+                    <div class = "right">
+                        <div class = "item">
+                            <span style = "font-size: 30px"><%= item.proname %></span>
+                        </div>
+
+                        <div class = "item">          
+                            <span class="name">單價: </span>
+                            <span style = "font-size: 24px; font-weight: 700;"><%= item.price %>$</span>
+                            <br/>
+                        </div>
+
+                        <div class = "item">          
+                            <span class="name">數量: </span>
+                            <span style = "width: 50px"><%= item.amt %></span>
+                        </div>
+
+                        <div class = "item">                     
+                            <span class="name">標籤: </span>
+                            <% for(var i=0; i<item.lblname.length; i++) {%>
+                                <span class="tag"><%= item.lblname[i] %></span>
+                            <% } %>
+                        </div>
+
+                        <div class = "item">
+                            <span class="name" style = "vertical-align: top">商品介紹: </span><br/>
+                            <span style = "width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= item.description %></span>
+                            <br/>
+                        </div>
+                        
+                        <div class = "item">
+                            <span class="name">付費方式: </span>
+                            <span style = "width: 50px"><%= item.paymethod %></span>
+                        </div>
+
+                        <div class = "item">
+                            <span class="name">上架日期: </span>
+                            <span style = "width: 50px"><%= item.date %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "footer">
+            </div>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src = "/js/public_div.js"></script>
+    <script>
+        var img = document.getElementById(preview);
+        $("#gallery").css("height" ,$("#gallery > img").css("height"));
+    </script>
+</html>

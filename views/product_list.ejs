@@ -5,6 +5,25 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
+        <style>
+            div.item {
+                border: 2px solid #000;
+                width: 1050px;
+                height: 200px;
+                margin:10px auto;
+                padding: 25px;
+                box-sizing: border-box;
+            }
+
+            div.item img{
+                float:left;
+                margin-right: 20px;
+            }
+
+            div.item h1{
+                margin-top: 0;
+            }
+        </style>
     </head>
 
     <body>
@@ -16,41 +35,67 @@
             </div>
 
             <div class = "content">
-                <h1>商品清單</h1>
-
-                <form action = "/product/query" method = "get">
-                    <div class="form">
-                        <span class="name">商品名稱: </span>
+                <div class="searchbar">
+                    <form class = "form" action = "/product/query" method = "post">
+                        <img src = "/images/search_icon.png" height="50">
                         <span class="value"><input type="text" name="proname"></span>
-                        <br/>    
-                                        
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="查詢" ></span>    
-                    </div>    
-                </form>   
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th width="25%"></th>
-                            <th width="15%">商品名稱</th>
-                            <th width="15%">標籤</th>
-                            <th width="20%">商品介紹</th>
-                            <th width="15%">單價</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i=0; i<items.length; i++) {%>
-                            <tr>
-                                <img src = "/imgs/item.jpg"> 
-                                <td><a href="/product/one/<%= items[i].proname %>"><%= items[i].proname %></a></td>
-                                <td><%= items[i].label %></td>
-                                <td><%= items[i].description %></td>
-                                <td><%= items[i].price %></td>
-                            </tr> 
+                        <span class="value"><select>
+                            <option value="product">商品</option>
+                            <option value="member">會員</option>
+                        </select></span>
+                        <span class="value"><input type="submit" value="查詢" ></span>
+                    <form class = "form" action = "/product/add" method = "post">
+                </div>
+
+                <ul class="pagination" style="margin-bottom: 1em;">
+                    <% if(items.startPage>1){ %>
+                        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
+                    <% } %> 
+    
+                    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
+                        <% if(i<=items.totalPage){ %>
+                            <li <% if(items.pageNo==i){ %> style = "background:#666"  <% } %>><a href="/product/page/<%=i%>" <% if(items.pageNo==i){ %> style = "color:#fff;"  <% } %>><%=i%></a></li>
                         <% } %> 
-                    </tbody>
-                </table>
+                    <% } %>
+    
+                    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
+                        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
+                    <% } %>
+                </ul>
+
+                <% for(var i=0; i<items.data.length; i++) {%>
+                    <a href="/product/one/<%= items.data[i].prono %>"> 
+                        <div class = "section">
+                            <img src = "/<%= items.data[i].picture %>" height="100%">
+                            <div class = "right">
+                                <span>商品名稱: <%= items.data[i].proname %></span>
+                                <br/>
+                                <span>售價: <%= items.data[i].price %>$</span>
+                                <br/>
+                                <span>商品介紹: <%= items.data[i].description %></span>
+                                <br/>
+                                <span>上架日期: <%= items.data[i].date %></span>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+
+                <ul class="pagination">
+                    <% if(items.startPage>1){ %>
+                        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
+                    <% } %> 
+    
+                    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
+                        <% if(i<=items.totalPage){ %>
+                            <li <% if(items.pageNo==i){ %> style = "background:#666"  <% } %>><a href="/product/page/<%=i%>" <% if(items.pageNo==i){ %> style = "color:#fff;"  <% } %>><%=i%></a></li>
+                        <% } %> 
+                    <% } %>
+    
+                    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
+                        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
+                    <% } %>
+                </ul>
             </div>
 
             <div class = "footer">
