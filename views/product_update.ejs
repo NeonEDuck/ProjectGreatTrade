@@ -33,43 +33,42 @@
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
                     <div class = "inline-block">
                         <div class = "left">
-                            <div id="gallery">
-                                <img id="preview" src='/<%= item.picture %>' width="100%">
+                            <div id="gallery"></div>
+                            <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" value = "<%= item.picture %>" style = "display: none;" /></span>
+                            <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                             </div>
                         </div>
                         
                         <div class = "right">
                             <div class = "item">
-                                <span style = "font-size: 30px"><%= item.proname %></span>
+                                <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" autocomplete="off" style="font-size: 30px;" value="<%= item.proname %>" required></span>
                             </div>
 
                             <div class = "item">          
-                                <span class="name">單價: </span>
-                                <span style = "font-size: 24px; font-weight: 700;"><%= item.price %>$</span>
+                                <span class="name">單價: $</span>
+                                <span class="value"><input type="number" name="price" placeholder="" style = "width: 50px" value="<%= item.price %>" required></span>
                                 <br/>
                             </div>
 
                             <div class = "item">          
                                 <span class="name">數量: </span>
-                                <span style = "width: 50px"><%= item.amt %></span>
+                                <span class="value"><input type="number" name="amt" placeholder="" style = "width: 50px" value="<%= item.amt %>" required></span>
                             </div>
 
                             <div class = "item">                     
                                 <span class="name">標籤: </span>
-                                <% for(var i=0; i<item.lblname.length; i++) {%>
-                                    <span class="tag"><%= item.lblname[i] %></span>
-                                <% } %>
                             </div>
 
                             <div class = "item">
                                 <span class="name" style = "vertical-align: top">商品介紹: </span><br/>
-                                <span style = "width: 100px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= item.description %></span>
+                                <span class="value"><textarea name="description" placeholder="請輸入文字" textarea cols="40" rows="7" maxlength="255" value="<%= item.description %>" style = "margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
                                 <br/>
+                                <span class="hint" style = "left: 72px;">(最大字數限制為255個字)</span>
                             </div>
                             
                             <div class = "item">
                                 <span class="name">付費方式: </span>
-                                <span style = "width: 50px"><%= item.paymethod %></span>
+                                <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
                             </div>
 
                             <div class = "item">
@@ -78,12 +77,6 @@
                             </div>
                         </div>
                     </div>
-                    <% if(isAuthor==true){ %>
-                        <form action = "/product/edit" method = "post" class="update">
-                            <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
-                            <div class="value update"><input type="submit" value="修改"></div>
-                        </form>
-                    <% } %>
                 </div>
             </div>
             <div class = "footer">
@@ -93,8 +86,11 @@
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src = "/js/public_div.js" memno="<%= id %>"></script>
+    <script  src="/js/multiselect.js"></script>
+    
     <script>
-        var img = document.getElementById(preview);
-        $("#gallery").css("height" ,$("#gallery > img").css("height"));
+        $("div.form").css("width", $("form.form").css("width"));
     </script>
+    <script src = "/js/public_div.js" memno="<%= id %>"></script>
+    <script src = "/js/preview_image.js"></script>
 </html>

@@ -7,8 +7,8 @@ var moment = require('moment');
 const product = require('./utility/product');
 
 //接收GET請求
-router.get('/:prono', function(req, res, next) {
-    var prono = req.params.prono;   //取出參數
+router.post('/', function(req, res, next) {
+    var prono = req.body.prono;   //取出參數
 
     product.one(prono).then(data => {
         if (data==null){
@@ -23,11 +23,7 @@ router.get('/:prono', function(req, res, next) {
             else {
                 data.picture='images/no_pic.jpg';
             }
-            var isAuthor = false;
-            if (data.memno == req.session.memno) {
-                isAuthor = true;
-            }
-            res.render('product_one', {item:data, id:req.session.memno, isAuthor:isAuthor});  //將資料傳給顯示頁面
+            res.render('product_update', {item:data, id:req.session.memno});  //將資料傳給顯示頁面
         }  
     })
 });

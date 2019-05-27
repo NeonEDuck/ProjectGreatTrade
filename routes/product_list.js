@@ -38,7 +38,6 @@ router.get('/', function(req, res, next) {
             res.render('error');  //導向錯誤頁面
         }else if(data.length >= 0){
             res.redirect('/product/list/1')  //將資料傳給顯示頁面
-            res.render('notFound');  //導向找不到頁面
         }else{
             res.render('notFound');  //導向找不到頁面
         }  
