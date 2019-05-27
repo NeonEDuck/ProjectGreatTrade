@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapap</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+    </head>
+
+    <body>
+        <div class = "container">
+            <div class = "header">           
+            </div>
+
+            <div class = "navbar">
+            </div>
+
+            <div class = "content">
+
+                <h2>產品新增 </h2>
+
+<form action = "/list/add" method = "post">
+    <div class="form">
+        <span class="name">編號: </span>
+        <span class="value"><input type="text" name="prono" maxlength="4"></span>
+        <br/>
+                        
+        <span class="name">名稱: </span>
+        <span class="value"><input type="text" name="proname" ></span>
+        <br/>
+                                            
+        <span class="name">單價: </span>
+        <span class="value"><input type="number" name="price" ></span>
+        <br/>
+                                
+        <span class="name">日期: </span>
+        <span class="value"><input type="date" name="inventorydate" ></span>
+        <br/>	    
+                        
+        <span class="name"></span>
+        <span class="value"><input type="submit" value="新增" ></span>    
+    </div>    
+</form>      
+                
+            </div>
+
+            <div class = "footer">
+            </div>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src = "/js/public_div.js"></script>
+</html>
