@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= title %></title>
+        <title>123123</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
@@ -9,11 +9,15 @@
 
     <body>
         <div class = "container">
-            <div class = "header">   
-                    <li class="sub">         
-                 
-                    <li><a href="user/login/form">登入</a></li>
-                    <li><a href="user/register/form">註冊</a></li>    
+            <div class = "header">
+                <ul class="log">
+                    <% if(id == null){ %>
+                        <li><a href="/login">登入</a></li>
+                        <li><a href="/register">註冊</a></li>
+                    <% } else { %>  
+                        <li><a href="/logout">登出</a></li>
+                    <% } %>
+                </ul>
             </div>
 
             <div class = "navbar">
@@ -137,5 +141,5 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src = "/js/public_div.js"></script>
+    <script src = "/js/public_div.js" memno="<%= id %>"></script>
 </html>

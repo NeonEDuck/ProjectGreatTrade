@@ -54,9 +54,9 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     
     product.add(newData).then(d => {
         if (d==0){
-            res.render('addSuccess');  //傳至成功頁面
+            res.render('addSuccess', {id: req.session.memno});  //傳至成功頁面
         }else{
-            res.render('addFail');     //導向錯誤頁面
+            res.render('addFail', {id: req.session.memno});     //導向錯誤頁面
         }  
     })
 });

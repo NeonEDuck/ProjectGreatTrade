@@ -26,9 +26,9 @@ router.post('/', function(req, res, next) {
     
     user.add(newData).then(d => {
         if (d==0){
-            res.render('registerSuccess');  //傳至成功頁面
+            res.render('registerSuccess', {id: req.session.memno});  //傳至成功頁面
         }else{
-            res.render('registerFail');     //導向錯誤頁面
+            res.render('registerFail', {id: req.session.memno});     //導向錯誤頁面
         }  
     })
 });

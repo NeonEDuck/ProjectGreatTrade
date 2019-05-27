@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
       name = '尚未登入';
     }
 
-    res.render('login_show', { name: name });
+    res.render('login_show', { name: name ,id: req.session.memno});
 });
 
 module.exports = router;
