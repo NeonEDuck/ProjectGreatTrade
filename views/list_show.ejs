@@ -16,24 +16,29 @@
             </div>
 
             <div class = "content">
-                <h2>訂單查詢 </h2>
+                <h2>訂單檢視 </h2>
 
                 <table>
                     <thead>
                         <tr>
-                            <th width="20%">編號</th>
-                            <th width="35%">名稱</th>
+                            
+                            <th width="15%">客戶名稱</th>
+                            <th width="15%">編號</th>
+                            <th width="15%">商品名稱</th>
                             <th width="15%">單價</th>   
-                            <th width="30%">日期</th>                   
+                            <th width="20%">數量</th>
+                            <th width="20%">日期</th>                   
                         </tr>
                     </thead>
                     <tbody>
                         <% for(var i=0; i<items.length; i++) {%>
                             <tr>
+                                <td><%= items[i].cusname %></td>
                                 <td><a href="/product/one/<%= items[i].prono %>"><%= items[i].prono %></a></td>
-                                <td><%= items[i].proname %></td>
+                                <td><%= items[i].proname %></td> 
                                 <td><%= items[i].price %></td> 
-                                <td><%= items[i].price %></td>                       
+                                <td><%= items[i].amount %></td> 
+                                <td><%= items[i].inventorydate %></td>                       
                             </tr> 
                         <% } %> 
                     </tbody>
