@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,65 +17,53 @@
             </div>
 
             <div class = "content">
-                <!DOCTYPE html>
-<html>
-    <head>
-        <title>papappapapa</title>
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
-        <link href="/stylesheets/main.css" rel="stylesheet"/>    
-    </head>
 
-    <body>
-         <div class = "content">
+                <h2>註冊</h2>
 
-            <h2>註冊</h2>
+                <form action = "/user/register" method = "post">
+                    <div class="form">
+                        <span class="name">帳號 </span>
+                        <span class="value"><input type="text" name="account"></span>
+                        <br/>
+                        
+                        <span class="name">密碼 </span>
+                        <span class="value"><input type="text" name="password"></span>
+                        <br/>
 
-            <form action = "/user/register" method = "post">
-                <div class="form">
-                    <span class="name">名字 </span>
-                    <span class="value"><input type="text" name="id"></span>
-                    <br/>
+                        <span class="name">密碼確認 </span>
+                        <span class="value"><input type="password" name="password2"></span>
+                        <br/>
 
-                    <span class="name">暱稱 </span>
-                    <span class="value"><input type="text" name="id"></span>
-                    <br/>
+                        <span class="name">Email </span>
+                        <span class="value"><input type="text" name="email"></span>
+                        <br/>
 
-                    <span class="name">Email </span>
-                    <span class="value"><input type="text" name="id"></span>
-                    <br/>
+                        <span class="name">名字 </span>
+                        <span class="value"><input type="text" name="memname"></span>
+                        <br/>
+                            
+                        <span class="name">暱稱 </span>
+                        <span class="value"><input type="text" name="nickname"></span>
+                        <br/>
 
-                    <span class="name">密碼 </span>
-                    <span class="value"><input type="text" name="id"></span>
-                    <br/>
-                                                
-                    <span class="name">密碼 </span>
-                    <span class="value"><input type="password" name="password"></span>
-                    <br/>
+                        <span class="name">性別 </span>
+                        <span class="value"><input type="text" name="sex"></span>
+                        <br/>
 
-                    <span class="name">密碼確認 </span>
-                    <span class="value"><input type="password" name="password"></span>
-                    <br/>
-                         
-                    <span class="name">性別 </span>
-                    <span class="value"><input type="text" name="password"></span>
-                    <br/>
+                        <span class="name">電話 </span>
+                        <span class="value"><input type="password" name="tel"></span>
+                        <br/>
 
-                    <span class="name">電話 </span>
-                    <span class="value"><input type="password" name="password"></span>
-                    <br/>
+                        <span class="name">地址 </span>
+                        <span class="value"><input type="text" name="address"></span>
+                        <br/>
 
-                    <span class="name">地址 </span>
-                    <span class="value"><input type="text" name="id"></span>
-                    <br/>
-
-                <span class="name"></span>
-                <span class="value"><input type="submit" value="註冊" ></span>                                                                                    
-            </table>  
-        </div>
-                </form>  
-
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="註冊" ></span>          
+                    </div>
+                </form>
             </div>
+        </div>
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

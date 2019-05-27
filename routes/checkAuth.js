@@ -4,7 +4,7 @@ var router = express.Router();
 //處理GET, POST, PUT, DELETE等所有請求
 router.all('/', function(req, res, next) {
     //檢查是否有session註記
-    var id = req.session.empno;
+    var id = req.session.memno;
     
     if(id===null || id===undefined){
         res.render('unAuth');  //導向無權限畫面        

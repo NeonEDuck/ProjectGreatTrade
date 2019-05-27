@@ -1,3 +1,7 @@
+$.get( "/ejs/header.ejs", function( data ) {
+    $(".header").replaceWith(data);
+});
+
 $.get( "/ejs/navbar.ejs", function( data ) {
     $(".navbar").replaceWith(data);
 });

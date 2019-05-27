@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //增加引用函式
-const register = require('./utility/register');
+const user = require('./utility/user');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
         Telephone:Telephone
     } 
     
-    register.add(newData).then(d => {
+    user.add(newData).then(d => {
         if (d==0){
             res.render('registerSuccess');  //傳至成功頁面
         }else{
