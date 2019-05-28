@@ -5,7 +5,22 @@
         <title>papappapapa</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
-        <link href="/stylesheets/main.css" rel="stylesheet"/>    
+        <link href="/stylesheets/main.css" rel="stylesheet"/> 
+        <style>
+            h1{
+                margin-left: 400px;
+                font-size: 60px;
+            }
+
+            div.item{
+                margin-left: 350px;
+                margin-bottom: 30px;
+            }
+
+            div.btn{
+                margin-left: 430px;
+            }
+        </style>   
     </head>
 
     <body>
@@ -18,49 +33,59 @@
 
             <div class = "content">
 
-                <h2>註冊</h2>
+                <h1>註冊</h1>
 
                 <form action = "/user/register" method = "post">
-                    <div class="form">
-                        <span class="name">帳號 </span>
+                    <div class = "item">
+                        <span class="name">帳號: </span>
                         <span class="value"><input type="text" name="account"></span>
-                        <br/>
-                        
-                        <span class="name">密碼 </span>
-                        <span class="value"><input type="text" name="password"></span>
-                        <br/>
-
-                        <span class="name">密碼確認 </span>
-                        <span class="value"><input type="password" name="password2"></span>
-                        <br/>
-
-                        <span class="name">Email </span>
-                        <span class="value"><input type="text" name="email"></span>
-                        <br/>
-
-                        <span class="name">名字 </span>
-                        <span class="value"><input type="text" name="memname"></span>
-                        <br/>
-                            
-                        <span class="name">暱稱 </span>
-                        <span class="value"><input type="text" name="nickname"></span>
-                        <br/>
-
-                        <span class="name">性別 </span>
-                        <span class="value"><input type="text" name="sex"></span>
-                        <br/>
-
-                        <span class="name">電話 </span>
-                        <span class="value"><input type="password" name="tel"></span>
-                        <br/>
-
-                        <span class="name">地址 </span>
-                        <span class="value"><input type="text" name="address"></span>
-                        <br/>
-
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="註冊" ></span>          
                     </div>
+                    
+                    <div class = "item">
+                        <span class="name">密碼: </span>
+                        <span class="value"><input type="text" name="password"></span>
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">密碼確認: </span>
+                        <span class="value"><input type="password" name="password2"></span>
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">Email: </span>
+                        <span class="value"><input type="text" name="email"></span>
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">名字: </span>
+                        <span class="value"><input type="text" name="memname"></span>
+                    </div>
+                            
+                    <div class = "item">
+                        <span class="name">暱稱: </span>
+                        <span class="value"><input type="text" name="nickname"></span>
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">性別: </span>
+                        <input type="radio" name="sex" value="男"> 男
+                        <input type="radio" name="sex" value="女"> 女
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">電話: </span>
+                        <span class="value"><input type="text" name="tel"></span>
+                    </div>
+
+                    <div class = "item">
+                        <span class="name">地址: </span>
+                        <span class="value"><input type="text" name="address"></span>
+                    </div>
+
+                    <div class = "btn">
+                        <span class="name"></span>
+                        <span class="value"><input type="submit" value="註冊" ></span> 
+                    </div>         
                 </form>
             </div>
         </div>
