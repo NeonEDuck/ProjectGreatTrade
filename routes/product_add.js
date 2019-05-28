@@ -37,7 +37,6 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var picture;
     var label;
 
-    console.log(typeof(req.file));
     if (typeof(req.file) != 'undefined'){
         picture=req.file.filename;   //取得上傳照片名稱
     }

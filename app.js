@@ -10,6 +10,7 @@ var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
 var product_one = require('./routes/product_one');
+var product_update_form = require('./routes/product_update_form');
 var product_update = require('./routes/product_update');
 
 var login_form = require('./routes/login_form');
@@ -39,6 +40,7 @@ app.use('/product/add/form', checkAuth, product_add_form);
 app.use('/product/add', product_add);
 app.use('/product/list', product_list);
 app.use('/product/page', product_list);
+app.use('/product/edit/form', product_update_form);
 app.use('/product/edit', product_update);
 app.use('/product/', product_one);
 app.use('/login', login_form);

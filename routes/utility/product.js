@@ -138,5 +138,22 @@ var page = async function(pageNo){
     return result;
 }
 
+//---------------------------------------------
+//執行資料庫動作的函式-傳回分頁及指定頁面的產品
+//---------------------------------------------
+var edit = async function(newData){
+    var results;
+    
+    await sql('UPDATE product SET proname=$1, amt=$2, price=$3, description=$4, picture=$5 WHERE prono = $6', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.prono])
+        .then((data) => {
+            console.log(data);
+            results = data.rowCount;  
+        }, (error) => {
+            results = -1;
+        });
+		
+    return results;
+}
+
 //匯出
-module.exports = {getDropdownData, add, list, one, page};
+module.exports = {getDropdownData, add, list, one, page, edit};
