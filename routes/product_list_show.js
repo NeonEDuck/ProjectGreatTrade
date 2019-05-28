@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
         if(data==null){
             res.render('error');  //導向錯誤頁面
         }else if(data.length > 0){
-            res.render('list_show', {items:data});  //將資料傳給顯示頁面
+            res.render('product_list_show', {items:data});  //將資料傳給顯示頁面
         }else{
             res.render('notFound');  //導向找不到頁面
         }  

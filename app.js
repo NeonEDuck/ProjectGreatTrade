@@ -10,10 +10,10 @@ var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
 var product_one = require('./routes/product_one');
-var list_show = require('./routes/list_show');
-var list_add = require('./routes/list_add');
-var list_remove_show = require('./routes/list_remove_show');
-var list_remove = require('./routes/list_remove');
+var product_list_show = require('./routes/product_list_show');
+var product_list_add = require('./routes/product_list_add');
+var product_list_remove_show = require('./routes/product_list_remove_show');
+var product_list_remove = require('./routes/product_list_remove');
 
 //------------------------------------------------------------
 
@@ -50,10 +50,10 @@ app.use('/user/login', login);
 app.use('/user/log_out', log_out);
 app.use('/user/login_show', login_show);
 app.use('/register', register);
-app.use('/list/show', list_show);
-app.use('/list/add', list_add);
-app.use('/list/remove/show', list_remove_show);
-app.use('/list/remove', list_remove);
+app.use('/product/list/show', product_list_show);
+app.use('/product/list/add', product_list_add);
+app.use('/product/list/remove/show', product_list_remove_show);
+app.use('/product/list/remove', product_list_remove);
 //-----------------------------------------
 //------------------------------------------------------------
 //-----------------------------------------

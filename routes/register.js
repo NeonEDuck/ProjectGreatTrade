@@ -6,8 +6,7 @@ const user = require('./utility/user');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
-    var Name = req.body.Name;                  
-    var label = req.body.label;              
+    var Name = req.body.Name;                               
     var Nick = req.body.Nick;
     var Email = req.body.Email;  
     var password = Number(req.body.password);
