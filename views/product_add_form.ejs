@@ -37,11 +37,9 @@
 
     <body>
         <div class = "container">
-            <div class = "header">           
-            </div>
+            <%- include('public/header'); -%>
 
-            <div class = "navbar">
-            </div>
+            <%- include('public/navbar'); -%>
 
             <div class = "content">
                 <h2>產品新增 </h2>
@@ -107,8 +105,7 @@
                 </form>  
             </div>
 
-            <div class = "footer">
-            </div>
+            <%- include('public/footer'); -%>
         </div>
     </body>
 
@@ -124,7 +121,6 @@
     <script>
         $("div.form").css("width", $("form.form").css("width"));
     </script>
-    <script src = "/js/public_div.js" memno="<%= id %>"></script>
     <script src = "/js/preview_image.js"></script>
 
 </html>

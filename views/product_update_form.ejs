@@ -23,11 +23,9 @@
 
     <body>
         <div class = "container">
-            <div class = "header">           
-            </div>
+            <%- include('public/header'); -%>
 
-            <div class = "navbar">
-            </div>
+            <%- include('public/navbar'); -%>
 
             <div class = "content">
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
@@ -84,19 +82,16 @@
                     </div>
                 </div>
             </div>
-            <div class = "footer">
-            </div>
+            <%- include('public/header'); -%>
         </div>
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src = "/js/public_div.js" memno="<%= id %>"></script>
     <script  src="/js/multiselect.js"></script>
     
     <script>
         var img = document.getElementById(preview);
         $("#gallery").css("height" ,$("#gallery > img").css("height"));
     </script>
-    <script src = "/js/public_div.js" memno="<%= id %>"></script>
     <script src = "/js/preview_image.js"></script>
 </html>
