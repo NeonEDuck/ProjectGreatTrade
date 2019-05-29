@@ -58,9 +58,9 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     
     product.edit(newData).then(d => {
         if (d>=0){
-            res.render('editSuccess', {results:d, id: req.session.memno});  //傳至成功頁面
+            res.render('editSuccess', {results:d});  //傳至成功頁面
         }else{
-            res.render('editFail', {id: req.session.memno});     //導向錯誤頁面
+            res.render('editFail');     //導向錯誤頁面
         }  
     })
 });

@@ -12,6 +12,7 @@ var product_list = require('./routes/product_list');
 var product_one = require('./routes/product_one');
 var product_update_form = require('./routes/product_update_form');
 var product_update = require('./routes/product_update');
+var product_remove = require('./routes/product_remove');
 
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
@@ -27,7 +28,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 var session = require('express-session');
-app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60000 }}));
+app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60000 },saveUninitialized: false,resave: false}));
+app.use(function(req, res, next) {
+  res.locals.user = req.session.memno;
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,12 +41,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/product/add/form', checkAuth, product_add_form);
+app.use('/product/add/form', product_add_form);
 app.use('/product/add', product_add);
 app.use('/product/list', product_list);
 app.use('/product/page', product_list);
 app.use('/product/edit/form', product_update_form);
 app.use('/product/edit', product_update);
+app.use('/product/remove', product_remove);
 app.use('/product/', product_one);
 app.use('/login', login_form);
 app.use('/user/login', login);

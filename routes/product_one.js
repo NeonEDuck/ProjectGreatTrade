@@ -11,10 +11,11 @@ router.get('/:prono', function(req, res, next) {
     var prono = req.params.prono;   //取出參數
 
     product.one(prono).then(data => {
+        console.log(data);
         if (data==null){
-            res.render('error', {id: req.session.memno});  //導向錯誤頁面
+            res.render('error');  //導向錯誤頁面
         }else if(data==-1){
-            res.render('notFound', {id: req.session.memno});  //導向找不到頁面                
+            res.render('notFound');  //導向找不到頁面                
         }else{
             data.inventorydate=moment(data.inventorydate).format("YYYY-MM-DD");
             if (fs.existsSync('./public/picture/' + data.picture)) {
@@ -23,11 +24,7 @@ router.get('/:prono', function(req, res, next) {
             else {
                 data.picture='images/no_pic.jpg';
             }
-            var isAuthor = false;
-            if (data.memno == req.session.memno) {
-                isAuthor = true;
-            }
-            res.render('product_one', {item:data, id:req.session.memno, isAuthor:isAuthor});  //將資料傳給顯示頁面
+            res.render('product_one', {item:data});  //將資料傳給顯示頁面
         }  
     })
 });

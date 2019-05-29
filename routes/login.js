@@ -13,11 +13,11 @@ router.post('/', function(req, res, next) {
         if (d==null){
             req.session.memno = null;
             req.session.nickname = null;           
-            res.render('login_Fail', {id: req.session.memno});  //傳至登入失敗
+            res.render('login_Fail');  //傳至登入失敗
         }else{
             req.session.memno = d.memno;
             req.session.nickname = d.nickname;
-            res.render('login_show', {name:d.nickname, id: req.session.memno});   //導向使用者
+            res.render('login_show', {name:d.nickname});   //導向使用者
         }  
     })
 });

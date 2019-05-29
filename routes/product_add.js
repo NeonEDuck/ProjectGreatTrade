@@ -35,7 +35,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var amt = Number(req.body.amt);
     var description = req.body.description;
     var picture;
-    var label;
+    var lblno = req.body.lblno;
 
     if (typeof(req.file) != 'undefined'){
         picture=req.file.filename;   //取得上傳照片名稱
@@ -48,14 +48,14 @@ router.post('/', upload.single('picture'), function(req, res, next) {
         price:price,
         description:description,
         picture:picture,
-        label:label
+        lblno:lblno
     } 
     
     product.add(newData).then(d => {
         if (d==0){
-            res.render('addSuccess', {id: req.session.memno});  //傳至成功頁面
+            res.render('addSuccess');  //傳至成功頁面
         }else{
-            res.render('addFail', {id: req.session.memno});     //導向錯誤頁面
+            res.render('addFail');     //導向錯誤頁面
         }  
     })
 });

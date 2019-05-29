@@ -23,9 +23,9 @@ router.get('/:pageNo', function(req, res, next) {
                     d.data[i].picture='images/no_pic.jpg';
                 }
             }
-            res.render('product_list', {items:d, id: req.session.memno});  //將資料傳給顯示頁面
+            res.render('product_list', {items:d});  //將資料傳給顯示頁面
         }else{
-            res.render('notFound', {id: req.session.memno});  //導向找不到頁面
+            res.render('notFound');  //導向找不到頁面
         }  
     })
 });

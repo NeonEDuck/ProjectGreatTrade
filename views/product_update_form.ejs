@@ -3,6 +3,7 @@
     <head>
         <title>papapapapapa</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
         <style>
@@ -36,8 +37,10 @@
 
             <div class = "content">
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
-                    <form class = "form" enctype="multipart/form-data" action = "/product/edit" method = "post">
-                        <span>
+                    <form class = "form" id = "remove" action = "/product/remove" method="post">
+                        <input type="hidden" name="prono" value="<%= item.prono %>">
+                    </form>
+                    <form class = "form" id = "edit" enctype="multipart/form-data" action = "/product/edit" method = "post">
                         <div class = "inline-block">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class = "left">
@@ -89,9 +92,9 @@
                         <div class="division-line" style="border-top: 1px solid; margin:1em 0"></div>
                         <span class="button-group" style="float: right">
                             <input class = "button" type="submit" value="修改" >
-                            <input class = "button" style="background: #d84141" type="submit" value="刪除" >
+                            <input class = "button remove" style="background: #d84141" type="button" value="刪除">
+
                         </div>
-                    </span>
                     </form>
                 </div>
             </div>
@@ -100,8 +103,38 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script  src="/js/multiselect.js"></script>
-    
+    <script src="/js/multiselect.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+        $('.remove').on('click', function(){
+            $.confirm({
+                title: '確定刪除?',
+                content: '刪除的資料可是回不來喔',
+                boxWidth: '300px',
+                useBootstrap: false,
+                type: 'red',
+                buttons: {   
+                    ok: {
+                        text: "刪除",
+                        btnClass: 'btn-primary',
+                        btnClass: 'btn-red',
+                        keys: ['enter'],
+                        action: function(){
+                            document.getElementById("remove").submit();
+                        }
+                    },
+                    cancel:{
+                        text: "取消",
+                        btnClass: 'btn-primary',
+                        btnClass: 'btn-blue',
+                        cancel: function(){
+                        }
+                    }
+                }
+            });
+        })
+    </script>
+
     <script>
         var img = document.getElementById(preview);
         $("#gallery").css("height" ,$("#gallery > img").css("height"));

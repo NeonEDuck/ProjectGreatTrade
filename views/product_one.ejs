@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <% if(isAuthor==true){ %>
+                    <% if(item.memno == user){ %>
                         <form action = "/product/edit/form" method = "post" class="update">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class="value update"><input class="button" type="submit" value="修改"></div>

@@ -7,9 +7,9 @@ const product = require('./utility/product');
 router.get('/', function(req, res, next) {
     product.getDropdownData().then(d => {
         if (d!=[]){
-            res.render('product_add_form', {result:d, id: req.session.memno});  //轉至新增頁面
+            res.render('product_add_form', {result:d});  //轉至新增頁面
         }else{
-            res.render('addFail', {id: req.session.memno});     //導向錯誤頁面
+            res.render('addFail');     //導向錯誤頁面
         }  
     });
 });
