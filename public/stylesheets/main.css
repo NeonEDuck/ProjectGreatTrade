@@ -40,6 +40,7 @@ div.content{
     padding:20px 30px;    
     line-height:30px;
     text-align:justify;
+    overflow: hidden
 }
 div.navbar{
     box-sizing: border-box;
@@ -292,7 +293,18 @@ form.update{
     float: right;
 }
 
-div.update input{
+div.update input {
+    cursor: pointer;
+}
+
+div.update:before
+div.update:after{
+	display: block;
+	content: '';
+	clear: both;
+}
+
+input.button {
     font-family: 'Noto Sans TC', sans-serif;
     background: #41b883;
     border: 0px;
@@ -304,13 +316,6 @@ div.update input{
     font-weight: 800;
 }
 
-div.update input:hover {
+input.button:hover{
     cursor: pointer;
-}
-
-div.update:before
-div.update:after{
-	display: block;
-	content: '';
-	clear: both;
 }

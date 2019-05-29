@@ -18,6 +18,13 @@
                 margin-bottom: 8px;
                 white-space: nowrap;
             }
+            .button-group:after
+            .button-group:before{
+                content: '';
+                clear: both;
+                display: inline-block;
+                float: left;
+            }
         </style>
     </head>
 
@@ -29,8 +36,9 @@
 
             <div class = "content">
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
-                    <div class = "inline-block">
-                        <form class = "form" enctype="multipart/form-data" action = "/product/edit" method = "post">
+                    <form class = "form" enctype="multipart/form-data" action = "/product/edit" method = "post">
+                        <span>
+                        <div class = "inline-block">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class = "left">
                                 <span class="value"><input type="hidden" name="picture" value="<%= item.picture %>"></span>
@@ -75,14 +83,19 @@
                                     <span class="name">上架日期: </span>
                                     <span style = "width: 50px"><%= item.date %></span>
                                 </div>
-                                <span class="name"></span>
-                                <span class="value"><input type="submit" value="修改" ></span>   
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        </span>
+                        <div class="division-line" style="border-top: 1px solid; margin:1em 0"></div>
+                        <span class="button-group" style="float: right">
+                            <input class = "button" type="submit" value="修改" >
+                            <input class = "button" style="background: #d84141" type="submit" value="刪除" >
+                        </div>
+                    </span>
+                    </form>
                 </div>
             </div>
-            <%- include('public/header'); -%>
+            <%- include('public/footer'); -%>
         </div>
     </body>
 
