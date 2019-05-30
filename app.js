@@ -13,6 +13,8 @@ var product_one = require('./routes/product_one');
 var product_update_form = require('./routes/product_update_form');
 var product_update = require('./routes/product_update');
 var product_remove = require('./routes/product_remove');
+var comment_add = require('./routes/comment_add');
+var reply_add = require('./routes/reply_add');
 
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
@@ -30,7 +32,9 @@ app.set('view engine', 'ejs');
 var session = require('express-session');
 app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60000 },saveUninitialized: false,resave: false}));
 app.use(function(req, res, next) {
-  res.locals.user = req.session.memno;
+  res.locals.user = req.session.user;
+  res.locals.username = req.session.username;
+  res.locals.userpic = req.session.userpic;
   next();
 });
 
@@ -49,6 +53,8 @@ app.use('/product/edit/form', product_update_form);
 app.use('/product/edit', product_update);
 app.use('/product/remove', product_remove);
 app.use('/product/', product_one);
+app.use('/comment', comment_add);
+app.use('/reply', reply_add);
 app.use('/login', login_form);
 app.use('/user/login', login);
 app.use('/user/log_out', log_out);

@@ -90,24 +90,29 @@ var one = async function(prono){
             result = null;
         });
     if (result!=null && result!=-1){
+        await sql('SELECT member.memname,member.nickname,member.picture FROM product JOIN member ON product.memno = member.memno WHERE prono = $1', [prono])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    result.member = data.rows[0];
+                }else{
+                    result.member = -1;
+                }    
+            }, (error) => {
+                result.member = null;
+            });
         await sql('SELECT label.lblname FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
             .then((data) => {
                 if(data.rows.length > 0){
-                    var list = [];
-                    for (var i = 0; i < data.rows.length; i++) {
-                        list.push(data.rows[i].lblname);
-                    }
-                    result.lblname = list;
+                    result.label = list;
                 }else{
-                    result.lblname = -1;
+                    result.label = -1;
                 }    
             }, (error) => {
-                result.lblname = null;
+                result.label = null;
             });
-        await sql('SELECT comment.*,member.memname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [prono])
+        await sql('SELECT comment.*,member.memname,member.nickname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [prono])
             .then((data) => {
                 if(data.rows.length > 0){
-                    console.log(data.rows)
                     result.comment = data.rows;
                 }else{
                     result.comment = -1;

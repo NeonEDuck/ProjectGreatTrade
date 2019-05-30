@@ -5,6 +5,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <style>
             span.tag{
                 position: relative;
@@ -54,8 +55,8 @@
 
                             <div class = "item">                     
                                 <span class="name">標籤: </span>
-                                <% for(var i=0; i<item.lblname.length; i++) {%>
-                                    <span class="tag"><%= item.lblname[i] %></span>
+                                <% for(var i=0; i<item.label.length; i++) {%>
+                                    <span class="tag"><%= item.label[i].lblname %></span>
                                 <% } %>
                             </div>
 
@@ -82,35 +83,90 @@
                             <div class="value update"><input class="button" type="submit" value="修改"></div>
                         </form>
                     <% } %>
-                    <div class="division-line" style="border-top: 1px solid; margin:1em 0"></div>
-                    <div class="comment-group" style="width: 80%; margin: 0 auto">
-                        <div class = "section" style="height: 100px;">
-                            <div style="height: 82px;width: 82px;padding: 0; float:left; background:#555; border-radius: 50%; margin-right: 1em">
-                                <img src = "/images/no_pic.jpg" height="100%" style="margin: 0 auto; float:none; display:block;clip-path: circle(50% at 50% 50%);box-shadow: none;">
+
+
+                    <div class="division-line"></div>
+                    
+                    <h1>留言</h1>
+                    <% if(user != null && user != item.memno){ %>
+                        <div class="comment-group">
+                            <div class = "comment section">
+                                <form action = "/comment" method = "post">
+                                    <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
+                                    <span class="value"><input type="hidden" name="memno" value="<%= user %>"></span>
+                                    <div class = "avatar">
+                                        <img src = "/<%= userpic %>" height="100%">
+                                    </div>
+                                    <h3>
+                                        <%= username %> <span> 今天 </span>
+                                    </h3>
+                                    <textarea name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
+                                    <div class="value"><input class="button" type="submit" value="留言"></div>
+                                </form>
                             </div>
-                            <h3 style="margin: 0">
-                                mah name
-                            </h3>
-                            <p style="margin: 0">
-                                &nbsp;&nbsp;&nbsp;&nbsp; ghjskdoooosi isdijoabsad asojw sosh oishih oijhdihs ihdikhns
-                                sadsad
-                                asdsadsa
-                            </p>
                         </div>
-                        <div class = "section" style="height: 100px;width: 80%; float: right;">
-                            <div style="height: 82px;width: 82px;padding: 0; float:left; background:#555; border-radius: 50%; margin-right: 1em">
-                                <img src = "/images/no_pic.jpg" height="100%" style="margin: 0 auto; float:none; display:block;clip-path: circle(50% at 50% 50%);box-shadow: none;">
+                    <% } %>
+
+
+                    <% for(var i=0;i < item.comment.length;i++){ %>
+                        <div class="comment-group">
+                            <div class = "comment section">
+                                <div class = "avatar">
+                                    <img src = "/<%= item.comment[i].picture %>" height="100%">
+                                </div>
+                                <h3>
+                                    <% if(item.comment[i].nickname != null){ %>
+                                        <%= item.comment[i].nickname %>
+                                    <% }else{ %>
+                                        <%= item.comment[i].memname %>
+                                    <% } %>
+                                    <span class = "date"> <%= item.comment[i].cmtdate %> </span>
+                                </h3>
+                                <p>
+                                    <span class = "text">
+                                        &nbsp;&nbsp;&nbsp;&nbsp; <%= item.comment[i].cmtcontent %>
+                                    </span>
+                                </p>
+                                <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                             </div>
-                            <h3 style="margin: 0">
-                                mah name
-                            </h3>
-                            <p style="margin: 0">
-                                &nbsp;&nbsp;&nbsp;&nbsp; ghjskdoooosi isdijoabsad asojw sosh oishih oijhdihs ihdikhns
-                                sadsad
-                                asdsadsa
-                            </p>
+                            <% if(item.comment[i].rspcontent != null){ %> 
+                                <div class = "reply section">
+                                    <div class = "avatar">
+                                        <img src = "/<%= item.member.picture %>" height="100%">
+                                    </div>
+                                    <h3>
+                                        
+                                    <% if(item.member.nickname != null){ %>
+                                        <%= item.member.nickname %>
+                                    <% }else{ %>
+                                        <%= item.member.memname %>
+                                    <% } %>
+                                    <span class = "date"> <%= item.comment[i].rspdate %> </span>
+                                    </h3>
+                                    <p>
+                                        <span class = "text">
+                                            &nbsp;&nbsp;&nbsp;&nbsp; <%= item.comment[i].rspcontent %>
+                                        </span>
+                                    </p>
+                                    <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                                </div>
+                            <% }else if(user != null && user == item.memno){ %>
+                                <div class = "reply section">
+                                    <form action = "/reply" method = "post">
+                                        <span class="value"><input type="hidden" name="cmtno" value="<%= item.comment[i].cmtno %>"></span>
+                                        <div class = "avatar">
+                                            <img src = "/<%= userpic %>" height="100%">
+                                        </div>
+                                        <h3>
+                                            <%= username %> <span> 今天 </span>
+                                        </h3>
+                                        <textarea name="rspcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
+                                        <div class="value"><input class="button" type="submit" value="回覆"></div>
+                                    </form>
+                                </div>
+                            <% } %>
                         </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
             <%- include('public/footer'); -%>
@@ -118,8 +174,54 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+    
     <script>
         var img = document.getElementById(preview);
         $("#gallery").css("height" ,$("#gallery > img").css("height"));
+        
+        
+        $(window).on("load",function(){
+            $(".reveal").each(function(){
+                var text = $(this).parents().children("p").children("span.text");
+                var preHeight = text.css("height");
+                text.css("height","100%");
+                var maxHeight = text.css("height");
+                text.css("height",preHeight);
+                
+                if (parseInt(maxHeight) > parseInt(preHeight)) {
+                    $(this).show();
+                }
+                else {
+                    $(this).hide();
+                }
+            })
+        })
+
+        $(".reveal").click(function(event){
+            event.preventDefault();
+            var text = $(this).parents().children("p").children("span.text");
+            var preHeight = text.css("height");
+            text.css("height","100%");
+            var maxHeight = text.css("height");
+            text.css("height",preHeight);
+
+            if (!text.hasClass("opened")) {
+                text.addClass("opened");
+                text.stop().a
+                text.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
+                $(this).children().removeClass("fa-arrow-down");
+                $(this).children().addClass("fa-arrow-up");
+            }
+            else {
+                text.removeClass("opened");
+                text.stop().animate({height: "60px"}, {duration:400, easing:'easeOutExpo'});
+                $(this).children().removeClass("fa-arrow-up");
+                $(this).children().addClass("fa-arrow-down");
+            }
+        });
     </script>
 </html>
