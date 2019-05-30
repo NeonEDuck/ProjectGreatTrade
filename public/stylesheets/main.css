@@ -40,6 +40,7 @@ div.content{
     padding:20px 30px;    
     line-height:30px;
     text-align:justify;
+    overflow: hidden
 }
 div.navbar{
     box-sizing: border-box;
@@ -179,8 +180,8 @@ div.form{
 div.inline-block{
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
-    margin: 10px 0;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 div.left{
@@ -285,4 +286,36 @@ ul.log li{
 ul.log li a{
     font-size: 20px;
     color: #fff;
+}
+
+div.update,
+form.update{
+    float: right;
+}
+
+div.update input {
+    cursor: pointer;
+}
+
+div.update:before
+div.update:after{
+	display: block;
+	content: '';
+	clear: both;
+}
+
+input.button {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #41b883;
+    border: 0px;
+    width: 80px;
+    height: 50px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+input.button:hover{
+    cursor: pointer;
 }

@@ -3,6 +3,7 @@
     <head>
         <title>papapapapapa</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/select2.min.css" rel="stylesheet"/>
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
         <style>
@@ -27,21 +28,24 @@
                 padding: 0;
                 margin-bottom: 0.5em;
             }
-            div.multiselect__tags,
-            ul.multiselect__content{
-                border-color: #aaa;
-                padding-top:4px;
+            .select2-container{
+                width: 300px !important;
+            }
+            .select2-selection__choice{
+                background-color: #41b883 !important;
+                color: #fff;
+            }
+            .select2-selection__choice__remove{
+                color: #fff !important;
             }
         </style>
     </head>
 
     <body>
         <div class = "container">
-            <div class = "header">           
-            </div>
+            <%- include('public/header'); -%>
 
-            <div class = "navbar">
-            </div>
+            <%- include('public/navbar'); -%>
 
             <div class = "content">
                 <h2>產品新增 </h2>
@@ -78,12 +82,11 @@
                             <div class = "item">                     
                                 <span class="name">標籤: </span>
                                 <span class="value">
-                                    <div id="app-vue" style="width:350px;display:inline-block;">
-                                        <multiselect width="300px" 
-                                            v-model="selected"
-                                            :options="options" :multiple="true" :taggable="true" @tag="addTag">
-                                        </multiselect>
-                                    </div>
+                                    <select id="e1" multiple name="lblno">
+                                        <% for(var i=0; i<result.label.length; i++) {%>
+                                            <option value="<%= result.label[i].lblno %>"><%= result.label[i].lblname %></option>
+                                        <% } %>
+                                    </select>
                                 </span>
                             </div>
 
@@ -107,24 +110,25 @@
                 </form>  
             </div>
 
-            <div class = "footer">
-            </div>
+            <%- include('public/footer'); -%>
         </div>
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/vue.multiselect/2.0.0-beta.13/vue-multiselect.min.js'></script>
 
-    
+    <script src="/js/select2.full.min.js"></script>
 
-    <script  src="/js/multiselect.js"></script>
+    <script src="/js/ejs.min.js"></script>
+
+    <script>
+        $("#e1").select2();
+    </script>
     
     <script>
         $("div.form").css("width", $("form.form").css("width"));
     </script>
-    <script src = "/js/public_div.js"></script>
     <script src = "/js/preview_image.js"></script>
 
 </html>

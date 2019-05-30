@@ -30,7 +30,7 @@ var getDropdownData = async function(){
 var add = async function(newData){
     var result;
     var prono;
-    var list;
+    var list = [];
 
     await sql('INSERT INTO product (proname, amt, price, description, picture) VALUES ($1, $2, $3, $4, $5) RETURNING prono', [newData.proname, newData.amt, newData.price, newData.description, newData.picture])
         .then((data) => {
@@ -39,17 +39,19 @@ var add = async function(newData){
         }, (error) => {
             result = -1;
         });
-    // for (var i = 0; i < newData.label.length; i++) {
-    //     list.push([prono,newData.label])
-    // }
-    // if (result == 0) {
-    //     await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
-    //         .then((data) => {
-    //             result = 0;  
-    //         }, (error) => {
-    //             result = -1;
-    //         });
-    // }
+        
+    for (var i = 0; i < newData.lblno.length; i++) {
+        list.push([prono,newData.lblno[i]])
+    }
+
+    if (result == 0) {
+        await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
+            .then((data) => {
+                result = 0;  
+            }, (error) => {
+                result = -1;
+            });
+    }
 
 		
     return result;
@@ -87,21 +89,22 @@ var one = async function(prono){
         }, (error) => {
             result = null;
         });
-    
-    await sql('SELECT label.lblname FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
-        .then((data) => {
-            if(data.rows.length > 0){
-                var list = [];
-                for (var i = 0; i < data.rows.length; i++) {
-                    list.push(data.rows[i].lblname);
-                }
-                result.lblname = list;
-            }else{
-                result.lblname = -1;
-            }    
-        }, (error) => {
-            result = null;
-        });
+    if (result!=null && result!=-1){
+        await sql('SELECT label.lblname FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    var list = [];
+                    for (var i = 0; i < data.rows.length; i++) {
+                        list.push(data.rows[i].lblname);
+                    }
+                    result.lblname = list;
+                }else{
+                    result.lblname = -1;
+                }    
+            }, (error) => {
+                result = null;
+            });
+    }
 
     
 
@@ -138,5 +141,37 @@ var page = async function(pageNo){
     return result;
 }
 
+//---------------------------------------------
+//執行資料庫動作的函式-傳回分頁及指定頁面的產品
+//---------------------------------------------
+var edit = async function(newData){
+    var results;
+    
+    await sql('UPDATE product SET proname=$1, amt=$2, price=$3, description=$4, picture=$5 WHERE prono = $6', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.prono])
+        .then((data) => {
+            results = data.rowCount;  
+        }, (error) => {
+            results = -1;
+        });
+		
+    return results;
+}
+
+var remove = async function(prono){
+    var results;
+    
+    await sql('DELETE FROM propayment WHERE prono = $1', [prono])
+    await sql('DELETE FROM prolabel WHERE prono = $1', [prono])
+    await sql('DELETE FROM comment WHERE prono = $1', [prono])
+    await sql('DELETE FROM product WHERE prono = $1', [prono])
+        .then((data) => {
+            results = data.rowCount;  
+        }, (error) => {
+            results = -1;
+        });
+		
+    return results;
+}
+
 //匯出
-module.exports = {getDropdownData, add, list, one, page};
+module.exports = {getDropdownData, add, list, one, page, edit, remove};
