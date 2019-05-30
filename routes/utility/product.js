@@ -102,7 +102,18 @@ var one = async function(prono){
                     result.lblname = -1;
                 }    
             }, (error) => {
-                result = null;
+                result.lblname = null;
+            });
+        await sql('SELECT comment.*,member.memname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [prono])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    console.log(data.rows)
+                    result.comment = data.rows;
+                }else{
+                    result.comment = -1;
+                }    
+            }, (error) => {
+                result.comment = null;
             });
     }
 
