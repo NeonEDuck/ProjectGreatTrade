@@ -17,8 +17,7 @@ var product_list_remove_show = require('./routes/product_list_remove_show');
 var product_list_remove = require('./routes/product_list_remove');
 var buyer_list = require('./routes/buyer_list');
 var seller_list = require('./routes/seller_list');
-var payment = require('./routes/payment');
-
+var list = require('./routes/list');
 //------------------------------------------------------------
 
 var login_form = require('./routes/login_form');
@@ -61,7 +60,7 @@ app.use('/product/list/remove/show', product_list_remove_show);
 app.use('/product/list', product_list_remove);
 app.use('/buyer/list', buyer_list);
 app.use('/seller/list', seller_list);
-app.use('/payment', payment);
+app.use('/list', list);
 //-----------------------------------------
 //------------------------------------------------------------
 //-----------------------------------------

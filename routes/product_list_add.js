@@ -9,8 +9,7 @@ router.post('/', function(req, res) {
     var prono = req.body.prono;                  //取得產品編號
     var proname = req.body.proname;              //取得產品名稱
     var price = Number(req.body.price);          //取得價格
-    var inventorydate = req.body.inventorydate;  //取得盤點日期
-    var propayment = req.body.propayment;  
+    var inventorydate = req.body.inventorydate;  //取得盤點日期 
     var tel = Number(req.body.tel);
     var address = req.body.address;
 
@@ -20,7 +19,6 @@ router.post('/', function(req, res) {
         proname:proname,
         price:price,
         inventorydate:inventorydate,
-        propayment:propayment,
         tel:tel,
         address:address
     } 
