@@ -28,7 +28,6 @@ router.post('/', function(req, res, next) {
             else {
                 data.picture='images/no_pic.jpg';
             }
-            console.log(data);
             res.render('product_update_form', {item:data, label:list});  //將資料傳給顯示頁面
         }  
     })
