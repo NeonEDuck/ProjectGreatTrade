@@ -100,10 +100,10 @@ var one = async function(prono){
             }, (error) => {
                 result.member = null;
             });
-        await sql('SELECT label.lblname FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
+        await sql('SELECT label.* FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
             .then((data) => {
                 if(data.rows.length > 0){
-                    result.label = list;
+                    result.label = data.rows;
                 }else{
                     result.label = -1;
                 }    
@@ -162,6 +162,7 @@ var page = async function(pageNo){
 //---------------------------------------------
 var edit = async function(newData){
     var results;
+    var list = [];
     
     await sql('UPDATE product SET proname=$1, amt=$2, price=$3, description=$4, picture=$5 WHERE prono = $6', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.prono])
         .then((data) => {
@@ -169,6 +170,15 @@ var edit = async function(newData){
         }, (error) => {
             results = -1;
         });
+    
+    for (var i = 0; i < newData.lblno.length; i++) {
+        list.push([newData.prono,newData.lblno[i]])
+    }
+
+    if (results > 0) {
+        await sql('DELETE FROM prolabel WHERE prono = $1', [newData.prono])
+        await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
+    }
 		
     return results;
 }

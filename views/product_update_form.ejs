@@ -4,6 +4,7 @@
         <title>papapapapapa</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <link href="/stylesheets/select2.min.css" rel="stylesheet"/>
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
         <style>
@@ -24,6 +25,16 @@
                 content: '';
                 clear: both;
                 display: inline-block;
+            }
+            .select2-container{
+                width: 300px !important;
+            }
+            .select2-selection__choice{
+                background-color: #41b883 !important;
+                color: #fff;
+            }
+            .select2-selection__choice__remove{
+                color: #fff !important;
             }
         </style>
     </head>
@@ -67,6 +78,16 @@
 
                                 <div class = "item">                     
                                     <span class="name">標籤: </span>
+                                    <span class="value">
+                                        <select id="e1" multiple name="lblno">
+                                            <% for(var i=0; i<label.length; i++) {%>
+                                                <option id="<%= label[i].lblno %>" value="<%= label[i].lblno %>"><%= label[i].lblname %></option>
+                                            <% } %>
+                                        </select>
+                                        <span id='variableJSON' hidden>
+                                            <%= JSON.stringify(item.label); %>
+                                        </span>
+                                    </span>
                                 </div>
 
                                 <div class = "item">
@@ -102,36 +123,23 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="/js/multiselect.js"></script>
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js'></script>
+
+    <script src="/js/select2.full.min.js"></script>
+
+    <script src="/js/ejs.min.js"></script>
+
     <script>
-        $('.remove').on('click', function(){
-            $.confirm({
-                title: '確定刪除?',
-                content: '刪除的資料可是回不來喔',
-                boxWidth: '300px',
-                useBootstrap: false,
-                type: 'red',
-                buttons: {   
-                    ok: {
-                        text: "刪除",
-                        btnClass: 'btn-primary',
-                        btnClass: 'btn-red',
-                        keys: ['enter'],
-                        action: function(){
-                            document.getElementById("remove").submit();
-                        }
-                    },
-                    cancel:{
-                        text: "取消",
-                        btnClass: 'btn-primary',
-                        btnClass: 'btn-blue',
-                        cancel: function(){
-                        }
-                    }
-                }
-            });
-        })
+        var variableJSON = JSON.parse($('#variableJSON').text());
+        $("#variableJSON").remove();
+        for (var i = 0; i < variableJSON.length; i++) {
+            var ch = "#"+variableJSON[i].lblno;
+            $("#e1").children(ch).attr("selected","selected");
+        }
+        $("#e1").select2();
     </script>
 
     <script>

@@ -46,7 +46,6 @@ router.get('/:prono', function(req, res, next) {
                     data.comment[i].rspdate = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                 }
             }
-            console.log(data);
             res.render('product_one', {item:data});  //將資料傳給顯示頁面
         }  
     })

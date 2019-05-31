@@ -55,7 +55,7 @@
 
                             <div class = "item">                     
                                 <span class="name">標籤: </span>
-                                <% for(var i=0; i<item.label.length; i++) {%>
+                                <% for(var i=0; i<item.label.length; i++) { %>
                                     <span class="tag"><%= item.label[i].lblname %></span>
                                 <% } %>
                             </div>
@@ -98,10 +98,10 @@
                                         <img src = "/<%= userpic %>" height="100%">
                                     </div>
                                     <h3>
-                                        <%= username %> <span> 今天 </span>
+                                        <%= username %> <span class = "date"> 今天 </span>
                                     </h3>
                                     <textarea name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
-                                    <div class="value"><input class="button" type="submit" value="留言"></div>
+                                    <div class="value"><input class="comment-button button" type="submit" value="留言"></div>
                                 </form>
                             </div>
                         </div>
@@ -158,10 +158,10 @@
                                             <img src = "/<%= userpic %>" height="100%">
                                         </div>
                                         <h3>
-                                            <%= username %> <span> 今天 </span>
+                                            <%= username %> <span class = "date"> 今天 </span>
                                         </h3>
                                         <textarea name="rspcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
-                                        <div class="value"><input class="button" type="submit" value="回覆"></div>
+                                        <div class="value"><input class="comment-button button" type="submit" value="回覆"></div>
                                     </form>
                                 </div>
                             <% } %>
