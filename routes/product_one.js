@@ -24,6 +24,28 @@ router.get('/:prono', function(req, res, next) {
             else {
                 data.picture='images/no_pic.jpg';
             }
+            if (fs.existsSync('./public/picture/' + data.member.picture)) {
+                data.member.picture='picture/' + data.member.picture;
+            }
+            else {
+                data.member.picture='images/no_pic.jpg';
+            }
+            for(var i=0; i < data.comment.length;i++){ 
+                if (fs.existsSync('./public/picture/' + data.comment[i].picture)) {
+                    data.comment[i].picture='picture/' + data.comment[i].picture;
+                }
+                else {
+                    data.comment[i].picture='images/no_pic.jpg';
+                }
+                if (data.comment[i].cmtdate != null) {
+                    var d = new Date(data.comment[i].cmtdate);
+                    data.comment[i].cmtdate = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                }
+                if (data.comment[i].rspdate != null) {
+                    var d = new Date(data.comment[i].rspdate);
+                    data.comment[i].rspdate = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                }
+            }
             res.render('product_one', {item:data});  //將資料傳給顯示頁面
         }  
     })

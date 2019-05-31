@@ -36,7 +36,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var amt = Number(req.body.amt);
     var description = req.body.description;
     var picture;
-    var label;
+    var lblno = req.body.lblno;
 
     if (req.body.picture != 'images/no_pic.jpg'){
         picture = req.body.picture.replace('picture/','');
@@ -53,7 +53,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
         price:price,
         description:description,
         picture:picture,
-        label:label
+        lblno:lblno
     } 
     
     product.edit(newData).then(d => {
