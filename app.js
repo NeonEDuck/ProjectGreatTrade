@@ -26,7 +26,8 @@ var login_form = require('./routes/login_form');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var login_show = require('./routes/login_show');
-var register = require('./routes/register_form');
+var register = require('./routes/register');
+var register_form = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
 //var shoppingCart = require('./routes/shoppingCart');
 
@@ -69,7 +70,8 @@ app.use('/login', login_form);
 app.use('/user/login', login);
 app.use('/logout', logout);
 app.use('/user/login_show', login_show);
-app.use('/register', register);
+app.use('/register', register_form);
+app.use('/user/register', register)
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 

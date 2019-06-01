@@ -13,29 +13,27 @@ router.post('/', function(req, res, next) {
     var backupemail = req.body.backupemail;
     var sex = req.body.sex;
     var password = req.body.password;
-    var password2 = req.body.password2;
-    var birthday = req.body.birthday;
+    var birth = req.body.birth;
     var tel = req.body.tel;
 
     // 建立一個新資料物件
     var newData={
-        account:account,
         memname:memname,
         nickname:nickname,
         email:email,
         backupemail:backupemail,
         sex:sex,
+        account:account,
         password:password,
-        password2:password2,
-        birthday:birthday,
+        birth:birth,
         tel:tel
     } 
     
     user.add(newData).then(d => {
         if (d==0){
-            res.render('registerSuccess');  //傳至成功頁面
+            res.render('register_Success');  //傳至成功頁面
         }else{
-            res.render('registerFail');     //導向錯誤頁面
+            res.render('register_Fail');     //導向錯誤頁面
         }  
     })
 });
