@@ -6,22 +6,29 @@ const user = require('./utility/user');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
-    var Name = req.body.Name;                  
-    var label = req.body.label;              
-    var Nick = req.body.Nick;
-    var Email = req.body.Email;  
-    var password = Number(req.body.password);
-    var Birthday = Number(req.body.Telephone);
-    var Telephone = Number(req.body.Telephone);
+    var account = req.body.account
+    var memname = req.body.memname;                                
+    var nickname = req.body.nickname;
+    var email = req.body.email; 
+    var backupemail = req.body.backupemail;
+    var sex = req.body.sex;
+    var password = req.body.password;
+    var password2 = req.body.password2;
+    var birthday = req.body.birthday;
+    var tel = req.body.tel;
 
     // 建立一個新資料物件
     var newData={
-        Name:Name,
-        Nick:Nick,
-        Email:Email,
+        account:account,
+        memname:memname,
+        nickname:nickname,
+        email:email,
+        backupemail:backupemail,
+        sex:sex,
         password:password,
-        Birthday:Birthday,
-        Telephone:Telephone
+        password2:password2,
+        birthday:birthday,
+        tel:tel
     } 
     
     user.add(newData).then(d => {
