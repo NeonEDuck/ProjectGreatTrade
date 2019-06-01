@@ -24,7 +24,7 @@ var shoppingCart_remove = require('./routes/shoppingCart_remove');
 
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
-var log_out = require('./routes/log_out');
+var logout = require('./routes/logout');
 var login_show = require('./routes/login_show');
 var register = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
@@ -67,7 +67,7 @@ app.use('/shoppingCart/remove', shoppingCart_remove);
 app.use('/shoppingCart', shoppingCart);
 app.use('/login', login_form);
 app.use('/user/login', login);
-app.use('/user/log_out', log_out);
+app.use('/logout', logout);
 app.use('/user/login_show', login_show);
 app.use('/register', register);
 //app.use('/shopping_cart', shoppingCart);
