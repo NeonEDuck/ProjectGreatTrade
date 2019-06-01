@@ -1,5 +1,15 @@
 @charset "utf-8";
 
+:root {
+    --lighter-color: #91AAC2;
+    --light-color: #4C7192;
+    --main-color: #274F73;
+    --dark-color: #0D3151;
+    --darker-color: #02172A;
+    --green: #41b883;
+}
+
+
 /*---------------------------*/
 /* 編排網頁                   */
 /*---------------------------*/
@@ -8,7 +18,7 @@ html, body{
     font-family: 'Noto Sans TC', sans-serif; 
     padding: 0px;
     margin: 0px;
-    background:#444;
+    background: var(--dark-color);
 }
 
 /*---------------------------*/
@@ -24,6 +34,7 @@ div.container{
 div.header{
     box-sizing: border-box;
     height:80px;
+    background: var(--light-color);
 }
 
 
@@ -33,7 +44,7 @@ div.header{
 div.content{
     box-sizing: border-box;
     background:#fff;
-    width:1000px;
+    max-width:1000px;
     margin:0px auto 0px auto;
     box-shadow:0px 0px 10px 0px #000;
     min-height: calc(100vh - 80px - 80px - 3em);
@@ -45,7 +56,7 @@ div.content{
 div.navbar{
     box-sizing: border-box;
     text-align: center;
-    background: #000;
+    background: var(--main-color);
     height: 3em;
 }
 
@@ -72,7 +83,7 @@ span.register{
 div.footer{
     box-sizing: border-box;
     height:80px;
-    background: #666;
+    background: var(--darker-color);
     color: #fff;
     text-align: center;
     padding: 20px 30px;
@@ -134,7 +145,7 @@ table tbody tr td a:hover{
 /*---------------------*/
 ul.pagination{
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 1em;
     padding: 0;    
     height:40px;
     line-height:40px;
@@ -156,7 +167,7 @@ ul.pagination li a{
 }
 
 ul.pagination li a:hover{  
-    color: #888;
+    color: var(--light-color);
     font-size:19px;
 }
 
@@ -188,6 +199,7 @@ div.left{
     float: left;
     position: relative;
     margin-right: 2em;
+    margin-bottom: 0.5em;
 }
 div.right{
     float: left;
@@ -271,7 +283,7 @@ ul.pagination{
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 0;
+    margin: 1em 0;
 }
 
 ul.log{
@@ -288,9 +300,8 @@ ul.log li a{
     color: #fff;
 }
 
-div.update,
-form.update{
-    float: right;
+div.update{
+    text-align: right;
 }
 
 div.update input {
@@ -336,7 +347,7 @@ div.division-line {
     cursor: pointer;
     font-weight: 500;
     color: #fff;
-    background: #D25500;
+    background: var(--dark-color);
     padding: 4px 13px;
     box-sizing: border-box;
     margin: 0.5em 0 -0.5em -0.5em;
@@ -416,4 +427,16 @@ span.date {
 
 input.comment-button {
     float: right;
+}
+span.tag{
+    position: relative;
+    display: inline-block;
+    padding: 4px 10px 4px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: #fff;
+    line-height: 1;
+    background: var(--green);
+    margin-bottom: 8px;
+    white-space: nowrap;
 }

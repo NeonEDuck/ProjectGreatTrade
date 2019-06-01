@@ -18,7 +18,7 @@
 
 #navigation > li a {
     height: 100%;
-    color: #c60;
+    color: #fff;
     text-decoration: none;
     line-height: 3;
     text-transform: uppercase;
@@ -27,7 +27,7 @@
 
 
 #navigation > li:hover a {
-    color: orange;
+    color: #fff;
 }
 
 #navigation > li:hover {
@@ -40,10 +40,11 @@
     margin: 0;
     padding: 0.3em 0 0 0;
     list-style: none;
-    background: #a40;
+    background: var(--darker-color);
     position: absolute;
     top: -1000em;
     box-shadow:0px 0px 10px 0px #000;
+    z-index: 250;
 }
 
 #navigation > li.sub ul li {
@@ -62,7 +63,7 @@
 }
 
 #navigation > li.sub ul li a:hover {
-    background: #c60;
+    background: var(--main-color);
 }
 
 #navigation > li.sub:hover ul {

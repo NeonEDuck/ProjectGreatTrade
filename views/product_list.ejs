@@ -46,21 +46,7 @@
                     <form class = "form" action = "/product/add" method = "post">
                 </div>
 
-                <ul class="pagination" style="margin-bottom: 1em;">
-                    <% if(items.startPage>1){ %>
-                        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
-                    <% } %> 
-    
-                    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
-                        <% if(i<=items.totalPage){ %>
-                            <li <% if(items.pageNo==i){ %> style = "background:#666"  <% } %>><a href="/product/page/<%=i%>" <% if(items.pageNo==i){ %> style = "color:#fff;"  <% } %>><%=i%></a></li>
-                        <% } %> 
-                    <% } %>
-    
-                    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
-                        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
-                    <% } %>
-                </ul>
+                <%- include('public/page'); -%>
 
                 <% for(var i=0; i<items.data.length; i++) {%>
                     <a href="/product/<%= items.data[i].prono %>"> 
@@ -79,21 +65,8 @@
                     </a>
                 <% } %>
 
-                <ul class="pagination">
-                    <% if(items.startPage>1){ %>
-                        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
-                    <% } %> 
-    
-                    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
-                        <% if(i<=items.totalPage){ %>
-                            <li <% if(items.pageNo==i){ %> style = "background:#666"  <% } %>><a href="/product/page/<%=i%>" <% if(items.pageNo==i){ %> style = "color:#fff;"  <% } %>><%=i%></a></li>
-                        <% } %> 
-                    <% } %>
-    
-                    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
-                        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
-                    <% } %>
-                </ul>
+                <%- include('public/page'); -%>
+                
             </div>
 
             <%- include('public/footer'); -%>

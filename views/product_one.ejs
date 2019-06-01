@@ -6,20 +6,6 @@
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-        <style>
-            span.tag{
-                position: relative;
-                display: inline-block;
-                padding: 4px 10px 4px 10px;
-                border-radius: 5px;
-                margin-right: 10px;
-                color: #fff;
-                line-height: 1;
-                background: #41b883;
-                margin-bottom: 8px;
-                white-space: nowrap;
-            }
-        </style>
     </head>
 
     <body>
@@ -90,7 +76,7 @@
                     <h1>留言</h1>
                     <% if(user != null && user != item.memno){ %>
                         <div class="comment-group">
-                            <div class = "comment section">
+                            <div class = "comment section" style="min-width:576px">
                                 <form action = "/comment" method = "post">
                                     <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                                     <span class="value"><input type="hidden" name="memno" value="<%= user %>"></span>
@@ -100,7 +86,7 @@
                                     <h3>
                                         <%= username %> <span class = "date"> 今天 </span>
                                     </h3>
-                                    <textarea name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
+                                    <textarea id="text" name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="2" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
                                     <div class="value"><input class="comment-button button" type="submit" value="留言"></div>
                                 </form>
                             </div>
@@ -151,7 +137,7 @@
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                                 </div>
                             <% }else if(user != null && user == item.memno){ %>
-                                <div class = "reply section">
+                                <div class = "reply section"" style="min-width:576px">
                                     <form action = "/reply" method = "post">
                                         <span class="value"><input type="hidden" name="cmtno" value="<%= item.comment[i].cmtno %>"></span>
                                         <div class = "avatar">
@@ -160,7 +146,7 @@
                                         <h3>
                                             <%= username %> <span class = "date"> 今天 </span>
                                         </h3>
-                                        <textarea name="rspcontent" placeholder="請輸入文字" textarea cols="48" rows="6" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
+                                        <textarea name="rspcontent" placeholder="請輸入文字" textarea cols="48" rows="2" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
                                         <div class="value"><input class="comment-button button" type="submit" value="回覆"></div>
                                     </form>
                                 </div>
@@ -174,6 +160,7 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src = "/js/autosize.min.js"></script>
     <script
         src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
@@ -199,7 +186,7 @@
                 }
             })
         })
-
+        autosize($('textarea'));
         $(".reveal").click(function(event){
             event.preventDefault();
             var text = $(this).parents().children("p").children("span.text");

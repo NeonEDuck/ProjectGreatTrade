@@ -1,0 +1,15 @@
+<ul class="pagination">
+    <% if(items.startPage>1){ %>
+        <li><a href="/product/page/<%=(items.startPage-items.navSegments)%>">...</a></li>
+    <% } %> 
+
+    <% for(var i=items.startPage; i<items.startPage+items.navSegments; i++) {%>
+        <% if(i<=items.totalPage){ %>
+            <li <% if(items.pageNo==i){ %> style = "background:var(--dark-color);"  <% } %>><a href="/product/page/<%=i%>" <% if(items.pageNo==i){ %> style = "color:#fff;"  <% } %>><%=i%></a></li>
+        <% } %> 
+    <% } %>
+
+    <% if(items.startPage+items.navSegments<=items.totalPage){ %>
+        <li><a href="/product/page/<%=(items.startPage+items.navSegments)%>">...</a></li>
+    <% } %>
+</ul>
