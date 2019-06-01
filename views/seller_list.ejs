@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= title %></title>
+        <title>= title %></title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
@@ -30,16 +30,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(var i=0; i<items.length; i++) {%>
+                         for(var i=0; i<items.length; i++) {%>
                             <tr>
-                                <td><a href="/product/one/<%= items[i].prono %>"><%= items[i].prono %></a></td>
-                                <td><%= items[i].memname %></td>
-                                <td><%= items[i].proname %></td>
-                                <td><%= items[i].price %></td>
-                                <td><%= items[i].payname %></td>
-                                <td><%= items[i].orddate %></td>                        
+                                <td><a href="/product/one/= items[i].prono %>">= items[i].prono %></a></td>
+                                <td>= items[i].memname %></td>
+                                <td>= items[i].proname %></td>
+                                <td>= items[i].price %></td>
+                                <td>= items[i].payname %></td>
+                                <td>= items[i].orddate %></td>                        
                             </tr> 
-                        <% } %> 
+                         } %> 
                     </tbody>
                 </table>   
             </div>

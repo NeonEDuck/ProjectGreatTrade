@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>papappapapa</title>
+        <title><%= title %></title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
     </head>
-
-    
 
     <body>
         <div class = "container">
@@ -18,75 +16,41 @@
             </div>
 
             <div class = "content">
-                <div class="w3-bar w3-black">
-                    <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'買家清單')">買家清單</button>
-                    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'賣家清單')">賣家清單</button>
-                  </div>
-                  
-                  <div id="買家清單" class="w3-container w3-border city">
-                    <h2>買家清單</h2>
+                <h2>清單</h2>
+  <p>檢視與買家、賣家的所有清單</p>
 
-                    <% for(var i=0; i<items.data.length; i++) {%>
-                      <a href="/buyer/list/<%= items.data[i].prono %>"> 
-                          <div class = "section">
-                              <img src = "/<%= items.data[i].picture %>" height="100%">
-                              <div class = "right">
-                                  <span>商品名稱: <%= items.data[i].proname %></span>
-                                  <br/>
-                                  <span>售價: <%= items.data[i].price %>$</span>
-                                  <br/>
-                                  <span>商品介紹: <%= items.data[i].description %></span>
-                                  <br/>
-                                  <span>上架日期: <%= items.data[i].date %></span>
-                              </div>
-                          </div>
-                      </a>
-                  <% } %>
+  <div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'買家')">買家</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'賣家')">賣家</button>
+  </div>
   
-                    
-                  </div>
-                
-                  <div id="賣家清單" class="w3-container w3-border city" style="display:none">
-                    <h2>賣家清單</h2>
+  <div id="買家" class="w3-container w3-border city">
+    <h2>買家</h2>
+    <p>London is the capital city of England.</p>
+  </div>
 
-                    <% for(var i=0; i<items.data.length; i++) {%>
-                      <a href="/seller/list/<%= items.data[i].prono %>"> 
-                          <div class = "section">
-                              <img src = "/<%= items.data[i].picture %>" height="100%">
-                              <div class = "right">
-                                  <span>商品名稱: <%= items.data[i].proname %></span>
-                                  <br/>
-                                  <span>售價: <%= items.data[i].price %>$</span>
-                                  <br/>
-                                  <span>商品介紹: <%= items.data[i].description %></span>
-                                  <br/>
-                                  <span>上架日期: <%= items.data[i].date %></span>
-                              </div>
-                          </div>
-                      </a>
-                  <% } %>
-                  </div>
-                
-                <script>
-                function openCity(evt, cityName) {
-                  var i, x, tablinks;
-                  x = document.getElementsByClassName("city");
-                  for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                  }
-                  tablinks = document.getElementsByClassName("tablink");
-                  for (i = 0; i < x.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-                  }
-                  document.getElementById(cityName).style.display = "block";
-                  evt.currentTarget.className += " w3-red";
-                }
-                </script>
-                
-                </body>
-                </html>
-                
-            </div>
+  <div id="賣家" class="w3-container w3-border city" style="display:none">
+    <h2>賣家</h2>
+    <p>Paris is the capital of France.</p> 
+  </div>
+
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
 
             <div class = "footer">
             </div>
