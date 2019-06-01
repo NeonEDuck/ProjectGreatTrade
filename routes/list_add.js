@@ -5,7 +5,7 @@ var router = express.Router();
 const product = require('./utility/product');
 
 //接收POST請求
-router.post('/', function(req, res) {
+router.post('/', function(req, res, next) {
     var prono = req.body.prono;                  //取得產品編號
     var proname = req.body.proname;              //取得產品名稱
     var price = Number(req.body.price);          //取得價格

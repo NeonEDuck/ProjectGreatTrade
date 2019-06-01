@@ -7,6 +7,8 @@
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
     </head>
 
+    
+
     <body>
         <div class = "container">
             <div class = "header">           
@@ -23,10 +25,46 @@
                   
                   <div id="買家清單" class="w3-container w3-border city">
                     <h2>買家清單</h2>
+
+                    <% for(var i=0; i<items.data.length; i++) {%>
+                      <a href="/buyer/list/<%= items.data[i].prono %>"> 
+                          <div class = "section">
+                              <img src = "/<%= items.data[i].picture %>" height="100%">
+                              <div class = "right">
+                                  <span>商品名稱: <%= items.data[i].proname %></span>
+                                  <br/>
+                                  <span>售價: <%= items.data[i].price %>$</span>
+                                  <br/>
+                                  <span>商品介紹: <%= items.data[i].description %></span>
+                                  <br/>
+                                  <span>上架日期: <%= items.data[i].date %></span>
+                              </div>
+                          </div>
+                      </a>
+                  <% } %>
+  
+                    
                   </div>
                 
                   <div id="賣家清單" class="w3-container w3-border city" style="display:none">
                     <h2>賣家清單</h2>
+
+                    <% for(var i=0; i<items.data.length; i++) {%>
+                      <a href="/seller/list/<%= items.data[i].prono %>"> 
+                          <div class = "section">
+                              <img src = "/<%= items.data[i].picture %>" height="100%">
+                              <div class = "right">
+                                  <span>商品名稱: <%= items.data[i].proname %></span>
+                                  <br/>
+                                  <span>售價: <%= items.data[i].price %>$</span>
+                                  <br/>
+                                  <span>商品介紹: <%= items.data[i].description %></span>
+                                  <br/>
+                                  <span>上架日期: <%= items.data[i].date %></span>
+                              </div>
+                          </div>
+                      </a>
+                  <% } %>
                   </div>
                 
                 <script>

@@ -25,8 +25,6 @@
                             <th width="15%">賣家名稱</th>
                             <th width="15%">產品名稱</th>
                             <th width="10%">價錢</th>
-                            <th width="10%">庫存量</th>
-                            <th width="10%">安全存量</th>  
                             <th width="10%">付費方式</th> 
                             <th width="10%">日期</th>                              
                         </tr>
@@ -35,10 +33,11 @@
                         <% for(var i=0; i<items.length; i++) {%>
                             <tr>
                                 <td><a href="/product/one/<%= items[i].prono %>"><%= items[i].prono %></a></td>
+                                <td><%= items[i].memname %></td>
                                 <td><%= items[i].proname %></td>
                                 <td><%= items[i].price %></td>
-                                <td><%= items[i].stockamt %></td>
-                                <td><%= items[i].safeamt %></td>                        
+                                <td><%= items[i].payname %></td>
+                                <td><%= items[i].orddate %></td>                        
                             </tr> 
                         <% } %> 
                     </tbody>

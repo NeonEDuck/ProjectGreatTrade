@@ -11,13 +11,13 @@ var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
 var product_one = require('./routes/product_one');
 var product_list_show = require('./routes/product_list_show');
-var product_list_add_form = require('./routes/product_add_form');
-var product_list_add = require('./routes/product_list_add');
+var list_add_form = require('./routes/list_add_form');
+var list_add = require('./routes/list_add');
 var product_list_remove_show = require('./routes/product_list_remove_show');
 var product_list_remove = require('./routes/product_list_remove');
 var buyer_list = require('./routes/buyer_list');
 var seller_list = require('./routes/seller_list');
-var list = require('./routes/list');
+var list = require('./routes/list_show');
 //------------------------------------------------------------
 
 var login_form = require('./routes/login_form');
@@ -54,8 +54,12 @@ app.use('/user/log_out', log_out);
 app.use('/user/login_show', login_show);
 app.use('/register', register);
 app.use('/product/list/show', product_list_show);
-app.use('/product/list/add/form', product_list_add_form);
-app.use('/product/list/add', product_list_add);
+//-----------------------------------------
+// 設定模組使用方式
+//-----------------------------------------
+app.use('/list/add/form', list_add_form);
+app.use('/list/add', list_add);
+//-----------------------------------------
 app.use('/product/list/remove/show', product_list_remove_show);
 app.use('/product/list', product_list_remove);
 app.use('/buyer/list', buyer_list);
