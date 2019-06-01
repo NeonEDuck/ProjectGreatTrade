@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 var product_add_form = require('./routes/product_add_form');
 var product_add = require('./routes/product_add');
 var product_list = require('./routes/product_list');
@@ -13,8 +14,13 @@ var product_one = require('./routes/product_one');
 var product_update_form = require('./routes/product_update_form');
 var product_update = require('./routes/product_update');
 var product_remove = require('./routes/product_remove');
+
 var comment_add = require('./routes/comment_add');
 var reply_add = require('./routes/reply_add');
+
+var shoppingCart = require('./routes/shoppingCart');
+var shoppingCart_add = require('./routes/shoppingCart_add');
+var shoppingCart_remove = require('./routes/shoppingCart_remove');
 
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
@@ -30,11 +36,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 var session = require('express-session');
-app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60000 },saveUninitialized: false,resave: false}));
+app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60*60*1000 },saveUninitialized: false,resave: false}));
 app.use(function(req, res, next) {
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
   res.locals.userpic = req.session.userpic;
+  res.locals.shoppingCart = req.session.shoppingCart;
   next();
 });
 
@@ -55,6 +62,9 @@ app.use('/product/remove', product_remove);
 app.use('/product/', product_one);
 app.use('/comment', comment_add);
 app.use('/reply', reply_add);
+app.use('/shoppingCart/add', shoppingCart_add);
+app.use('/shoppingCart/remove', shoppingCart_remove);
+app.use('/shoppingCart', shoppingCart);
 app.use('/login', login_form);
 app.use('/user/login', login);
 app.use('/user/log_out', log_out);

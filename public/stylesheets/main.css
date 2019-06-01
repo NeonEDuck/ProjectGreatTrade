@@ -7,6 +7,7 @@
     --dark-color: #0D3151;
     --darker-color: #02172A;
     --green: #41b883;
+    --red: #d84141;
 }
 
 
@@ -230,6 +231,7 @@ div.section{
     margin-bottom: 20px;
     height: 150px;
     padding: 0.5em;
+    background: #fff;
 }
 
 div.section img{
@@ -268,7 +270,7 @@ a{
     box-sizing: border-box;
     border: 2px inset;
     margin: 0 0.5em 0 -5px;
-    font-size: 30px;
+    font-size: 22px;
     height: 40px;
 }
 .searchbar input[type="submit"]{
@@ -319,7 +321,8 @@ input.button {
     font-family: 'Noto Sans TC', sans-serif;
     background: #41b883;
     border: 0px;
-    width: 80px;
+    min-width: 80px;
+    width: auto;
     height: 50px;
     border-radius: 15px;
     color: #fff;

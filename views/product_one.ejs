@@ -64,9 +64,19 @@
                         </div>
                     </div>
                     <% if(item.memno == user){ %>
-                        <form action = "/product/edit/form" method = "post" class="update">
+                        <form action = "/product/edit/form" method = "post">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class="value update"><input class="button" type="submit" value="修改"></div>
+                        </form>
+                    <% }else if (shoppingCart===null || shoppingCart===undefined || !shoppingCart.includes(item.prono)){ %>
+                        <form action = "/shoppingCart/add" method = "post">
+                            <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
+                            <div class="value update"><input class="button" type="submit" value="加入購物車"></div>
+                        </form>
+                    <% }else{ %>
+                        <form action = "/shoppingCart/remove" method = "post">
+                            <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
+                            <div class="value update"><input class="button" style="background: var(--red);" type="submit" value="從購物車清除"></div>
                         </form>
                     <% } %>
 
@@ -86,7 +96,7 @@
                                     <h3>
                                         <%= username %> <span class = "date"> 今天 </span>
                                     </h3>
-                                    <textarea id="text" name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="2" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
+                                    <textarea name="cmtcontent" placeholder="請輸入文字" textarea cols="48" rows="2" maxlength="255" style = "margin-top: 2px; resize: none; font-size: 16px; line-height: 30px"></textarea>
                                     <div class="value"><input class="comment-button button" type="submit" value="留言"></div>
                                 </form>
                             </div>

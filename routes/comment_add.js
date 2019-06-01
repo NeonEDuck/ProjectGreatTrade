@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
     
     comment.add(newData).then(d => {
         if (d==0){
-            res.render('addSuccess');  //傳至成功頁面
+            res.redirect('back');  //傳至成功頁面
         }else{
             res.render('addFail');     //導向錯誤頁面
         }  

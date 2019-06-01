@@ -34,20 +34,30 @@
 
             <div class = "content">
                 <h1>我的購物車</h1>
-
-                <% for(var i=0; i<items.length; i++) {%>
-                    <a href="/product/one/<%= items[i].prono %>"> 
-                        <div class = "section">
-                            <img src = "/picture/<%= items[i].picture %>" height="100%">
-                            <div class = "right">
-                                <span>商品名稱: <%= items[i].proname %></span>
-                                <br/>
-                                <span>售價: <%= items[i].price %></span>
-                                <br/>
+                <div style="background: var(--main-color); border: var(--darker-color) solid 5px ; padding: 5%;box-sizing: border-box;">
+                    <% for(var i=0; i<items.length; i++) {%>
+                        <a href="/product/<%= items[i].prono %>"> 
+                            <div class = "section" style="margin: 0 auto;">
+                                <img src = "/<%= items[i].picture %>" height="100%">
+                                <div class = "right">
+                                    <span>商品名稱: <%= items[i].proname %></span>
+                                    <br/>
+                                    <span>售價: <%= items[i].price %>$</span>
+                                    <br/>
+                                    <span>商品介紹: <%= items[i].description %></span>
+                                    <br/>
+                                    <span>上架日期: <%= items[i].date %></span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                <% } %>
+                        </a>
+                    <% } %>
+                </div>
+                <div style="float: right">
+                    <h1 style="float: left;margin-top: 1em;">總共<%= sum %>$</h1>
+                    <!-- <form action = "/shoppingCart/remove" method = "post"> -->
+                        <div class="value" style="margin-left: 1em;margin-top: 1em;float: right;"><input class="button" type="submit" value="確認"></div>
+                    <!-- </form> -->
+                </div>
             </div>
 
             <%- include('public/footer'); -%>
