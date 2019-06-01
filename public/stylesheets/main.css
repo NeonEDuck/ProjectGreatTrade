@@ -367,7 +367,7 @@ div.comment {
     /* border: none;
     box-shadow: #444 0px 0px 10px 0px; */
     height: fit-content;
-    width: 80%;
+    width: 100%;
     min-height: 108px;
 }
 div.reply {
@@ -375,7 +375,7 @@ div.reply {
     box-shadow: #444 0px 0px 10px 0px; */
     height: fit-content;
     width: 80%;
-    float: right;
+    margin-left: 20%;
     min-height: 108px;
 }
 
