@@ -28,6 +28,9 @@ var log_out = require('./routes/log_out');
 var login_show = require('./routes/login_show');
 var register = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
+var profile_edit = require('./routes/profile_edit');
+var member_report = require('./routes/member_report');
+//var profile_show = require('./routes/profile_show');
 //var shoppingCart = require('./routes/shoppingCart');
 
 var app = express();
@@ -70,6 +73,9 @@ app.use('/user/login', login);
 app.use('/user/log_out', log_out);
 app.use('/user/login_show', login_show);
 app.use('/register', register);
+app.use('/profile/edit', profile_edit);
+app.use('/member/report', member_report);
+//app.use('/profile_show', profile_show);
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 
