@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //增加引用函式
-const product = require('./utility/product');
+const order = require('./utility/order');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
         address:address
     } 
     
-    product.add(newData).then(d => {
+    order.add(newData).then(d => {
         if (d==0){
             res.render('addSuccess');  //傳至成功頁面
         }else{

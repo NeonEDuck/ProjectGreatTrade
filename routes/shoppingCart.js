@@ -6,13 +6,14 @@ const fs = require('fs')
 
 //接收GET請求
 router.get('/', function(req, res, next) {
-
     shoppingCart.one(req.session.shoppingCart).then(d => {
         if (d == null){
             res.render('error');
         }
-        else if (d.length > 0){
+        else{
             var sum = 0;
+            var results = [];
+            var product = [];
             for (var i = 0; i < d.length; i++) {
                 if (fs.existsSync('./public/picture/' + d[i].picture)) {
                     d[i].picture='picture/' + d[i].picture;
@@ -24,10 +25,29 @@ router.get('/', function(req, res, next) {
             for (var i = 0;i < d.length; i++) {
                 sum+= d[i].price;
             }
+            for (var i = 0;i < d.length; i++) {
+                var include = false;
+                for (var j = 0; j < results.length; j++) {
+                    if (results[j][0].memno==(d[i].memno)) {
+                        include = true;
+                    }
+                }
+                if (!include) {
+                    results.push([d[i]])
+                    product.push([d[i].prono]);
+                }
+                else {
+                    for (var j = 0; j < results.length; j++) {
+                        if (results[j][0].memno == d[i].memno) {
+                            results[j].push(d[i])
+                            product[j].push(d[i].prono);
+                            break;
+                        }
+                    }
+                }
+            }
 
-            res.render('shoppingCart', {items:d, sum:sum});  //將資料傳給顯示頁面
-        }else{
-            res.render('notFound');  //導向找不到頁面
+            res.render('shoppingCart', {items:results, product:product, sum:sum});  //將資料傳給顯示頁面
         }
     });
 });

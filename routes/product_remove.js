@@ -7,7 +7,6 @@ const product = require('./utility/product');
 //接收POST請求
 router.post('/', function(req, res, next) {
     var prono = req.body.prono;   //取得產品編號
-    console.log(prono);
     product.remove(prono).then(d => {
         if(d>=0){
             res.render('removeSuccess', {results:d});  //傳至成功頁面     

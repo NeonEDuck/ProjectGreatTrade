@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>papapapapapa</title>
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-        <link href="/stylesheets/select2.min.css" rel="stylesheet"/>
-        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
-        <link href="/stylesheets/main.css" rel="stylesheet"/>
+        <%- include('public/head'); -%>
         <style>
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button{ 
@@ -32,7 +28,7 @@
                 width: 300px !important;
             }
             .select2-selection__choice{
-                background-color: #41b883 !important;
+                background-color: var(--green) !important;
                 color: #fff;
             }
             .select2-selection__choice__remove{
@@ -47,22 +43,19 @@
 
             <%- include('public/navbar'); -%>
 
-            <div class = "content">
-                <h2>產品新增 </h2>
-
-                
+            <div class = "content">                
                 <form class = "form" enctype="multipart/form-data" action = "/product/add" method = "post">
-                    <div class="form">
+                    <div class = "inline-block">
 
                         <div class = "left">
                             <div id="gallery"></div>
                             <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" style = "display: none;" /></span>
-                            <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+                            <input type="button" class="button" style = "width:150px; margin: 0.5em 0 0 125px;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                         </div>
                         
                         <div class = "right">
                             <div class = "item">   
-                                <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" autocomplete="off" style="font-size: 30px;" required></span>
+                                <span class="value"><input type="text" name="proname" placeholder="請輸入商品名稱" style="font-size: 30px; height: 45px;;width: 250px;" required></span>
                             </div>
 
                             <div class = "item">          
@@ -102,10 +95,12 @@
                                 <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
                             </div>
                         </div>
-
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="新增" ></span>    
                     </div>
+
+                    <div class="division-line"></div>
+
+                    <span class="name"></span>
+                    <span class="value"><input class="button" style="float:right" type="submit" value="新增" ></span>    
                     
                 </form>  
             </div>

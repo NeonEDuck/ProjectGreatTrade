@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-//增加引用函式
-const product = require('./utility/product');
 
 
 //接收POST請求
@@ -18,9 +16,13 @@ router.post('/', function(req, res, next) {
     }
     if (req.session.shoppingCart.includes(prono)) {
         for (var i = 0; i < req.session.shoppingCart.length; i++) {
-            req.session.shoppingCart = req.session.shoppingCart.splice(i,1);
+            if (req.session.shoppingCart[i] == prono) {
+                req.session.shoppingCart.splice(i,1)
+                break;
+            }
         }
     }
+    console.log(req.session.shoppingCart);
     res.redirect('back');  //傳至成功頁面
 });
 

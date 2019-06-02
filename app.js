@@ -21,14 +21,15 @@ var reply_add = require('./routes/reply_add');
 var shoppingCart = require('./routes/shoppingCart');
 var shoppingCart_add = require('./routes/shoppingCart_add');
 var shoppingCart_remove = require('./routes/shoppingCart_remove');
+var shoppingCart_confirm = require('./routes/shoppingCart_confirm');
 
-var list_add_form = require('./routes/list_add_form');
-var list_add = require('./routes/list_add');
-var list_remove_show = require('./routes/list_remove_show');
-var list_remove = require('./routes/list_remove');
+var order_add_form = require('./routes/order_add_form');
+var order_add = require('./routes/order_add');
+var order_remove_show = require('./routes/order_remove_show');
+var order_remove = require('./routes/order_remove');
 var buyer_list = require('./routes/buyer_list');
 var seller_list = require('./routes/seller_list');
-var list_show_form = require('./routes/list_show');
+var order_show_form = require('./routes/order_show');
 //------------------------------------------------------------
 
 var login_form = require('./routes/login_form');
@@ -48,6 +49,7 @@ app.set('view engine', 'ejs');
 var session = require('express-session');
 app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60*60*1000 },saveUninitialized: false,resave: false}));
 app.use(function(req, res, next) {
+  req.session.shoppingCart = ['P0000001','P0000002','P0000004','P0000024']
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
   res.locals.userpic = req.session.userpic;
@@ -74,6 +76,7 @@ app.use('/comment', comment_add);
 app.use('/reply', reply_add);
 app.use('/shoppingCart/add', shoppingCart_add);
 app.use('/shoppingCart/remove', shoppingCart_remove);
+app.use('/shoppingCart/confirm', shoppingCart_confirm);
 app.use('/shoppingCart', shoppingCart);
 app.use('/login', login_form);
 app.use('/user/login', login);
@@ -81,13 +84,13 @@ app.use('/logout', logout);
 app.use('/user/login_show', login_show);
 app.use('/register', register_form);
 app.use('/user/register', register)
-app.use('/list/add/form', list_add_form);
-app.use('/list/add', list_add);
-app.use('/list/remove/show', list_remove_show);
-app.use('/list/remove', list_remove);
+app.use('/order/add/form', order_add_form);
+app.use('/order/add', order_add);
+app.use('/order/remove/show', order_remove_show);
+app.use('/order/remove', order_remove);
 app.use('/buyer/list', buyer_list);
 app.use('/seller/list', seller_list);
-app.use('/list/show/form', list_show_form);
+app.use('/order/show/form', order_show_form);
 
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));

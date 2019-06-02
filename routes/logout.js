@@ -6,8 +6,10 @@ const user = require('./utility/user');
 
 //接收POST請求
 router.get('/', function(req, res, next) {
-    req.session.empno = null;
-    req.session.name = null;           
+    res.locals.user = null;
+    res.locals.username = null;
+    res.locals.userpic = null;
+    res.locals.shoppingCart = null;
     res.render('logout');  //傳至登出    
 });
 

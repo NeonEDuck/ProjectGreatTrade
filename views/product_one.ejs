@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>papapapapapa</title>
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
-        <link href="/stylesheets/main.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <%- include('public/head'); -%>
     </head>
 
     <body>
@@ -83,7 +79,7 @@
 
                     <div class="division-line"></div>
                     
-                    <h1>留言</h1>
+                    <h1>留言<i class="fa fa-comments-o" aria-hidden="true"></i></h1>
                     <% if(user != null && user != item.memno){ %>
                         <div class="comment-group">
                             <div class = "comment section" style="min-width:576px">
