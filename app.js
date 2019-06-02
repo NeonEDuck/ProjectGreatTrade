@@ -22,6 +22,15 @@ var shoppingCart = require('./routes/shoppingCart');
 var shoppingCart_add = require('./routes/shoppingCart_add');
 var shoppingCart_remove = require('./routes/shoppingCart_remove');
 
+var list_add_form = require('./routes/list_add_form');
+var list_add = require('./routes/list_add');
+var list_remove_show = require('./routes/list_remove_show');
+var list_remove = require('./routes/list_remove');
+var buyer_list = require('./routes/buyer_list');
+var seller_list = require('./routes/seller_list');
+var list_show_form = require('./routes/list_show');
+//------------------------------------------------------------
+
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
@@ -70,6 +79,14 @@ app.use('/user/login', login);
 app.use('/logout', logout);
 app.use('/user/login_show', login_show);
 app.use('/register', register);
+app.use('/list/add/form', list_add_form);
+app.use('/list/add', list_add);
+app.use('/list/remove/show', list_remove_show);
+app.use('/list/remove', list_remove);
+app.use('/buyer/list', buyer_list);
+app.use('/seller/list', seller_list);
+app.use('/list/show/form', list_show_form);
+
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 
