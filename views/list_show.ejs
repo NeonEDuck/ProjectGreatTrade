@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= title %></title>
+        <title>wow</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>    
@@ -16,41 +16,44 @@
             </div>
 
             <div class = "content">
-                <h2>清單</h2>
-  <p>檢視與買家、賣家的所有清單</p>
+                
+              <h2>清單</h2>
+              <p>檢視與買家、賣家的所有清單</p>
+            
+              <div class="w3-bar w3-black">
+                <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'買家')">買家</button>
+                <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'賣家')">賣家</button>
+              </div>
+              
+              <div id="買家" class="w3-container w3-border city">
+                <h2>買家</h2>
+                <p>London is the capital city of England.</p>
+              </div>
+            
+              <div id="賣家" class="w3-container w3-border city" style="display:none">
+                <h2>賣家</h2>
+                <p>Paris is the capital of France.</p> 
+              </div>
+            
+            </div>
+            
+            <script>
+            function openCity(evt, cityName) {
+              var i, x, tablinks;
+              x = document.getElementsByClassName("city");
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablink");
+              for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " w3-red";
+            }
+            </script>
 
-  <div class="w3-bar w3-black">
-    <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'買家')">買家</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'賣家')">賣家</button>
-  </div>
-  
-  <div id="買家" class="w3-container w3-border city">
-    <h2>買家</h2>
-    <p>London is the capital city of England.</p>
-  </div>
-
-  <div id="賣家" class="w3-container w3-border city" style="display:none">
-    <h2>賣家</h2>
-    <p>Paris is the capital of France.</p> 
-  </div>
-
-</div>
-
-<script>
-function openCity(evt, cityName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("city");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " w3-red";
-}
-</script>
+            </div>
 
             <div class = "footer">
             </div>
@@ -60,3 +63,4 @@ function openCity(evt, cityName) {
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src = "/js/public_div.js"></script>
 </html>
+
