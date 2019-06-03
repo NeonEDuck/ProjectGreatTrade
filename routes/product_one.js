@@ -39,11 +39,11 @@ router.get('/:prono', function(req, res, next) {
                 }
                 if (data.comment[i].cmtdate != null) {
                     var d = new Date(data.comment[i].cmtdate);
-                    data.comment[i].cmtdate = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                    data.comment[i].cmtdate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                 }
                 if (data.comment[i].rspdate != null) {
                     var d = new Date(data.comment[i].rspdate);
-                    data.comment[i].rspdate = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                    data.comment[i].rspdate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                 }
             }
             res.render('product_one', {item:data});  //將資料傳給顯示頁面

@@ -34,7 +34,7 @@
                 <% if(items.length > 0){ %>
                     <div style="background: var(--main-color); border: var(--darker-color) solid 5px ; padding: 5%;box-sizing: border-box;">
                         <% for(var i=0; i<items.length; i++) {%>
-                            <div class = "section" style="margin: 0 auto; height: auto">
+                            <div id = "<%= i %>" class = "section" style="margin: 0 auto; height: auto">
                                 <h2>賣家: <%= items[i][0].nickname %></h2>
                                 <% for(var j=0; j<items[i].length; j++) {%>
                                     <a href="/product/<%= items[i][j].prono %>"> 
@@ -52,17 +52,20 @@
                                         </div>
                                     </a>
                                 <% } %>
+                                <h2>備註:</h2>
+                                <span class="value"><textarea name="request" placeholder="請輸入文字" textarea rows="5" maxlength="255" style = "width:100%; margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
                                 <h2>選擇付費方式:</h2>
                                 <span id='variableJSON' hidden>
                                     <%= JSON.stringify(product); %>
                                 </span>
-                                <% for(var j=0; j<items[i].length; j++) {%>    <% } %>
                                 <div class="button-group">
                                     <% for(var j=0; j<items[i][0].payment.length; j++) {%>
                                         <label class="button" style="background:#444;display:inline-grid;cursor: pointer;-webkit-appearance: button-bevel;" for="<%= items[i][0].memno %><%= items[i][0].payment[j].payno %>">
                                             <input name="radio[<%= i %>]" id="<%= items[i][0].memno %><%= items[i][0].payment[j].payno %>" value="<%= items[i][0].payment[j].payno %>"" style="margin: 0 auto;display: none" type="radio"><span style="margin: auto"><%= items[i][0].payment[j].payname %></span>
                                         </label>
                                     <% } %>
+                                    
+                                    <input class = "button remove" style=" background: var(--red);margin-left: 1em; float:right" type="button" value="刪除">
                                 </div>
                             </div>
                         <% } %>
@@ -88,19 +91,9 @@
     <script>
         var variableJSON = JSON.parse($('#variableJSON').text());
         $("#variableJSON").remove();
+        var removed = [];
         
-        $(':input[type=radio]').each(function(){
-            $(this).parent().css("background","#444");
-            $(':input[type="submit"]').prop('disabled', true);
-            $(':input[type="submit"]').css("background","#444");
-        })
-        $(':input').change(function(){
-            $(':input[type=radio]').each(function(){
-                $(this).parent().css("background","#444");
-                if($(this).prop("checked")) {
-                    $(this).parent().css("background","var(--green)");
-                }
-            })
+        function dataChange(){
             var chek = true;
             if ($('div.button-group:not(:has(:radio:checked))').length) {
                 var chek = false;
@@ -108,6 +101,7 @@
 
             if (chek) {
                 payno = [];
+                request = [];
                 $('div.button-group').each(function(){
                     $(this).children().children().each(function(){
                         if ($(this).prop("checked")) {
@@ -115,19 +109,26 @@
                         }
                     })
                 })
+                $('textarea[name=request]').each(function(){
+                    request.push($(this).val());
+                })
                 var newPost = []
+                var k = 0;
                 for (var i = 0; i < variableJSON.length; i++) {
-                    for (var j = 0; j < variableJSON[i].length; j++) {
-                        if (j == 0) {
-                            newPost.push({payno:payno[i],prono:[variableJSON[i][j]]})
+                    if (!removed.includes(i)) {
+                        for (var j = 0; j < variableJSON[i].length; j++) {
+                            if (j == 0) {
+                                newPost.push({payno:payno[k],prono:[variableJSON[i][j]],request:request[k]})
+                            }
+                            else {
+                                newPost[k].prono.push(variableJSON[i][j]);
+                            }
                         }
-                        else {
-                            newPost[i].prono.push(variableJSON[i][j]);
-                        }
+                        k++
                     }
                 }
-                console.log(newPost)
-                console.log(JSON.stringify(newPost))
+                // console.log(newPost)
+                // console.log(JSON.stringify(newPost))
                 $('#data').val(JSON.stringify(newPost))
 
                 $(':input[type="submit"]').prop('disabled', false);
@@ -137,6 +138,35 @@
                 $(':input[type="submit"]').prop('disabled', true);
                 $(':input[type="submit"]').css("background","#444");
             }
+        }
+
+        $(':input[type=radio]').each(function(){
+            $(this).parent().css("background","#444");
+            $(':input[type="submit"]').prop('disabled', true);
+            $(':input[type="submit"]').css("background","#444");
+        })
+        
+        $('.remove').click(function(){
+            if (confirm("確定要刪除?")) {
+                removed.push(parseInt($(this).parent().parent().attr('id')))
+                $(this).parent().parent().remove();
+                dataChange();
+                if ($(':input[type=radio]').length <= 0) {
+                    $(':input[type="submit"]').prop('disabled', true);
+                    $(':input[type="submit"]').css("background","#444");
+                }
+            }
+        })
+        
+        $(':input').change(function(){
+            $(':input[type=radio]').each(function(){
+                $(this).parent().css("background","#444");
+                if($(this).prop("checked")) {
+                    $(this).parent().css("background","var(--green)");
+                }
+            })
+
+            dataChange();
         })
     </script>
 </html>

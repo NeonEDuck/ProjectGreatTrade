@@ -3,6 +3,42 @@
     <head>
         <%- include('public/head'); -%>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            ul.progress-bar {
+                float: none;
+            }
+            ul.progress-bar .bar {
+                width: 20em;
+                height: 1em;
+                position: absolute;
+                background: var(--dark-color);
+                margin-top: 1em;
+                margin-left: 0.5em;
+                z-index: 50;
+            }
+            ul.progress-bar .bar .progress {
+                width: 50%;
+                height: 100%;
+                background: var(--green);
+            }
+            ul.progress-bar li {
+                float: left;
+                list-style: none;
+                width: 3em;
+                height: 3em;
+                background: var(--dark-color);
+                margin-right: 1.5em;
+                border-radius: 50%;
+                position: relative;
+                z-index: 100;
+                text-align: center;
+            }
+            ul.progress-bar li span{
+                position: relative;
+                top: 100%;
+                color: #000;
+            }
+        </style>
     </head>
 
     <body>
@@ -12,7 +48,9 @@
             <%- include('public/navbar'); -%>
 
             <div class = "content">
-              
+                <span id='variableJSON' hidden>
+                    <%= JSON.stringify(items); %>
+                </span>
                 <div class="tab-form">
                     <div class="tab">
                         <button class="tablinks" onclick="openTab(event, 'buy')">您下的訂單</button>
@@ -22,17 +60,57 @@
                     <div id="buy" class="tabcontent">
                         <% if (items.buy.length>0){ %>
                             <% for(var i=0;i<items.buy.length;i++){ %>
-                                <a href="#"> 
-                                    <div class = "section">
-                                        <span>訂單編號: <%= items.buy[i].ordno %></span>
-                                        <br/>
-                                        <span>付款方式: <%= items.buy[i].payno %></span>
-                                        <br/>
-                                        <span>下單日期: <%= items.buy[i].orddate %></span>
-                                        <br/>
-                                        <span>備註: <%= items.buy[i].request %></span>
+                                <div class = "section" style="height: auto; position: relative">
+                                    <div style="margin-bottom: 0.5em; display: flow-root;">
+                                        <div class = "left" style="color:#000">
+                                            <span>訂單編號: <%= items.buy[i][0].ordno %></span>
+                                            <br/>
+                                            <span>付款方式: <%= items.buy[i][0].payno %></span>
+                                            <br/>
+                                            <span>下單日期: <%= items.buy[i][0].orddate %></span>
+                                            <br/>
+                                            <span>備註: <%= items.buy[i][0].request %></span>
+                                        </div>
+                                        <a href="#">
+                                            <div class = "avatar" style="float: right; text-align: center;line-height: 1.5em">
+                                                <img src = "/<%= items.buy[i][0].picture %>" height="100%">
+                                                <span>賣家</span>
+                                                <br>
+                                                <span><%= items.buy[i][0].nickname %></span>
+                                            </div>
+                                        </a>
+                                        <div style="float: right">
+                                            <ul id="buy<%= i %>" class = "progress-bar">
+                                                <li><span>已下單</span></li>
+                                                <li><span>訂單已確認</span></li>
+                                                <li><span>製作中</span></li>
+                                                <li><span>製作完成</span></li>
+                                                <li><span>已出貨</span></li>
+                                                <div class = "bar">
+                                                    <div class = "progress">
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </a>
+                                    <% for(var j=0; j<items.buy[i].length; j++){ %>
+                                        <a href="/product/<%= items.buy[i][j].prono %>"> 
+                                            <div class = "section" style="margin: 0 auto;">
+                                                <img src = "/<%= items.buy[i][j].picture %>" height="100%">
+                                                <div class = "right">
+                                                    <span>商品名稱: <%= items.buy[i][j].proname %></span>
+                                                    <br/>
+                                                    <span>售價: <%= items.buy[i][j].price %>$</span>
+                                                    <br/>
+                                                    <span>商品介紹: <%= items.buy[i][j].description %></span>
+                                                    <br/>
+                                                    <span>上架日期: <%= items.buy[i][j].date %></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <% } %>
+                                    <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                                </div>
                             <% } %>
                         <% }else{ %>
                             <h3>尚未有任何訂單</h3>
@@ -43,17 +121,57 @@
                     <div id="sell" class="tabcontent">
                         <% if (items.sell.length>0){ %>
                             <% for(var i=0;i<items.sell.length;i++){ %>
-                                <a href="#"> 
-                                    <div class = "section">
-                                        <span>訂單編號: <%= items.sell[i].ordno %></span>
-                                        <br/>
-                                        <span>付款方式: <%= items.sell[i].payno %></span>
-                                        <br/>
-                                        <span>下單日期: <%= items.sell[i].orddate %></span>
-                                        <br/>
-                                        <span>備註: <%= items.sell[i].request %></span>
+                                <div class = "section" style="height: auto; position: relative">
+                                    <div style="margin-bottom: 0.5em; display: flow-root;">
+                                        <div class = "left" style="color:#000">
+                                            <span>訂單編號: <%= items.sell[i][0].ordno %></span>
+                                            <br/>
+                                            <span>付款方式: <%= items.sell[i][0].payno %></span>
+                                            <br/>
+                                            <span>下單日期: <%= items.sell[i][0].orddate %></span>
+                                            <br/>
+                                            <span>備註: <%= items.sell[i][0].request %></span>
+                                        </div>
+                                        <a href="#">
+                                            <div class = "avatar" style="float: right; text-align: center;line-height: 1.5em">
+                                                <img src = "/<%= items.buy[i][0].picture %>" height="100%">
+                                                <span>購買者</span>
+                                                <br>
+                                                <span><%= items.sell[i][0].nickname %></span>
+                                            </div>
+                                        </a>
+                                        <div style="float: right">
+                                            <ul id="sel<%= i %>" class = "progress-bar">
+                                                <li><span>已下單</span></li>
+                                                <li><span>訂單已確認</span></li>
+                                                <li><span>製作中</span></li>
+                                                <li><span>製作完成</span></li>
+                                                <li><span>已出貨</span></li>
+                                                <div class = "bar">
+                                                    <div class = "progress">
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </a>
+                                    <% for(var j=0; j<items.sell[i].length; j++){ %>
+                                        <a href="/product/<%= items.sell[i][j].prono %>"> 
+                                            <div class = "section" style="margin: 0 auto;">
+                                                <img src = "/<%= items.sell[i][j].picture %>" height="100%">
+                                                <div class = "right">
+                                                    <span>商品名稱: <%= items.sell[i][j].proname %></span>
+                                                    <br/>
+                                                    <span>售價: <%= items.sell[i][j].price %>$</span>
+                                                    <br/>
+                                                    <span>商品介紹: <%= items.sell[i][j].description %></span>
+                                                    <br/>
+                                                    <span>上架日期: <%= items.sell[i][j].date %></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <% } %>
+                                    <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                                </div>
                             <% } %>
                         <% }else{ %>
                             <h3>尚未有任何訂單</h3>
@@ -68,6 +186,11 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+    <script src = "/js/reveal.js"></script>
 
     <script>
         $(window).on("load",function(){
@@ -79,6 +202,52 @@
             tablinks = document.getElementsByClassName("tablinks")[0];
             tablinks.className += " active";
             tabcontent[0].style.display = "block";
+            var item = JSON.parse($('#variableJSON').text());
+            $("#variableJSON").remove();
+            
+            $(".progress-bar").each(function(){
+                var type = $(this).attr("id").slice(0,3);
+                var no = parseInt($(this).attr("id").slice(3));
+                var progress;
+                if (type == 'buy') {
+                    progress = item.buy[no][0].stat;
+                    console.log(progress)
+                }
+                else {
+                    progress = item.sell[no][0].stat;
+                    console.log(progress)
+                }
+                console.log(progress)
+                switch (progress) {
+                    case "S":
+                        $(this).children("li").css("background","var(--green)");
+                        $(this).children(".bar").children().css("width","100%");
+                        break;
+                    case "F":
+                        $(this).children("li:first").css("background","var(--green)");
+                        $(this).children("li:nth-child(2)").css("background","var(--green)");
+                        $(this).children("li:nth-child(3)").css("background","var(--green)");
+                        $(this).children("li:nth-child(4)").css("background","var(--green)");
+                        $(this).children(".bar").children().css("width","75%");
+                        break;
+                    case "M":
+                        $(this).children("li:first").css("background","var(--green)");
+                        $(this).children("li:nth-child(2)").css("background","var(--green)");
+                        $(this).children("li:nth-child(3)").css("background","var(--green)");
+                        $(this).children(".bar").children().css("width","50%");
+                        break;
+                    case "A":
+                        $(this).children("li:first").css("background","var(--green)");
+                        $(this).children("li:nth-child(2)").css("background","var(--green)");
+                        $(this).children(".bar").children().css("width","25%");
+                        break;
+                    default:
+                        $(this).children("li:first").css("background","var(--green)");
+                        $(this).children(".bar").children().css("width","0%");
+                        break;
+
+                }
+            })
         })
         function openTab(evt, cityName) {
             var i, tabcontent, tablinks;

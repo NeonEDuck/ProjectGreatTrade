@@ -135,6 +135,12 @@
             $("#e1").children(ch).attr("selected","selected");
         }
         $("#e1").select2();
+
+        $('.remove').click(function(){
+            if (confirm("確定要刪除?")) {
+                document.getElementById("remove").submit();
+            }
+        })
     </script>
 
     <script>

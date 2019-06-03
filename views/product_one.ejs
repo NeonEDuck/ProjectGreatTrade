@@ -119,6 +119,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp; <%= item.comment[i].cmtcontent %>
                                     </span>
                                 </p>
+                                <div class="fill" style="height:40px;background:#fff"></div>
                                 <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                             </div>
                             <% if(item.comment[i].rspcontent != null){ %> 
@@ -140,6 +141,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp; <%= item.comment[i].rspcontent %>
                                         </span>
                                     </p>
+                                    <div class="fill" style="height:40px;background:#fff"></div>
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                                 </div>
                             <% }else if(user != null && user == item.memno){ %>
@@ -171,53 +173,54 @@
         src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
         crossorigin="anonymous"></script>
+    <script src = "/js/reveal.js"></script>
     <script>
         var img = document.getElementById(preview);
         $("#gallery").css("height" ,$("#gallery > img").css("height"));
         
         
-        $(window).on("load",function(){
-            $(".reveal").each(function(){
-                var text = $(this).parents().children("p").children("span.text");
-                var preHeight = text.css("height");
-                text.css("height","100%");
-                var maxHeight = text.css("height");
-                text.css("height",preHeight);
-                
-                if (parseInt(maxHeight) <= parseInt(preHeight)) {
-                    $(this).css("background","#666");
-                    $(this).css("cursor","default");
-                    $(this).children().remove();
-                }
-                else {
-                    $(this).addClass("active")
-                }
-            })
-        })
         autosize($('textarea'));
-        $(".reveal").click(function(event){
-            if ($(this).hasClass("active")){
-                event.preventDefault();
-                var text = $(this).parents().children("p").children("span.text");
-                var preHeight = text.css("height");
-                text.css("height","100%");
-                var maxHeight = text.css("height");
-                text.css("height",preHeight);
+        // $(window).on("load",function(){
+        //     $(".reveal").each(function(){
+        //         var text = $(this).parents().children("p").children("span.text");
+        //         var preHeight = text.css("height");
+        //         text.css("height","100%");
+        //         var maxHeight = text.css("height");
+        //         text.css("height",preHeight);
+                
+        //         if (parseInt(maxHeight) <= parseInt(preHeight)) {
+        //             $(this).css("background","#666");
+        //             $(this).css("cursor","default");
+        //             $(this).children().remove();
+        //         }
+        //         else {
+        //             $(this).addClass("active")
+        //         }
+        //     })
+        // })
+        // $(".reveal").click(function(event){
+        //     if ($(this).hasClass("active")){
+        //         event.preventDefault();
+        //         var text = $(this).parents().children("p").children("span.text");
+        //         var preHeight = text.css("height");
+        //         text.css("height","100%");
+        //         var maxHeight = text.css("height");
+        //         text.css("height",preHeight);
 
-                if (!text.hasClass("opened")) {
-                    text.addClass("opened");
-                    text.stop().a
-                    text.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
-                    $(this).children().removeClass("fa-arrow-down");
-                    $(this).children().addClass("fa-arrow-up");
-                }
-                else {
-                    text.removeClass("opened");
-                    text.stop().animate({height: "60px"}, {duration:400, easing:'easeOutExpo'});
-                    $(this).children().removeClass("fa-arrow-up");
-                    $(this).children().addClass("fa-arrow-down");
-                }
-            }
-        });
+        //         if (!text.hasClass("opened")) {
+        //             text.addClass("opened");
+        //             text.stop().a
+        //             text.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
+        //             $(this).children().removeClass("fa-arrow-down");
+        //             $(this).children().addClass("fa-arrow-up");
+        //         }
+        //         else {
+        //             text.removeClass("opened");
+        //             text.stop().animate({height: "60px"}, {duration:400, easing:'easeOutExpo'});
+        //             $(this).children().removeClass("fa-arrow-up");
+        //             $(this).children().addClass("fa-arrow-down");
+        //         }
+        //     }
+        // });
     </script>
 </html>

@@ -10,22 +10,54 @@ var format = require('pg-format');
 var list = async function(memno){
     var result = {buy:null,sell:null};
 	
-    console.log(memno);
-    await sql('SELECT * FROM ordmaster WHERE memno=$1 ORDER BY ordno', [memno])
+    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON product.memno=member.memno WHERE ordmaster.memno=$1 ORDER BY ordno', [memno])
         .then((data) => {
             result.buy = data.rows;
         }, (error) => {
             result = null;
         });
-    console.log(result);
-    await sql('SELECT ordmaster.* FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono WHERE product.memno=$1 ORDER BY ordno', [memno])
+
+    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON ordmaster.memno=member.memno WHERE product.memno=$1 ORDER BY ordno', [memno])
         .then((data) => {            
             result.sell = data.rows;  
         }, (error) => {
             result = null;
         });
-    console.log(result);
-		
+
+    var _buy = [];
+    for (var i = 0; i < result.buy.length; i++) {
+        _buy.push([result.buy[i]]);
+        if (i > 0) {
+            for (var j = 0; j < _buy.length-1; j++) {
+                if (_buy[j][0].ordno == result.buy[i].ordno) {
+                    _buy[j].push(result.buy[i]);
+                    _buy.pop();
+                }
+            }
+        }
+    }
+    result.buy = _buy;
+
+    var _sell = [];
+    for (var i = 0; i < result.sell.length; i++) {
+        _sell.push([result.sell[i]]);
+        if (i > 0) {
+            for (var j = 0; j < _sell.length-1; j++) {
+                if (_sell[j][0].ordno == result.sell[i].ordno) {
+                    _sell[j].push(result.sell[i]);
+                    _sell.pop();
+                }
+            }
+        }
+    }
+    result.sell = _sell;
+
+    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+    console.log(result.buy);
+    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+    console.log(result.sell);
+    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
+
     return result;
 }
 
@@ -64,7 +96,7 @@ var add = async function(newData){
         if (i > 0) {
             masterStr += ",";
         }
-        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp($1 / 1000.0),'"+newData.request+"')";
+        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp($1 / 1000.0),'"+newData.data[i].request+"')";
     }
     masterStr += " RETURNING ordno";
 
