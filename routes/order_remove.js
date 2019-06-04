@@ -6,15 +6,11 @@ const order = require('./utility/order');
 
 //接收POST請求
 router.post('/', function(req, res, next) {
-    var prono = req.body.prono;   //取得產品編號
-   
-    order.remove(prono).then(d => {
-        if(d>=0){
-            res.render('removeSuccess', {results:d});  //傳至成功頁面     
-        }else{
-            res.render('removeFail');     //導向錯誤頁面
-        }
-    })    
+    var ordno = req.body.ordno;   //取得產品編號
+    console.log(req.body.ordno)
+    order.remove(ordno).then(d => {
+        console.log(d)
+    })
 });
 
 module.exports = router;

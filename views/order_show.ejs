@@ -109,6 +109,9 @@
                                             </div>
                                         </a>
                                     <% } %>
+                                    <% if(items.buy[i][0].stat=='N' || items.buy[i][0].stat=='A' || items.buy[i][0].stat=='M'){ %>
+                                        <input id="<%= items.buy[i][0].ordno %>" class="button" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="取消訂單">
+                                    <% } %>
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                                 </div>
                             <% } %>
@@ -193,6 +196,16 @@
     <script src = "/js/reveal.js"></script>
 
     <script>
+        $('.button').click(function(){
+            if (confirm("確定要刪除?")) {
+                $.post('/order/remove', {ordno: $(this).attr("id")});
+                var section =$(this).parent();
+                section.children().remove();
+                section.append('<h1>訂單已取消<h1>');
+                section.css("height","auto");
+                section.css("color","#000");
+            }
+        });
         $(window).on("load",function(){
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -251,7 +264,8 @@
         })
         function openTab(evt, cityName) {
             var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent = document.getElementsByC
+            lassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }

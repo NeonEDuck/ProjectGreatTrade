@@ -7,6 +7,26 @@ var format = require('pg-format');
 //------------------------------------------
 //執行資料庫動作的函式-傳回所有產品資料
 //------------------------------------------
+var remove = async function(ordno){
+    var result;
+
+    console.log(ordno);
+    await sql('DELETE FROM orddetails WHERE ordno=$1',[ordno])
+        .then((data) => {
+            result = data.rowCount;
+        }, (error) => {
+            result = -1;
+        });
+    await sql('DELETE FROM ordmaster WHERE ordno=$1',[ordno])
+        .then((data) => {
+            result = data.rowCount;
+        }, (error) => {
+            result = -1;
+        });
+
+    return result;
+}
+
 var list = async function(memno){
     var result = {buy:null,sell:null};
 	
@@ -127,4 +147,4 @@ var add = async function(newData){
 }
 
 //匯出
-module.exports = {list, one, add} ;
+module.exports = {remove, list, one, add} ;
