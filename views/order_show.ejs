@@ -94,20 +94,25 @@
                                         </div>
                                     </div>
                                     <% for(var j=0; j<items.buy[i].length; j++){ %>
-                                        <a href="/product/<%= items.buy[i][j].prono %>"> 
-                                            <div class = "section">
-                                                <img src = "/<%= items.buy[i][j].picture %>" height="100%">
-                                                <div class = "right">
-                                                    <span>商品名稱: <%= items.buy[i][j].proname %></span>
-                                                    <br/>
-                                                    <span>售價: <%= items.buy[i][j].price %>$</span>
-                                                    <br/>
-                                                    <span>商品介紹: <%= items.buy[i][j].description %></span>
-                                                    <br/>
-                                                    <span>上架日期: <%= items.buy[i][j].date %></span>
-                                                </div>
+                                        <div>
+                                            <div class = "amt" style="position: absolute;margin-top: 57px;">
+                                                <span style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: 760px;color: #000">數量x<%= items.buy[i][j].amt %></span>
                                             </div>
-                                        </a>
+                                            <a href="/product/<%= items.buy[i][j].prono %>"> 
+                                                <div class = "section">
+                                                    <img src = "/<%= items.buy[i][j].picture %>" height="100%">
+                                                    <div class = "right">
+                                                        <span>商品名稱: <%= items.buy[i][j].proname %></span>
+                                                        <br/>
+                                                        <span>售價: <%= items.buy[i][j].price %>$</span>
+                                                        <br/>
+                                                        <span>商品介紹: <%= items.buy[i][j].description %></span>
+                                                        <br/>
+                                                        <span>上架日期: <%= items.buy[i][j].date %></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     <% } %>
                                     <% if(items.buy[i][0].stat=='N' || items.buy[i][0].stat=='A' || items.buy[i][0].stat=='M'){ %>
                                         <div id="buy<%= items.buy[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
@@ -130,7 +135,7 @@
                     <div id="sell" class="tabcontent">
                         <% if (items.sell.length>0){ %>
                             <% for(var i=0;i<items.sell.length;i++){ %>
-                                <div class = "section" style="height: auto; position: relative">
+                                <div id="sel<%= items.sell[i][0].ordno %>" class = "section" style="height: auto; position: relative">
                                     <div style="margin-bottom: 0.5em; display: flow-root;">
                                         <div class = "left" style="color:#000">
                                             <span>訂單編號: <%= items.sell[i][0].ordno %></span>
@@ -151,37 +156,45 @@
                                         </a>
                                         <div style="float: right">
                                             <ul id="sel<%= i %>" class = "progress-bar select">
-                                                <li><span>已下單</span></li>
-                                                <li><span>訂單已確認</span></li>
-                                                <li><span>製作中</span></li>
-                                                <li><span>製作完成</span></li>
-                                                <li><span>已出貨</span></li>
+                                                <li class="1"><span>已下單</span></li>
+                                                <li class="2"><span>訂單已確認</span></li>
+                                                <li class="3"><span>製作中</span></li>
+                                                <li class="4"><span>製作完成</span></li>
+                                                <li class="5"><span>已出貨</span></li>
                                                 <div class = "bar">
                                                     <div class = "progress">
                                                     </div>
                                                 </div>
                                             </ul>
                                         </div>
+                                        <% if(i==0){ %>
+                                            <div class="hint" style="position:absolute;top:1em;left:25%;color:#000"><span>按一下進度條已修改進度</span><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
+                                        <% } %>
                                     </div>
                                     <% for(var j=0; j<items.sell[i].length; j++){ %>
-                                        <a href="/product/<%= items.sell[i][j].prono %>"> 
-                                            <div class = "section">
-                                                <img src = "/<%= items.sell[i][j].picture %>" height="100%">
-                                                <div class = "right">
-                                                    <span>商品名稱: <%= items.sell[i][j].proname %></span>
-                                                    <br/>
-                                                    <span>售價: <%= items.sell[i][j].price %>$</span>
-                                                    <br/>
-                                                    <span>商品介紹: <%= items.sell[i][j].description %></span>
-                                                    <br/>
-                                                    <span>上架日期: <%= items.sell[i][j].date %></span>
-                                                </div>
+                                        <div>
+                                                <div class = "amt" style="position: absolute;margin-top: 57px;">
+                                                    <span style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: 760px;color: #000">數量x<%= items.sell[i][j].amt %></span>
                                             </div>
-                                        </a>
+                                            <a href="/product/<%= items.sell[i][j].prono %>"> 
+                                                <div class = "section">
+                                                    <img src = "/<%= items.sell[i][j].picture %>" height="100%">
+                                                    <div class = "right">
+                                                        <span>商品名稱: <%= items.sell[i][j].proname %></span>
+                                                        <br/>
+                                                        <span>售價: <%= items.sell[i][j].price %>$</span>
+                                                        <br/>
+                                                        <span>商品介紹: <%= items.sell[i][j].description %></span>
+                                                        <br/>
+                                                        <span>上架日期: <%= items.sell[i][j].date %></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     <% } %>
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                                     <% if(items.sell[i][0].stat=='N'){ %>
-                                        <div id="sel<%= items.sell[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                        <div class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
                                             <input class="button accept" style="background:var(--green);" type="button" value="接受訂單">
                                             <input class="button deny" style="background:var(--red);" type="button" value="拒絕訂單">
                                         </div>
@@ -209,26 +222,47 @@
 
     <script>
         $('.select').children('li').click(function(){
-            if ($(this).css("background-color") == 'rgb(13, 49, 81)') {
-                
+            if ($(this).css("background-color") == 'rgb(13, 49, 81)' && confirm("確定要更改狀態?")) {
+                for (var i = 1; i <= 5; i++) {
+                    $(this).parent().children("li:nth-child(" + i + ")").stop().animate({backgroundColor: "#41b883"},{duration:400});
+                    if ($(this).hasClass(String(i))) {
+                        break;
+                    }
+                }
+                $(this).parent().children(".bar").children(".progress").stop().animate({width: String((i-1)*25)+"%"},{duration:400});
+                $(".hint").remove();
+                var stat;
+                switch(i) {
+                    case 3:
+                        stat='M'
+                        break;
+                    case 4:
+                        stat='F'
+                        break;
+                    case 5:
+                        stat='S'
+                        break;
+                }
+                var section = $(this).parent().parent().parent().parent();
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: stat});
             }
         });
         $('.button').click(function(){
             if ($(this).hasClass("delete") && confirm("確定要" + $(this).val().slice(0,2) + "?")) {
-                $.post('/order/remove', {ordno: $(this).parent().attr("id").slice(3)});
                 var section =$(this).parent().parent();
+                $.post('/order/remove', {ordno: section.attr("id").slice(3)});
                 section.children().remove();
                 section.append('<h1>訂單已' + $(this).val().slice(0,2) + '<h1>');
                 section.css("height","auto");
                 section.css("color","#000");
             }
             if ($(this).hasClass("accept") && confirm("確定要接受?")) {
-                $.post('/order/update', {ordno: $(this).parent().attr("id").slice(3),stat: "A"});
                 var section =$(this).parent().parent();
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "A"});
                 section.children().children().children(".progress-bar").each(function(){
-                    $(this).children("li:first").css("background","var(--green)");
-                    $(this).children("li:nth-child(2)").css("background","var(--green)");
-                    $(this).children(".bar").children().css("width","25%");
+                    $(this).children("li:first").stop().animate({backgroundColor: "#41b883"},{duration:400});
+                    $(this).children("li:nth-child(2)").stop().animate({backgroundColor: "#41b883"},{duration:400});
+                    $(this).children(".bar").children().stop().animate({width:"25%"},{duration:400});
                 });
                 var nextHeight = parseInt(section.css("height"))-parseInt(section.children(".button-group").css("height"))-parseInt(section.children(".button-group").css("margin-top"))-parseInt(section.children(".button-group").css("margin-bottom"))
                 section.stop().animate({height: nextHeight}, {duration:100, easing:'easeOutExpo'});
@@ -238,8 +272,8 @@
                 // section.css("color","#000");
             }
             if ($(this).hasClass("deny") && confirm("確定要拒絕?")) {
-                $.post('/order/update', {ordno: $(this).parent().attr("id").slice(3),stat: "D"});
                 var section =$(this).parent().parent();
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "D"});
                 section.children().remove();
                 section.append('<h1>訂單已拒絕<h1>');
                 section.css("height","auto");

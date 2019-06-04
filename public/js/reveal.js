@@ -19,7 +19,8 @@ $(window).on("load",function(){
         else {
             $(this).addClass("active")
             maxHeight = parseInt($(this).parents(".section").css("height")) + parseInt($(this).css("height"));
-            $(this).parents().children("a").children(".section").css("display","none");
+            $(this).parents().children().children("a").children(".section").css("display","none");
+            $(this).parents().children().children(".amt").css("display","none");
             $(this).parents().children(".button-group").css("display","none");
             $(this).parents(".section").css("height","184")
         }
@@ -53,7 +54,7 @@ $(".reveal").click(function(event){
         else {
             target = $(this).parents(".section");
             var maxHeight = 184;
-            target.children("a").children(".section").each(function(){
+            target.children().children("a").children(".section").each(function(){
                 maxHeight += parseInt($(this).css("height"));
                 maxHeight += parseInt($(this).css("margin-top"))
                 maxHeight += parseInt($(this).css("margin-bottom"))
@@ -66,7 +67,8 @@ $(".reveal").click(function(event){
 
             if (!target.hasClass("opened")) {
                 target.addClass("opened");
-                target.children("a").children(".section").css("display","block");
+                target.children().children("a").children(".section").css("display","block");
+                target.children().children(".amt").css("display","block");
                 target.children(".button-group").css("display","block");
                 target.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
                 $(this).children().removeClass("fa-arrow-down");
@@ -74,7 +76,8 @@ $(".reveal").click(function(event){
             }
             else {
                 target.removeClass("opened");
-                target.children("a").children(".section").css("display","none");
+                target.children().children("a").children(".section").css("display","none");
+                target.children().children(".amt").css("display","none");
                 target.children(".button-group").css("display","none");
                 target.stop().animate({height: 184}, {duration:400, easing:'easeOutExpo'});
                 $(this).children().removeClass("fa-arrow-up");

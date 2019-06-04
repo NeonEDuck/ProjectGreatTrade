@@ -34,23 +34,28 @@
                 <% if(items.length > 0){ %>
                     <div style="background: var(--main-color); border: var(--darker-color) solid 5px ; padding: 5%;box-sizing: border-box;">
                         <% for(var i=0; i<items.length; i++) {%>
-                            <div id = "<%= i %>" class = "section" style="margin: 0 auto; height: auto">
+                            <div id = "<%= i %>" class = "section" style="height: auto">
                                 <h2>賣家: <%= items[i][0].nickname %></h2>
                                 <% for(var j=0; j<items[i].length; j++) {%>
-                                    <a href="/product/<%= items[i][j].prono %>"> 
-                                        <div class = "section" style="margin: 0 auto;">
-                                            <img src = "/<%= items[i][j].picture %>" height="100%">
-                                            <div class = "right">
-                                                <span>商品名稱: <%= items[i][j].proname %></span>
-                                                <br/>
-                                                <span>售價: <%= items[i][j].price %>$</span>
-                                                <br/>
-                                                <span>商品介紹: <%= items[i][j].description %></span>
-                                                <br/>
-                                                <span>上架日期: <%= items[i][j].date %></span>
-                                            </div>
+                                    <div>
+                                        <div class = "amt" id="<%= items[i][j].prono %>" style="position: absolute">
+                                            <input type="number" name="amt" style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: calc(820px - 80px - 1em);" value="1" min="1" max="<%= items[i][j].amt %>">
                                         </div>
-                                    </a>
+                                        <a href="/product/<%= items[i][j].prono %>"> 
+                                            <div class = "section">
+                                                <img src = "/<%= items[i][j].picture %>" height="100%">
+                                                <div class = "right">
+                                                    <span>商品名稱: <%= items[i][j].proname %></span>
+                                                    <br/>
+                                                    <span>售價: <%= items[i][j].price %>$</span>
+                                                    <br/>
+                                                    <span>商品介紹: <%= items[i][j].description %></span>
+                                                    <br/>
+                                                    <span>上架日期: <%= items[i][j].date %></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 <% } %>
                                 <h2>備註:</h2>
                                 <span class="value"><textarea name="request" placeholder="請輸入文字" textarea rows="5" maxlength="255" style = "width:100%; margin-top: 2px; resize: none; font-size: 16px;"></textarea></span>
@@ -113,16 +118,29 @@
                     request.push($(this).val());
                 })
                 var newPost = []
+                
+                var id = [];
+                $('.amt').each(function(){
+                    id.push({no:$(this).attr("id"),amt:parseInt($(this).children().val())})
+                })
                 var k = 0;
                 for (var i = 0; i < variableJSON.length; i++) {
                     if (!removed.includes(i)) {
                         for (var j = 0; j < variableJSON[i].length; j++) {
+                            var amt = 0;
+                            for (var l = 0; l < id.length; l++) {
+                                if (id[l].no == variableJSON[i][j]) {
+                                    amt = id[l].amt
+                                    break;
+                                }
+                            }
                             if (j == 0) {
-                                newPost.push({payno:payno[k],prono:[variableJSON[i][j]],request:request[k]})
+                                newPost.push({no:i,payno:payno[k],product:[{prono:variableJSON[i][j],amt:amt}],request:request[k]})
                             }
                             else {
-                                newPost[k].prono.push(variableJSON[i][j]);
+                                newPost[k].product.push({prono:variableJSON[i][j],amt:amt});
                             }
+                            console.log(newPost)
                         }
                         k++
                     }

@@ -134,6 +134,7 @@ var add = async function(newData){
         masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp($1 / 1000.0),'"+newData.data[i].request+"')";
     }
     masterStr += " RETURNING ordno";
+    console.log('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr)
 
     await sql('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr,[Date.now()])
         .then((data) => {
@@ -145,12 +146,13 @@ var add = async function(newData){
 
     if (result == 0) {
         for (var i = 0; i < ordmaster.length; i++) {
-            for (var j = 0; j < newData.data[i].prono.length; j++) {
-                detailList.push([ordmaster[i].ordno,newData.data[i].prono[j]]);
+            for (var j = 0; j < newData.data[i].product.length; j++) {
+                detailList.push([ordmaster[i].ordno,newData.data[i].product[j].prono,newData.data[i].product[j].amt]);
             }
         }
+        console.log(detailList);
     
-        await sql(format('INSERT INTO orddetails (ordno, prono) VALUES %L', detailList))
+        await sql(format('INSERT INTO orddetails (ordno, prono, amt) VALUES %L', detailList))
             .then((data) => {
                 result = 0;  
             }, (error) => {
