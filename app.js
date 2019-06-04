@@ -38,6 +38,9 @@ var login_show = require('./routes/login_show');
 var register = require('./routes/register');
 var register_form = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
+var profile_edit = require('./routes/profile_edit');
+var member_report = require('./routes/member_report');
+var profile_show = require('./routes/profile_show');
 //var shoppingCart = require('./routes/shoppingCart');
 
 var app = express();
@@ -88,7 +91,9 @@ app.use('/list/remove', list_remove);
 app.use('/buyer/list', buyer_list);
 app.use('/seller/list', seller_list);
 app.use('/list/show/form', list_show_form);
-
+app.use('/profile/edit', profile_edit);
+app.use('/member/report', member_report);
+app.use('/profile_show', profile_show);
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 
