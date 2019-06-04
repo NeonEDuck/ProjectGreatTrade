@@ -25,8 +25,8 @@ var shoppingCart_confirm = require('./routes/shoppingCart_confirm');
 
 var order_add_form = require('./routes/order_add_form');
 var order_add = require('./routes/order_add');
-var order_remove_show = require('./routes/order_remove_show');
 var order_remove = require('./routes/order_remove');
+var order_update = require('./routes/order_update');
 var buyer_list = require('./routes/buyer_list');
 var seller_list = require('./routes/seller_list');
 var order_show_form = require('./routes/order_show');
@@ -86,8 +86,8 @@ app.use('/register', register_form);
 app.use('/user/register', register)
 app.use('/order/add/form', order_add_form);
 app.use('/order/add', order_add);
-app.use('/order/remove/show', order_remove_show);
 app.use('/order/remove', order_remove);
+app.use('/order/update', order_update);
 app.use('/buyer/list', buyer_list);
 app.use('/seller/list', seller_list);
 app.use('/order/show/form', order_show_form);

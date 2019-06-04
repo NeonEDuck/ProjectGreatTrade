@@ -7,6 +7,21 @@ var format = require('pg-format');
 //------------------------------------------
 //執行資料庫動作的函式-傳回所有產品資料
 //------------------------------------------
+
+var update = async function(newData){
+    var result;
+
+    console.log(newData);
+    await sql('UPDATE ordmaster SET stat=$1 WHERE ordno=$2',[newData.stat,newData.ordno])
+        .then((data) => {
+            results = data.rowCount;  
+        }, (error) => {
+            results = -1;
+        });
+
+    return result;
+}
+
 var remove = async function(ordno){
     var result;
 
@@ -37,7 +52,7 @@ var list = async function(memno){
             result = null;
         });
 
-    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON ordmaster.memno=member.memno WHERE product.memno=$1 ORDER BY ordno', [memno])
+    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON ordmaster.memno=member.memno WHERE product.memno=$1 AND ordmaster.stat<>\'D\' ORDER BY ordno', [memno])
         .then((data) => {            
             result.sell = data.rows;  
         }, (error) => {
@@ -147,4 +162,4 @@ var add = async function(newData){
 }
 
 //匯出
-module.exports = {remove, list, one, add} ;
+module.exports = {update, remove, list, one, add} ;

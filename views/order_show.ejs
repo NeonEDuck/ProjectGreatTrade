@@ -95,7 +95,7 @@
                                     </div>
                                     <% for(var j=0; j<items.buy[i].length; j++){ %>
                                         <a href="/product/<%= items.buy[i][j].prono %>"> 
-                                            <div class = "section" style="margin: 0 auto;">
+                                            <div class = "section">
                                                 <img src = "/<%= items.buy[i][j].picture %>" height="100%">
                                                 <div class = "right">
                                                     <span>商品名稱: <%= items.buy[i][j].proname %></span>
@@ -110,7 +110,13 @@
                                         </a>
                                     <% } %>
                                     <% if(items.buy[i][0].stat=='N' || items.buy[i][0].stat=='A' || items.buy[i][0].stat=='M'){ %>
-                                        <input id="<%= items.buy[i][0].ordno %>" class="button" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="取消訂單">
+                                        <div id="buy<%= items.buy[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                            <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="取消訂單">
+                                        </div>
+                                    <% }else if(items.buy[i][0].stat=='D'){ %>
+                                        <div id="buy<%= items.buy[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                            <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="刪除訂單">
+                                        </div>
                                     <% } %>
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
                                 </div>
@@ -144,7 +150,7 @@
                                             </div>
                                         </a>
                                         <div style="float: right">
-                                            <ul id="sel<%= i %>" class = "progress-bar">
+                                            <ul id="sel<%= i %>" class = "progress-bar select">
                                                 <li><span>已下單</span></li>
                                                 <li><span>訂單已確認</span></li>
                                                 <li><span>製作中</span></li>
@@ -159,7 +165,7 @@
                                     </div>
                                     <% for(var j=0; j<items.sell[i].length; j++){ %>
                                         <a href="/product/<%= items.sell[i][j].prono %>"> 
-                                            <div class = "section" style="margin: 0 auto;">
+                                            <div class = "section">
                                                 <img src = "/<%= items.sell[i][j].picture %>" height="100%">
                                                 <div class = "right">
                                                     <span>商品名稱: <%= items.sell[i][j].proname %></span>
@@ -174,6 +180,12 @@
                                         </a>
                                     <% } %>
                                     <div class="reveal"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                                    <% if(items.sell[i][0].stat=='N'){ %>
+                                        <div id="sel<%= items.sell[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                            <input class="button accept" style="background:var(--green);" type="button" value="接受訂單">
+                                            <input class="button deny" style="background:var(--red);" type="button" value="拒絕訂單">
+                                        </div>
+                                    <% } %>
                                 </div>
                             <% } %>
                         <% }else{ %>
@@ -196,12 +208,40 @@
     <script src = "/js/reveal.js"></script>
 
     <script>
+        $('.select').children('li').click(function(){
+            if ($(this).css("background-color") == 'rgb(13, 49, 81)') {
+                
+            }
+        });
         $('.button').click(function(){
-            if (confirm("確定要刪除?")) {
-                $.post('/order/remove', {ordno: $(this).attr("id")});
-                var section =$(this).parent();
+            if ($(this).hasClass("delete") && confirm("確定要" + $(this).val().slice(0,2) + "?")) {
+                $.post('/order/remove', {ordno: $(this).parent().attr("id").slice(3)});
+                var section =$(this).parent().parent();
                 section.children().remove();
-                section.append('<h1>訂單已取消<h1>');
+                section.append('<h1>訂單已' + $(this).val().slice(0,2) + '<h1>');
+                section.css("height","auto");
+                section.css("color","#000");
+            }
+            if ($(this).hasClass("accept") && confirm("確定要接受?")) {
+                $.post('/order/update', {ordno: $(this).parent().attr("id").slice(3),stat: "A"});
+                var section =$(this).parent().parent();
+                section.children().children().children(".progress-bar").each(function(){
+                    $(this).children("li:first").css("background","var(--green)");
+                    $(this).children("li:nth-child(2)").css("background","var(--green)");
+                    $(this).children(".bar").children().css("width","25%");
+                });
+                var nextHeight = parseInt(section.css("height"))-parseInt(section.children(".button-group").css("height"))-parseInt(section.children(".button-group").css("margin-top"))-parseInt(section.children(".button-group").css("margin-bottom"))
+                section.stop().animate({height: nextHeight}, {duration:100, easing:'easeOutExpo'});
+                section.children(".button-group").remove();
+                // section.append('<h1>訂單已取消<h1>');
+                // section.css("height","auto");
+                // section.css("color","#000");
+            }
+            if ($(this).hasClass("deny") && confirm("確定要拒絕?")) {
+                $.post('/order/update', {ordno: $(this).parent().attr("id").slice(3),stat: "D"});
+                var section =$(this).parent().parent();
+                section.children().remove();
+                section.append('<h1>訂單已拒絕<h1>');
                 section.css("height","auto");
                 section.css("color","#000");
             }
@@ -254,6 +294,13 @@
                         $(this).children("li:nth-child(2)").css("background","var(--green)");
                         $(this).children(".bar").children().css("width","25%");
                         break;
+                    case "D":
+                        $(this).children("li").css("background","var(--red)");
+                        $(this).children("li").children().remove();
+                        $(this).children("li:nth-child(3)").append("<span>已被賣家拒絕</span>");
+                        $(this).children(".bar").children().css("width","100%");
+                        $(this).children(".bar").children().css("background","var(--red)");
+                        break;
                     default:
                         $(this).children("li:first").css("background","var(--green)");
                         $(this).children(".bar").children().css("width","0%");
@@ -264,8 +311,7 @@
         })
         function openTab(evt, cityName) {
             var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByC
-            lassName("tabcontent");
+            tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }

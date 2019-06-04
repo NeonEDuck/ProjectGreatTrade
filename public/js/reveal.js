@@ -20,7 +20,7 @@ $(window).on("load",function(){
             $(this).addClass("active")
             maxHeight = parseInt($(this).parents(".section").css("height")) + parseInt($(this).css("height"));
             $(this).parents().children("a").children(".section").css("display","none");
-            $(this).parents().children(".button").css("display","none");
+            $(this).parents().children(".button-group").css("display","none");
             $(this).parents(".section").css("height","184")
         }
     })
@@ -58,7 +58,7 @@ $(".reveal").click(function(event){
                 maxHeight += parseInt($(this).css("margin-top"))
                 maxHeight += parseInt($(this).css("margin-bottom"))
             })
-            target.children(".button").each(function(){
+            target.children(".button-group").each(function(){
                 maxHeight += parseInt($(this).css("height"))
                 maxHeight += parseInt($(this).css("margin-top"))
                 maxHeight += parseInt($(this).css("margin-bottom"))
@@ -67,7 +67,7 @@ $(".reveal").click(function(event){
             if (!target.hasClass("opened")) {
                 target.addClass("opened");
                 target.children("a").children(".section").css("display","block");
-                target.children(".button").css("display","block");
+                target.children(".button-group").css("display","block");
                 target.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
                 $(this).children().removeClass("fa-arrow-down");
                 $(this).children().addClass("fa-arrow-up");
@@ -75,7 +75,7 @@ $(".reveal").click(function(event){
             else {
                 target.removeClass("opened");
                 target.children("a").children(".section").css("display","none");
-                target.children(".button").css("display","none");
+                target.children(".button-group").css("display","none");
                 target.stop().animate({height: 184}, {duration:400, easing:'easeOutExpo'});
                 $(this).children().removeClass("fa-arrow-up");
                 $(this).children().addClass("fa-arrow-down");
