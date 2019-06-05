@@ -7,36 +7,7 @@
         <link href="/stylesheets/select2.min.css" rel="stylesheet"/>
         <link href="/stylesheets/menu.css" rel="stylesheet"/>  
         <link href="/stylesheets/main.css" rel="stylesheet"/>
-        <style>
-            span.tag{
-                position: relative;
-                display: inline-block;
-                padding: 4px 10px 4px 10px;
-                border-radius: 5px;
-                margin-right: 10px;
-                color: #fff;
-                line-height: 1;
-                background: #41b883;
-                margin-bottom: 8px;
-                white-space: nowrap;
-            }
-            .button-group:after
-            .button-group:before{
-                content: '';
-                clear: both;
-                display: inline-block;
-            }
-            .select2-container{
-                width: 300px !important;
-            }
-            .select2-selection__choice{
-                background-color: #41b883 !important;
-                color: #fff;
-            }
-            .select2-selection__choice__remove{
-                color: #fff !important;
-            }
-        </style>
+        
     </head>
 
     <body>
@@ -58,47 +29,48 @@
                                 <div id="gallery"><img id="preview" src='/<%= item.picture %>' width="100%"></div>
                                 <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" value = "<%= item.picture %>" style = "display: none;" /></span>
                                 <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+
+                                <div class = "item">
+                                        <span style = "font-size: 30px; font-weight: 800;"><%= items.account %></span>
+                                    </div>
+        
+                                    <div class = "item">
+                                        <span class="value"><input type="text" name="memname" placeholder="請輸入性名" autocomplete="off" style="font-size: 30px;" value="<%= item.memname %>" required></span>
+                                    </div>
+        
+                                    <div class = "item">          
+                                        <span class="value"><input type="text" name="nickname" placeholder="請輸入暱稱" style = "font-size: 24px; font-weight: 700;" value="<%= item.nickname %>" required></span>
+                                        <br/>
+                                    </div>
+        
                             </div>
                             
                             <div class = "right">
-                                <div class = "item">
-                                    <span class="name">用戶名稱:</span>
-                                    <span style = "font-size: 30px; font-weight: 800;"><%= item.account%></span>
-                                </div>
                                 
                                 <div class = "item">
-                                    <span class="name">密碼: </span>
-                                    <span class="value"><input type="text" name="password"><%= item.password%></span>
+                                    <span class="name" style="font-size:20px; font-weight: 600;">密碼: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="password"><%= item.password%></span>
                                 </div>
                 
                                 <div class = "item">
-                                    <span class="name">密碼確認: </span>
-                                    <span class="value"><input type="password" name="password2"><%= item.password2%></span>
+                                    <span class="name" style="font-size:20px; font-weight: 600;">密碼確認: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="password" name="password2"><%= item.password2%></span>
                                 </div>                
 
                                 <div class = "item">
-                                    <span class="value"><input type="text" name="memname" placeholder="請輸入性名" autocomplete="off" style="font-size: 30px;" value="<%= item.memname %>" required></span>
-                                </div>
-
-                                <div class = "item">          
-                                    <span class="value"><input type="text" name="nickname" placeholder="請輸入暱稱" style = "width: 50px" value="<%= item.nickname %>" required></span>
-                                    <br/>
-                                </div>
-
-                                <div class = "item">
-                                    <span class="name">性別: </span>
-                                    <input type="radio" name="sex" value="男"> 男
-                                    <input type="radio" name="sex" value="女"> 女
+                                    <span class="name" style="font-size:20px; font-weight: 600;">性別: </span>
+                                    <input type="radio" name="sex" value="男" style="font-size: 20px; font-weight: 700;"> 男
+                                    <input type="radio" name="sex" value="女" style="font-size: 20px; font-weight: 700;"> 女
                                 </div>
             
                                 <div class = "item">
-                                    <span class="name">電話: </span>
-                                    <span class="value"><input type="text" name="tel"><%= item.tel%></span>
+                                    <span class="name" style="font-size:20px; font-weight: 600;">電話: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="tel"><%= item.tel%></span>
                                 </div>
             
                                 <div class = "item">
-                                    <span class="name">地址: </span>
-                                    <span class="value"><input type="text" name="address"><%= item.address%></span>
+                                    <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="address"><%= item.address%></span>
                                 </div>
 
                             </div>

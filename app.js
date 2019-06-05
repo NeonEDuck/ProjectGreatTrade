@@ -40,7 +40,7 @@ var register_form = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
 var profile_edit = require('./routes/profile_edit');
 var member_report = require('./routes/member_report');
-var profile_show = require('./routes/profile_show');
+var member_one = require('./routes/member_one');
 //var shoppingCart = require('./routes/shoppingCart');
 
 var app = express();
@@ -93,7 +93,7 @@ app.use('/seller/list', seller_list);
 app.use('/list/show/form', list_show_form);
 app.use('/profile/edit', profile_edit);
 app.use('/member/report', member_report);
-app.use('/profile_show', profile_show);
+app.use('/member/one', member_one);
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 
