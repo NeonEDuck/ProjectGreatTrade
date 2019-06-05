@@ -130,29 +130,58 @@ var one = async function(prono){
 //---------------------------------------------
 //執行資料庫動作的函式-傳回分頁及指定頁面的產品
 //---------------------------------------------
-var page = async function(pageNo){
+var page = async function(newData){
     const linePerPage = 15;    //設定每頁資料筆數
     const navSegments = 10;    //設定導覽列顯示分頁數
-    const startPage = Math.floor((pageNo-1) / navSegments) * navSegments + 1;  //計算導覽列的起始頁數
+    const startPage = Math.floor((newData.pageNo-1) / navSegments) * navSegments + 1;  //計算導覽列的起始頁數
 
     var totalLine, totalPage;
     var result = {};
+    var label;
+    if (newData.label == []){
+        await sql(format('SELECT COUNT(product.*) AS cnt FROM product WHERE product.prono IN (SELECT product.prono FROM product JOIN prolabel ON prolabel.prono=product.prono WHERE product.proname LIKE \'%%%s%%\' AND prolabel.lblno IN %L)',newData.search.trim(),[newData.label]))
+            .then((data) => {
+                totalLine = data.rows[0].cnt;
+                totalPage = Math.ceil(totalLine/linePerPage);   
+            }, (error) => {
+                totalLine = 0;
+                totalPage = 0;  
+            });
+        await sql(format('SELECT product.* FROM product WHERE product.prono IN (SELECT product.prono FROM product JOIN prolabel ON prolabel.prono=product.prono WHERE product.proname LIKE \'%%%s%%\' AND prolabel.lblno IN %L) LIMIT $2 OFFSET $1',newData.search.trim(),[newData.label]), [(newData.pageNo-1)*linePerPage, linePerPage])
+            .then((data) => {
+                result = {data:data.rows, pageNo:newData.pageNo, totalLine:totalLine, totalPage:totalPage, startPage:startPage, linePerPage:linePerPage, navSegments:navSegments};  
+            }, (error) => {
+                result = null;
+            });
+    }
+    else {
+        await sql(format('SELECT COUNT(*) AS cnt FROM product WHERE proname LIKE \'%%%s%%\')',newData.search.trim()))
+            .then((data) => {
+                totalLine = data.rows[0].cnt;
+                totalPage = Math.ceil(totalLine/linePerPage);   
+            }, (error) => {
+                totalLine = 0;
+                totalPage = 0;  
+            });
+        await sql(format('SELECT product.* FROM product WHERE proname LIKE \'%%%s%%\' LIMIT $2 OFFSET $1',newData.search.trim()), [(newData.pageNo-1)*linePerPage, linePerPage])
+            .then((data) => {
+                result = {data:data.rows, pageNo:newData.pageNo, totalLine:totalLine, totalPage:totalPage, startPage:startPage, linePerPage:linePerPage, navSegments:navSegments};  
+            }, (error) => {
+                result = null;
+            });
+    }
+    
+    if (result != null) {
+        //取回protype資料
+        await sql('SELECT * FROM label ORDER BY lblno')
+            .then((data) => {
+                label = data.rows;  
+            }, (error) => {
+                result = [];
+            });
+        result.label = label;
 
-    await sql('SELECT count(*) AS cnt FROM product')
-        .then((data) => {
-            totalLine = data.rows[0].cnt;
-            totalPage = Math.ceil(totalLine/linePerPage);   
-        }, (error) => {
-            totalLine = 0;
-            totalPage = 0;  
-        });
-
-    await sql('SELECT * FROM product ORDER BY prono LIMIT $2 OFFSET $1', [(pageNo-1)*linePerPage, linePerPage])
-        .then((data) => {
-            result = {data:data.rows, pageNo:pageNo, totalLine:totalLine, totalPage:totalPage, startPage:startPage, linePerPage:linePerPage, navSegments:navSegments};  
-        }, (error) => {
-            result = null;
-        });
+    }
 
     return result;
 }

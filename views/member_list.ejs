@@ -30,12 +30,12 @@
             #label-group{
                 overflow: hidden;
                 margin: 0 auto;
-                display: block
+                display: none;
             }
         </style>
     </head>
 
-    <body style="height:100%">
+    <body>
         <div class = "container">
             <%- include('public/header'); -%>
 
@@ -45,12 +45,12 @@
                 <div class="searchbar">
                     <form class = "form" action = "/product/page/1" method = "get">
                         <i class="fa fa-search" aria-hidden="true" style="font-size: 40px;"></i>
-                        <span class="value"><input type="text" style="height: 40px;" name="search" value="<%= search %>"></span>
+                        <span class="value"><input type="text" name="search" value="<%= search %>"></span>
 
                         <span class="value" style="top: -3px;position: relative;">
                             <select name="type">
-                                <option value="product">商品</option>
                                 <option value="member">會員</option>
+                                <option value="product">商品</option>
                             </select>
                         </span>
                         <span class="value"><input class="button" type="submit" value="查詢" ></span>
@@ -69,17 +69,17 @@
                 <%- include('public/page'); -%>
 
                 <% for(var i=0; i<items.data.length; i++) {%>
-                    <a href="/product/<%= items.data[i].prono %>"> 
+                    <a href="/member/<%= items.data[i].memno %>"> 
                         <div class = "section">
-                            <img src = "/<%= items.data[i].picture %>" height="100%">
+                            <div class = "avatar" style="height: 125px;width: 125px;">
+                                <img src = "/<%= items.data[i].picture %>" height="100%">
+                            </div>
                             <div class = "right">
-                                <span>商品名稱: <%= items.data[i].proname %></span>
+                                <span>會員編號: <%= items.data[i].memno %></span>
                                 <br/>
-                                <span>售價: <%= items.data[i].price %>元</span>
+                                <span>會員名稱: <%= items.data[i].nickname %></span>
                                 <br/>
-                                <span>商品介紹: <%= items.data[i].description %></span>
-                                <br/>
-                                <span>上架日期: <%= items.data[i].date %></span>
+                                <span>email: <%= items.data[i].email %></span>
                             </div>
                         </div>
                     </a>
@@ -112,7 +112,6 @@
         })
         $("select[name=type]").change(function(){
             if ($("select[name=type]").find(":selected").val() == "product") {
-                $("#label-group").css("display","block")
                 $("#label-group").stop().slideDown()
             }
             else {

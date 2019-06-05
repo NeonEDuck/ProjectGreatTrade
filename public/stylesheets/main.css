@@ -262,7 +262,7 @@ a{
 }
 
 
-.searchbar input[name="proname"]{
+.searchbar input[name="search"]{
     box-sizing: border-box;
     margin: 0 0 0 0.5em;
     width: 600px;
@@ -276,10 +276,7 @@ a{
     font-size: 22px;
     height: 40px;
 }
-.searchbar input[type="submit"]{
-    font-size: 30px;
-    height: 40px;
-}
+
 .searchbar span{
     font-size: 30px;
 }
@@ -501,4 +498,15 @@ textarea {
     box-sizing: border-box;
     width: 100%;
     resize: none;
+}
+
+.select2-container{
+    width: 300px !important;
+}
+.select2-selection__choice{
+    background-color: var(--green) !important;
+    color: #fff;
+}
+.select2-selection__choice__remove{
+    color: #fff !important;
 }
