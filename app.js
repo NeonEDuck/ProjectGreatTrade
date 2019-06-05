@@ -94,7 +94,6 @@ app.use('/order/update', order_update);
 app.use('/buyer/list', buyer_list);
 app.use('/seller/list', seller_list);
 app.use('/order/show/form', order_show_form);
-app.use('/list/show/form', list_show_form);
 app.use('/profile/edit', profile_edit);
 app.use('/member/report', member_report);
 app.use('/member/one', member_one);
