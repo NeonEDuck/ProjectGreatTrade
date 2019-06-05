@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>papapapapapa</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <link href="/stylesheets/select2.min.css" rel="stylesheet"/>
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/>
+        
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <div class = "data" style="padding:20px 20px 0 20px; margin:0">
+                    <form class = "form" id = "remove" action = "/member/remove" method="post">
+                        <input type="hidden" name="memno" value="<%= item.memno %>">
+                    </form>
+                    <form class = "form" id = "edit" enctype="multipart/form-data" action = "/member/edit" method = "post">
+                        <div class = "inline-block">
+                            <span class="value"><input type="hidden" name="memno" value="<%= item.memno %>"></span>
+                            <div class = "left">
+                                <span class="value"><input type="hidden" name="picture" value="<%= item.picture %>"></span>
+                                <div id="gallery"><img id="preview" src='/<%= item.picture %>' width="100%"></div>
+                                <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" value = "<%= item.picture %>" style = "display: none;" /></span>
+                                <input type="button" style = "width: 100px; height: 25px; margin-left: 150px; box-sizing: border-box;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
+
+                                <div class = "item">
+                                        <span style = "font-size: 30px; font-weight: 800;"><%= items.account %></span>
+                                    </div>
+        
+                                    <div class = "item">
+                                        <span class="value"><input type="text" name="memname" placeholder="請輸入性名" autocomplete="off" style="font-size: 30px;" value="<%= item.memname %>" required></span>
+                                    </div>
+        
+                                    <div class = "item">          
+                                        <span class="value"><input type="text" name="nickname" placeholder="請輸入暱稱" style = "font-size: 24px; font-weight: 700;" value="<%= item.nickname %>" required></span>
+                                        <br/>
+                                    </div>
+        
+                            </div>
+                            
+                            <div class = "right">
+                                
+                                <div class = "item">
+                                    <span class="name" style="font-size:20px; font-weight: 600;">密碼: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="password"><%= item.password%></span>
+                                </div>
+                
+                                <div class = "item">
+                                    <span class="name" style="font-size:20px; font-weight: 600;">密碼確認: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="password" name="password2"><%= item.password2%></span>
+                                </div>                
+
+                                <div class = "item">
+                                    <span class="name" style="font-size:20px; font-weight: 600;">性別: </span>
+                                    <input type="radio" name="sex" value="男" style="font-size: 20px; font-weight: 700;"> 男
+                                    <input type="radio" name="sex" value="女" style="font-size: 20px; font-weight: 700;"> 女
+                                </div>
+            
+                                <div class = "item">
+                                    <span class="name" style="font-size:20px; font-weight: 600;">電話: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="tel"><%= item.tel%></span>
+                                </div>
+            
+                                <div class = "item">
+                                    <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
+                                    <span class="value" style="font-size: 20px; font-weight: 700;"><input type="text" name="address"><%= item.address%></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        </span>
+                        <div class="division-line"></div>
+                        <span class="button-group" style="float: right">
+                            <input class = "button" type="submit" value="修改" >
+                            <input class = "button remove" style=" background: var(--red);margin-left: 1em" type="button" value="刪除">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <%- include('public/footer'); -%>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js'></script>
+
+    <script src="/js/select2.full.min.js"></script>
+
+    <script src="/js/ejs.min.js"></script>
+
+    <script>
+        var variableJSON = JSON.parse($('#variableJSON').text());
+        $("#variableJSON").remove();
+        for (var i = 0; i < variableJSON.length; i++) {
+            var ch = "#"+variableJSON[i].lblno;
+            $("#e1").children(ch).attr("selected","selected");
+        }
+        $("#e1").select2();
+    </script>
+
+    <script>
+        var img = document.getElementById(preview);
+        $("#gallery").css("height" ,$("#gallery > img").css("height"));
+    </script>
+    <script src = "/js/preview_image.js"></script>
+</html>

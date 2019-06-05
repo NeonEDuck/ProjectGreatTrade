@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>123123</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="/stylesheets/menu.css" rel="stylesheet"/>  
+        <link href="/stylesheets/main.css" rel="stylesheet"/> 
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <div class = "data" style="padding:20px 20px 0 20px; margin:0">
+                    <div class = "inline-block">
+                        <div class = "left">
+                            <div class = "item">
+                                <img src = "img/blank.jpg" height="100%">
+                            </div>
+
+                            <div class = "item">
+                                <span style = "font-size: 30px; font-weight: 800;"><%= items.account %></span>
+                            </div>
+
+                            <div class = "item">
+                                <span style = "font-size: 30px"><%= items.memname %></span>
+                            </div>
+
+                            <div class = "item">          
+                                <span style = "font-size: 24px; font-weight: 700;"><%= items.nickname %></span>
+                            </div>
+
+                            <div class = "item">                     
+                                <span class="name" style="font-size:20px; font-weight: 600;">生日: </span>
+                                <br>
+                                <span style="font-size: 20px; font-weight: 700;"><%= items.birth %></span>
+                            </div>
+
+                            <div class = "item">                     
+                                <span class="name" style="font-size:20px; font-weight: 600;">性別: </span>
+                                <br>
+                                <span style="font-size: 20px; font-weight: 700;"><%= items.sex %></span>
+                            </div>
+
+                        </div>
+                        
+                        <div class = "right">
+
+                                <div class = "item">          
+                                    <span class="name" style="font-size:20px; font-weight: 600;">email: </span>
+                                    <br>
+                                    <span style = "font-size: 20px; font-weight: 700;"><%= items.email %></span>
+                                </div>
+    
+                                <div class = "item">                     
+                                    <span class="name" style="font-size:20px; font-weight: 600;">備用 Email: </span>
+                                    <br>
+                                    <span style="font-size: 20px; font-weight: 700;"><%= items.backupemail %></span>
+                                </div>
+    
+                                <div class = "item">                     
+                                    <span class="name" style="font-size:20px; font-weight: 600;">電話號碼: </span>
+                                    <br>
+                                    <span style="font-size: 20px; font-weight: 700;"><%= items.tel %></span>
+                                </div>
+    
+                                <div class = "item">                     
+                                    <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
+                                    <br>
+                                    <span style="font-size: 20px; font-weight: 700;"><%= items.address %></span>
+                                </div>
+    
+                                <div class = "item">                     
+                                    <span class="name" style="font-size:20px; font-weight: 600;">POYO: </span>
+                                    <br>
+                                    <span style="font-size: 20px; font-weight: 700;">POYOPOYOPOYOPOYO</span>
+                                </div>
+
+                        </div>
+                    </div>
+                    <% if(items.memno == user){ %>
+                        <form action = "/profile/edit/form" method = "post">
+                            <span class="value"><input type="hidden" name="memno" value="<%= items.memno %>"></span>
+                            <div class="value update"><input class="button" type="submit" value="修改"></div>
+                        </form>
+                    <% }else{ %>
+                        <form action = "/member/report" method = "post">
+                            <span class="value"><input type="hidden" name="memno" value="<%= items.memno %>"></span>
+                            <div class="value update"><input class="button" type="submit" value="檢舉會員"></div>
+                        </form>
+                    <% } %>
+            </div>
+
+            <%- include('public/footer'); -%>
+        </div>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</html>
