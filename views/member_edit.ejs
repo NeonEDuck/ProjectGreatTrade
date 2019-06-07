@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('public/head') -%>
+        <style>
+            .tag:hover {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <form action = "/member/edit" method = "post">
+                    <div class = "data" style="padding:20px 20px 0 20px; margin:0">
+                        <div class = "inline-block">
+                            <div class = "left" style="margin-right:6em">
+                                <div class = "avatar" style="height:10em;width:10em;margin-right:3em">
+                                    <img src = "/<%= items.picture %>" height="100%">
+                                </div>
+                                <div class="left">
+                                    <div class = "item">
+                                        <span style = "font-size: 30px; font-weight: 800;"><%= items.memno %></span>
+                                    </div>
+
+                                    <div class = "item">
+                                        <span style = "font-size: 30px; font-weight: 800;"><%= items.account %></span>
+                                    </div>
+
+                                    <div class = "item">
+                                        <input name="memname" placeholder="輸入名子" style = "font-size: 30px;width: 120px;height: 45px;" value="<%= items.memname %>">
+                                        <input name="nickname" placeholder="輸入稱號" style = "font-size: 30px;width: 300px;height: 45px;" value="<%= items.nickname %>">
+                                    </div>
+                                </div>
+                                <div style="margin-top:11em">
+                                    <div class = "left">
+                                        <div class = "item" style="margin-right:20em">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">生日: </span><%= items.birth %>
+                                            <input name="birth" value = "<%= items.birth %>" type="date" style = "font-size: 20px">
+                                        </div>
+
+                                        <div class = "item">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">性別: </span>
+                                            <% if(items.sex=='男'){ %>
+                                                <input type="radio" name="sex" value="男" checked> 男
+                                                <input type="radio" name="sex" value="女" > 女
+                                            <% }else{ %>
+                                                <input type="radio" name="sex" value="男" > 男
+                                                <input type="radio" name="sex" value="女" checked> 女
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class = "right">
+
+                                        <div class = "item">          
+                                            <span class="name" style="font-size:20px; font-weight: 600;">email: </span>
+                                            
+                                            <input placeholder="輸入email" name="email" type="text" style="font-size:20px;height: 29px" value="<%= items.email %>">
+                                        </div>
+            
+                                        <div class = "item">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">備用 Email: </span>
+                                            <input placeholder="輸入email" name="backupemail" type="text" style="font-size:20px;height: 29px" value="<%= items.backupemail %>">
+                                        </div>
+            
+                                        <div class = "item">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">電話號碼: </span>
+                                            
+                                            <input placeholder="輸入電話" name="tel" type="text" style="font-size:20px;height: 29px;width:250" value="<%= items.tel %>">
+                                        </div>
+            
+                                        <div class = "item">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
+                                            
+                                            <input placeholder="輸入地址" name="address" type="text" style="font-size:20px;height: 29px;width:350px" value="<%= items.address %>">
+                                        </div>
+            
+                                        <div class = "item">                     
+                                            <span class="name" style="font-size:20px; font-weight: 600;">接受付款方式: </span>
+                                            <br>
+                                            <span id='variableJSON' hidden>
+                                                <%= JSON.stringify(items.payment); %>
+                                            </span>
+                                            <% for(var i=0;i<payment.length;i++){ %>
+                                                <input type="checkbox" name="payno" class="tag" style="background-color: #888" value="<%= payment[i].payno %>"><%= payment[i].payname %>
+                                            <% } %>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                            <span class="value"><input type="hidden" name="memno" value="<%= items.memno %>"></span>
+                            <div class="value update"><input class="button" type="submit" value="修改完成"></div>
+                        
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <%- include('public/footer'); -%>
+    </body>
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script>
+        var variableJSON = JSON.parse($('#variableJSON').text());
+        $("#variableJSON").remove();
+        $(window).load(function(){
+            for (var i = 0; i < variableJSON.length; i++) {
+                $("input[value="+variableJSON[i].payno+"]").attr("checked","checked")
+            }
+        })
+    </script>
+</html>

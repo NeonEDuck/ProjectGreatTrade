@@ -5,12 +5,16 @@ var router = express.Router();
 const member = require('./utility/member');
 const fs = require('fs');
 
-router.get('/', function(req, res, next) {
-    var memno = req.query.user;
+router.post('/', function(req, res, next) {
+    var memno = req.body.memno;
+    var payment; 
     console.log(memno);
+    member.getPayment().then(data => {
+        payment = data;
+    })
     member.one(memno).then(data => {
         var d = new Date(data.birth);
-        data.birth = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate();
+        data.birth = d.toISOString().substring(0, 10);
         if (fs.existsSync('./public/picture/' + data.picture)) {
             data.picture='picture/' + data.picture;
         }
@@ -22,7 +26,7 @@ router.get('/', function(req, res, next) {
         }else if(data == -1){
             res.render('notFound');  //將資料傳給顯示頁面
         }else{
-            res.render('member_one', {items:data});  //導向找不到頁面
+            res.render('member_edit', {items:data,payment:payment});  //導向找不到頁面
         } 
     })
 });

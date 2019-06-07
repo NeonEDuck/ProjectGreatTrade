@@ -4,6 +4,18 @@
 const sql = require('./asyncDB');
 var format = require('pg-format');
 
+var getPayment = async function(memno){
+    var result={};
+    
+    await sql('SELECT * FROM payment')
+        .then((data) => {
+            result = data.rows;
+        }, (error) => {
+            result = null;
+        });
+    return result;
+}
+
 var one = async function(memno){
     var result={};
     
@@ -17,6 +29,18 @@ var one = async function(memno){
         }, (error) => {
             result = null;
         });
+    if (result != null) {
+        await sql('SELECT payment.* FROM mempayment JOIN payment ON mempayment.payno=payment.payno WHERE mempayment.memno = $1', [memno])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    result.payment = data.rows;
+                }else{
+                    result = -1;
+                }    
+            }, (error) => {
+                result = null;
+            });
+    }
     return result;
 }
 
@@ -26,13 +50,22 @@ var one = async function(memno){
 
 var edit = async function(newData){
     var results;
-    
-    await sql('UPDATE member SET memname=$1, nickname=$2, sex=$3, password=$4, picture=$5, backupemail=$6, tel=$7, address=$8, birth=$9 WHERE memno = $6', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.memno])
+    var list = [];
+    console.log(newData)
+    await sql('UPDATE member SET memname=$1, nickname=$2, sex=$3, email=$4, backupemail=$5, tel=$6, address=$7, birth=$8 WHERE memno = $9', [newData.memname, newData.nickname, newData.sex, newData.email, newData.backupemail, newData.tel, newData.address, newData.birth, newData.memno])
         .then((data) => {
             results = data.rowCount;  
         }, (error) => {
             results = -1;
         });
+    if (results > 0) {
+        for (var i = 0; i < newData.payno.length; i++) {
+            list.push([newData.memno,newData.payno[i]])
+        }
+        await sql('DELETE FROM mempayment WHERE memno = $1', [newData.memno])
+        console.log(format('INSERT INTO mempayment VALUES %L', list))
+        await sql(format('INSERT INTO mempayment VALUES %L', list))
+    }
 		
     return results;
 }
@@ -64,4 +97,4 @@ var report = async function(memno){
 }
 
 //匯出
-module.exports = {one, edit, remove, report};
+module.exports = {getPayment, one, edit, remove, report};

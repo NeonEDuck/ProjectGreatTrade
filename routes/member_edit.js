@@ -32,38 +32,30 @@ var upload = multer({
 router.post('/', upload.single('picture'), function(req, res, next) {
     var memno = req.body.memno;
     var memname = req.body.memname;
+    var nickname = req.body.nickname;
     var email = req.body.email;
     var backupemail = req.body.backupemail;
-    var account = req.body.account;
     var picture;
-    var nickname = req.body.nickname;
     var sex = req.body.sex;
     var birth = req.body.birth;
     var tel = req.body.tel;
     var address = req.body.address;
-    var password = req.body.password;
+    var payno = req.body.payno;
 
-    if (req.body.picture != 'images/no_pic.jpg'){
-        picture = req.body.picture.replace('picture/','');
-    }
-    if (typeof(req.file) != 'undefined'){
-        picture = req.file.filename;   //取得上傳照片名稱
-    }
 
     // 建立一個新資料物件
     var newData={
-        memno:memno,       
+        memno:memno,
         memname:memname,
+        nickname:nickname,
         email:email,
         backupemail:backupemail,
-        account:account,
         picture:picture,
-        nickname:nickname,
         sex:sex,
         birth:birth,
         tel:tel,
         address:address,
-        password:password
+        payno:payno
     } 
     
     member.edit(newData).then(d => {
