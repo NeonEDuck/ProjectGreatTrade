@@ -69,7 +69,7 @@
                 <%- include('public/page'); -%>
 
                 <% for(var i=0; i<items.data.length; i++) {%>
-                    <a href="/member/<%= items.data[i].memno %>"> 
+                    <a href="/member?user=<%= items.data[i].memno %>"> 
                         <div class = "section">
                             <div class = "avatar" style="height: 125px;width: 125px;">
                                 <img src = "/<%= items.data[i].picture %>" height="100%">

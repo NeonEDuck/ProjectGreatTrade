@@ -138,7 +138,8 @@ var page = async function(newData){
     var totalLine, totalPage;
     var result = {};
     var label;
-    if (newData.label == []){
+    console.log(newData);
+    if (newData.label.length != 0){
         await sql(format('SELECT COUNT(product.*) AS cnt FROM product WHERE product.prono IN (SELECT product.prono FROM product JOIN prolabel ON prolabel.prono=product.prono WHERE product.proname LIKE \'%%%s%%\' AND prolabel.lblno IN %L)',newData.search.trim(),[newData.label]))
             .then((data) => {
                 totalLine = data.rows[0].cnt;
@@ -155,7 +156,7 @@ var page = async function(newData){
             });
     }
     else {
-        await sql(format('SELECT COUNT(*) AS cnt FROM product WHERE proname LIKE \'%%%s%%\')',newData.search.trim()))
+        await sql(format('SELECT COUNT(*) AS cnt FROM product WHERE proname LIKE \'%%%s%%\'',newData.search.trim()))
             .then((data) => {
                 totalLine = data.rows[0].cnt;
                 totalPage = Math.ceil(totalLine/linePerPage);   
@@ -163,13 +164,34 @@ var page = async function(newData){
                 totalLine = 0;
                 totalPage = 0;  
             });
-        await sql(format('SELECT product.* FROM product WHERE proname LIKE \'%%%s%%\' LIMIT $2 OFFSET $1',newData.search.trim()), [(newData.pageNo-1)*linePerPage, linePerPage])
+        await sql(format('SELECT * FROM product WHERE proname LIKE \'%%%s%%\' LIMIT $2 OFFSET $1',newData.search.trim()), [(newData.pageNo-1)*linePerPage, linePerPage])
             .then((data) => {
                 result = {data:data.rows, pageNo:newData.pageNo, totalLine:totalLine, totalPage:totalPage, startPage:startPage, linePerPage:linePerPage, navSegments:navSegments};  
             }, (error) => {
                 result = null;
             });
     }
+
+    var list = []
+    for (var i = 0; i < result.data.length; i++) {
+        result.data[i].label = []
+        list.push(result.data[i].prono)
+    }
+    await sql(format('SELECT prolabel.*,label.lblname FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono IN %L', [list]))
+        .then((data) => {
+            if(data.rows.length > 0){
+                for (var i = 0; i < data.rows.length; i++) {
+                    for (var j = 0; j < result.data.length; j++) {
+                        if (result.data[j].prono == data.rows[i].prono) {
+                            result.data[j].label.push(data.rows[i])
+                            break;
+                        }
+                    }
+                }
+            }
+        }, (error) => {
+        });
+    console.log(result)
     
     if (result != null) {
         //取回protype資料

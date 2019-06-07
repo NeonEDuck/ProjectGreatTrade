@@ -81,6 +81,11 @@
                                 <br/>
                                 <span>上架日期: <%= items.data[i].date %></span>
                             </div>
+                            <div class = "right">
+                                <% for(var j = 0; j < items.data[i].label.length; j++){ %>
+                                    <span class="tag <%= items.data[i].label[j].lblno %>"><%= items.data[i].label[j].lblname %></span>
+                                <% } %>
+                            </div>
                         </div>
                     </a>
                 <% } %>
@@ -108,6 +113,7 @@
             for (var i = 0; i < variableJSON.length; i++) {
                 $('#'+ variableJSON[i]).css("background-color","var(--red)");
                 $('#'+ variableJSON[i]).addClass("selected");
+                $('.'+ variableJSON[i]).css("background-color","var(--red)");
             }
         })
         $("select[name=type]").change(function(){
