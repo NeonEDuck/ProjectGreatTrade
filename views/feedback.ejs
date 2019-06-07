@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('public/head'); -%>
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <h2>提供意見 <i class="fa fa-envelope" aria-hidden="true"></i></h2>
+
+                
+                <form class = "form" action = "/feedback/add" method = "post">
+                                                            
+                        <span class="name" style="vertical-align: top">原因: </span>
+                        <span class="value"><textarea type="text" rows = 5 style="width:20em" name="content" maxlength="255" placeholder="請輸入文字" style="resize: none"></textarea></span>
+                        <br/>
+                        
+                        <span class="name"></span>
+                        <span class="value"><input class="button" type="submit" value="送出" ></span>    
+                </form>  
+
+            </div>
+
+            <%- include('public/footer'); -%>
+        </div>
+    </body>
+</html>

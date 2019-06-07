@@ -43,6 +43,8 @@ var member_edit_form = require('./routes/member_edit_form');
 var member_edit = require('./routes/member_edit');
 var member_report = require('./routes/member_report');
 var member_one = require('./routes/member_one');
+var feedback = require('./routes/feedback')
+var feedback_add = require('./routes/feedback_add')
 //var shoppingCart = require('./routes/shoppingCart');
 
 var app = express();
@@ -98,7 +100,9 @@ app.use('/order/show/form', order_show_form);
 app.use('/member/edit/form', member_edit_form);
 app.use('/member/edit', member_edit);
 app.use('/member/report', member_report);
-app.use('/member', member_one);
+app.use('/member/one', member_one);
+app.use('/feedback', feedback);
+app.use('/feedback/add', feedback_add);
 //app.use('/shopping_cart', shoppingCart);
 app.use(express.static('public/picture'));
 
