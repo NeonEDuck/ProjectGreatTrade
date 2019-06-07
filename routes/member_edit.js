@@ -60,7 +60,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     
     member.edit(newData).then(d => {
         if (d>=0){
-            res.render('editSuccess', {results:d});  //傳至成功頁面
+            res.redirect('/member/?user='+memno)
         }else{
             res.render('editFail');     //導向錯誤頁面
         }  

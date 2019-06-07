@@ -510,3 +510,75 @@ textarea {
 .select2-selection__choice__remove{
     color: #fff !important;
 }
+
+div.linebar{
+	height: 50px;
+	background: var(--light-color);
+	color: #eee;
+}
+
+div.linebar span:nth-child(1){
+	font-size: 30px;
+	line-height: 50px;
+	padding: 0 0 0 10px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	float: left;
+}
+
+div.linebar span:nth-child(2){
+	font-size: 20px;
+	line-height: 50px;
+	padding: 0 10px 0 0;
+	float: right;
+}
+
+div.thumbnails{
+}
+div.thumbnails:before,
+div.thumbnails:after{
+    display: block;
+    content: '';
+    clear: both;
+}
+
+div.thumbnail{
+    width: 200px;
+    height: 250px;
+    background: var(--darker-color);
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+div.thumbnail h1{
+    color: #fff;
+    margin:0;
+    margin-top:-5px;
+    font-size: 20px;
+}
+
+div.thumbnail p{
+    color: #fff;
+    margin:0;
+    margin-top:-5px;
+    font-size: 15px;
+}
+
+div.thumbimg img {
+    box-shadow: none;
+    width : 180px;
+    margin-top: calc(-50% + 25px);
+}
+div.thumbimg {
+    width : 180px;
+    height : 100px;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+}
+
+div.thumbnail:not(:nth-child(4)){
+    margin-right: 40px; 
+}

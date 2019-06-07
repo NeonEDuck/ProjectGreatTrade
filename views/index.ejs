@@ -1,45 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('public/head'); -%>  
+        <%- include('public/head'); -%>
         <style>
-                div.thumbnails{
-                }
-                div.thumbnails:before,
-                div.thumbnails:after{
-                    display: block;
-                    content: '';
-                    clear: both;
-                }
-        
-                div.thumbnail{
-                    width: 230px;
-                    height: 300px;
-                    background: #777;
-                    float: left;
-                    box-sizing: border-box;
-                    padding: 10px;
-                    position: relative;
-                }
-        
-                div.thumbnail h1{
-                    color: #fff;
-                    margin:0;
-                    margin-top:-5px;
-                    font-size: 20px;
-                }
-        
-                div.thumbnail p{
-                    color: #fff;
-                    margin:0;
-                    margin-top:-5px;
-                    font-size: 15px;
-                }
-        
-                div.thumbnail:not(:nth-child(4)){
-                    margin-right: 60px; 
-                }
-            </style>   
+            .searchbar input[type="submit"]{
+                position: relative;
+                top: -5px;
+            }
+            
+            div.item {
+                border: 2px solid #000;
+                width: 1050px;
+                height: 200px;
+                margin:10px auto;
+                padding: 25px;
+                box-sizing: border-box;
+            }
+
+            div.item img{
+                float:left;
+                margin-right: 20px;
+            }
+            .tag:hover{
+                cursor: pointer;
+            }
+            div.item h1{
+                margin-top: 0;
+            }
+            #label-group{
+                overflow: hidden;
+                margin: 0 auto;
+                display: block
+            }
+        </style>
     </head>
 
     <body>
@@ -49,112 +42,62 @@
             <%- include('public/navbar'); -%>
 
             <div class = "content">
-                <div class = "searchbar">
-                    <div class = "search">
-                        <img class = "search" src = "imgs/search.png">
-                        <div class = "searchbox">
-                            <img src = "imgs/search_bar.png", width = "870">
-                        </div>
-                    </div>
-                    <div class = "searchtype">
-                        <span>商品</span>
-                    </div>
+                <div class="searchbar">
+                    <form class = "form" action = "/product/page/1" method = "get">
+                        <i class="fa fa-search" aria-hidden="true" style="font-size: 40px;"></i>
+                        <span class="value"><input type="text" style="height: 40px;" name="search"></span>
+
+                        <span class="value" style="top: -3px;position: relative;">
+                            <select name="type">
+                                <option value="product">商品</option>
+                                <option value="member">會員</option>
+                            </select>
+                        </span>
+                        <span class="value"><input class="button" type="submit" value="查詢" ></span>
+                        <input name="data" id='data' hidden>
+                    </form>
                 </div>
-                <div class = "section">
+                <span id="label-group">
+                    <% for(var i=0; i<item.label.length; i++) {%>
+                        <span id="<%= item.label[i].lblno %>" style="float: left" class="tag"><%= item.label[i].lblname %></span>
+                    <% } %>
+                </span>
+                <div class = "section" style="height: auto">
                     <div class = "linebar">
-                        <span>熱門商品</span> <span>看更多&rarr;</span>
+                        <span>熱門商品</span> <span style="float: right">看更多<i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
                     
                     <p>
                         <div class = "thumbnails">
-                            
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            
+                            <% for(var i=0; i<item.hot.length; i++) {%>
+                                <div class = "thumbnail">
+                                    <div class="thumbimg">
+                                        <img src = "<%= item.hot[i].picture %>">
+                                    </div>
+                                    <h1><%= item.hot[i].proname %></h1>
+                                    <p><%= item.hot[i].description %></p>
+                                </div>
+                            <% } %>
                         </div>
                     </p>
                 </div>
                 
-                <div class = "section">
+                <div class = "section" style="height: auto">
                     <div class = "linebar">
-                        <span>最新商品</span> <span>看更多&rarr;</span>
+                        <span>最新商品</span> <span>看更多<i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
                     
                     <p>
                         <div class = "thumbnails">
-                            
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            
-                        </div>
-                    </p>
-                </div>
-                
-                <div class = "section">
-                    <div class = "linebar">
-                        <span>最近搜尋的商品</span> <span>看更多&rarr;</span>
-                    </div>
-                    
-                    <p>
-                        <div class = "thumbnails">
-                            
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            <div class = "thumbnail">
-                                <img src = "imgs/blank.jpg" width = 210>
-                                <h1>商品名稱</h1>
-                                <p>商品介紹</p>
-                            </div>
-                            
+                            <% for(var i=0; i<item.new.length; i++) {%>
+                                <div class = "thumbnail">
+                                    <div class="thumbimg">
+                                        <img src = "<%= item.new[i].picture %>">
+                                    </div>
+                                    <h1><%= item.new[i].proname %></h1>
+                                    <p><%= item.new[i].description %></p>
+                                </div>
+                            <% } %>
                         </div>
                     </p>
                 </div>
@@ -165,4 +108,32 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script>
+        $("select[name=type]").change(function(){
+            if ($("select[name=type]").find(":selected").val() == "product") {
+                $("#label-group").stop().slideDown()
+            }
+            else {
+                $("#label-group").stop().slideUp()
+            }
+        })
+        $(".tag").click(function(){
+            if ($(this).hasClass("selected")) {
+                $(this).css("background-color","var(--green)");
+                $(this).removeClass("selected");
+            }
+            else {
+                $(this).css("background-color","var(--red)");
+                $(this).addClass("selected");
+            }
+            var label = []
+            $(".tag").each(function(){
+                if ($(this).hasClass("selected")) {
+                    label.push($(this).attr("id"));
+                }
+            })
+            $('#data').val(JSON.stringify(label))
+        })
+    </script>
 </html>

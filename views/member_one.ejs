@@ -40,39 +40,34 @@
                                 <div class = "left">
                                     <div class = "item" style="margin-right:20em">                     
                                         <span class="name" style="font-size:20px; font-weight: 600;">生日: </span>
-                                        <br>
                                         <span style="font-size: 20px; font-weight: 700;"><%= items.birth %></span>
                                     </div>
 
                                     <div class = "item">                     
                                         <span class="name" style="font-size:20px; font-weight: 600;">性別: </span>
-                                        <br>
                                         <span style="font-size: 20px; font-weight: 700;"><%= items.sex %></span>
+                                    </div>
+                                    
+                                    <div class = "item">          
+                                        <span class="name" style="font-size:20px; font-weight: 600;">email: </span>
+                                        <span style = "font-size: 20px; font-weight: 700;"><%= items.email %></span>
+                                    </div>
+        
+                                    <div class = "item">                     
+                                        <span class="name" style="font-size:20px; font-weight: 600;">備用 Email: </span>
+                                        <span style="font-size: 20px; font-weight: 700;"><%= items.backupemail %></span>
                                     </div>
                                 </div>
                                 <div class = "right">
 
-                                        <div class = "item">          
-                                            <span class="name" style="font-size:20px; font-weight: 600;">email: </span>
-                                            
-                                            <span style = "font-size: 20px; font-weight: 700;"><%= items.email %></span>
-                                        </div>
-            
-                                        <div class = "item">                     
-                                            <span class="name" style="font-size:20px; font-weight: 600;">備用 Email: </span>
-                                            
-                                            <span style="font-size: 20px; font-weight: 700;"><%= items.backupemail %></span>
-                                        </div>
             
                                         <div class = "item">                     
                                             <span class="name" style="font-size:20px; font-weight: 600;">電話號碼: </span>
-                                            
                                             <span style="font-size: 20px; font-weight: 700;"><%= items.tel %></span>
                                         </div>
             
                                         <div class = "item">                     
                                             <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
-                                            
                                             <span style="font-size: 20px; font-weight: 700;"><%= items.address %></span>
                                         </div>
             
@@ -92,7 +87,7 @@
                         
                     </div>
                     <% if(items.memno == user){ %>
-                        <form action = "/profile/edit/form" method = "post">
+                        <form action = "/member/edit/form" method = "post">
                             <span class="value"><input type="hidden" name="memno" value="<%= items.memno %>"></span>
                             <div class="value update"><input class="button" type="submit" value="修改"></div>
                         </form>

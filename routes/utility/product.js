@@ -228,5 +228,33 @@ var remove = async function(prono){
     return results;
 }
 
+var indexList = async function(){
+    var result={};
+    var label;
+	
+    await sql('SELECT * FROM product ORDER BY "like" LIMIT 4')
+        .then((data) => {            
+            result.hot = data.rows;  
+        }, (error) => {
+            result.hot = [];
+        });
+
+    await sql('SELECT * FROM product ORDER BY prono DESC LIMIT 4')
+        .then((data) => {            
+            result.new = data.rows;  
+        }, (error) => {
+            result.new = [];
+        });
+		
+    await sql('SELECT * FROM label ORDER BY lblno')
+        .then((data) => {
+            result.label = data.rows;  
+        }, (error) => {
+            result.label = [];
+        });
+
+    return result;
+}
+
 //匯出
-module.exports = {getDropdownData, add, list, one, page, edit, remove};
+module.exports = {getDropdownData, add, list, one, page, edit, remove, indexList};

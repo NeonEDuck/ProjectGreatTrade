@@ -100,7 +100,7 @@ app.use('/order/show/form', order_show_form);
 app.use('/member/edit/form', member_edit_form);
 app.use('/member/edit', member_edit);
 app.use('/member/report', member_report);
-app.use('/member/one', member_one);
+app.use('/member', member_one);
 app.use('/feedback', feedback);
 app.use('/feedback/add', feedback_add);
 //app.use('/shopping_cart', shoppingCart);
