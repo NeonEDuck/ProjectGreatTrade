@@ -2,6 +2,12 @@
 <html>
     <head>
         <%- include('public/head') -%>
+
+        <style>
+            a:not(:nth-child(3)) .thumbnail{
+                margin-right: 142px; 
+            }
+        </style>
     </head>
 
     <body>
@@ -61,23 +67,23 @@
                                 <div class = "right">
 
             
-                                        <div class = "item">                     
-                                            <span class="name" style="font-size:20px; font-weight: 600;">電話號碼: </span>
-                                            <span style="font-size: 20px; font-weight: 700;"><%= items.tel %></span>
-                                        </div>
-            
-                                        <div class = "item">                     
-                                            <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
-                                            <span style="font-size: 20px; font-weight: 700;"><%= items.address %></span>
-                                        </div>
-            
-                                        <div class = "item">                     
-                                            <span class="name" style="font-size:20px; font-weight: 600;">接受付款方式: </span>
-                                            <br>
-                                            <% for(var i=0;i<items.payment.length;i++){ %>
-                                                <span class="tag"><%= items.payment[i].payname %></span>
-                                            <% } %>
-                                        </div>
+                                    <div class = "item">                     
+                                        <span class="name" style="font-size:20px; font-weight: 600;">電話號碼: </span>
+                                        <span style="font-size: 20px; font-weight: 700;"><%= items.tel %></span>
+                                    </div>
+        
+                                    <div class = "item">                     
+                                        <span class="name" style="font-size:20px; font-weight: 600;">地址: </span>
+                                        <span style="font-size: 20px; font-weight: 700;"><%= items.address %></span>
+                                    </div>
+        
+                                    <div class = "item">                     
+                                        <span class="name" style="font-size:20px; font-weight: 600;">接受付款方式: </span>
+                                        <br>
+                                        <% for(var i=0;i<items.payment.length;i++){ %>
+                                            <span class="tag"><%= items.payment[i].payname %></span>
+                                        <% } %>
+                                    </div>
         
                                 </div>
                             </div>
@@ -97,6 +103,35 @@
                             <div class="value update"><input class="button" style="background-color:var(--red)" type="submit" value="檢舉會員"></div>
                         </form>
                     <% } %>
+                    
+                    <div class = "section" style="height: auto; margin-top: 1em;">
+                        <% if(items.product.length>0){ %>
+                            <div class = "linebar">
+                                <span>此會員的商品</span> <span style="float: right">看更多<i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                            </div>
+                            
+                            <p>
+                                <div class = "thumbnails">
+                                    <% for(var i=0; i<items.product.length; i++) {%>
+                                        <a href="/product/<%= items.product[i].prono %>">
+                                            <div class = "thumbnail">
+                                                <div class="thumbimg">
+                                                    <img src = "<%= items.product[i].picture %>">
+                                                </div>
+                                                <h1><%= items.product[i].proname %></h1>
+                                                <p><%= items.product[i].description %></p>
+                                            </div>
+                                        </a>
+                                    <% } %>
+                                </div>
+                            </p>
+                        <% } else { %>
+                            <div class = "linebar">
+                                <span>此會員的目前無任何商品</span>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
             </div>
 
         </div>

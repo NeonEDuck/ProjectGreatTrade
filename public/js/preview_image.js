@@ -8,8 +8,8 @@ function previewImage(file) {
         throw "File Type must be an image";
     }
 
-    var thumb = document.createElement("div");
-    thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+    // var thumb = document.createElement("div");
+    // thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
 
     var img = document.createElement("img");
     img.file = file;
@@ -24,8 +24,9 @@ function previewImage(file) {
     };
 
     $(gallery).empty();
-    thumb.appendChild(img);
-    gallery.appendChild(thumb);
+    // thumb.appendChild(img);
+    // gallery.appendChild(thumb);
+    gallery.appendChild(img);
 
     // Using FileReader to display the image content
     var reader = new FileReader();

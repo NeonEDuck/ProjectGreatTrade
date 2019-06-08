@@ -16,6 +16,14 @@
     padding: 0;
 }
 
+#navigation > a {
+    width: 7.5em;
+    float: left;
+    height: 100%;
+    margin-right: 0.5em;
+    padding: 0;
+}
+
 #navigation > li a {
     height: 100%;
     color: #fff;
@@ -24,10 +32,22 @@
     text-transform: uppercase;
 }
 
+#navigation > a li {
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+    line-height: 3;
+    text-transform: uppercase;
+}
 
 
 #navigation > li:hover a {
     color: #fff;
+}
+
+#navigation > a:hover {
+    color: #fff;
+    cursor: pointer;
 }
 
 #navigation > li:hover {

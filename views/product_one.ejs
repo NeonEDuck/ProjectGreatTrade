@@ -49,15 +49,31 @@
                             </div>
                             
                             <div class = "item">
-                                <span class="name">付費方式: </span>
-                                <span style = "width: 50px"><%= item.paymethod %></span>
-                            </div>
-
-                            <div class = "item">
                                 <span class="name">上架日期: </span>
                                 <span style = "width: 50px"><%= item.date %></span>
                             </div>
+
+                            <div class = "item">
+                                <span class="name" style="font-size:20px; font-weight: 600;">接受付款方式: </span>
+                                <br>
+                                <% for(var i=0;i<item.payment.length;i++){ %>
+                                    <span class="tag"><%= item.payment[i].payname %></span>
+                                <% } %>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="division-line" style="border:none"></div>
+
+                    <div class = "inline-block">
+                        <a href="/member?user=<%= item.memno %>">
+                            <div class="left">
+                                <div class="avatar" style="height: 10em;width:10em;margin-right: 0">
+                                    <img src="/<%= item.member.picture %>" height="100%">
+                                </div>
+                                <h2 style="text-align: center;width: auto"><%= item.member.nickname %></h2>
+                            </div>
+                        </a>
                     </div>
                     <% if(item.memno == user){ %>
                         <form action = "/product/edit/form" method = "post">
@@ -180,47 +196,5 @@
         
         
         autosize($('textarea'));
-        // $(window).on("load",function(){
-        //     $(".reveal").each(function(){
-        //         var text = $(this).parents().children("p").children("span.text");
-        //         var preHeight = text.css("height");
-        //         text.css("height","100%");
-        //         var maxHeight = text.css("height");
-        //         text.css("height",preHeight);
-                
-        //         if (parseInt(maxHeight) <= parseInt(preHeight)) {
-        //             $(this).css("background","#666");
-        //             $(this).css("cursor","default");
-        //             $(this).children().remove();
-        //         }
-        //         else {
-        //             $(this).addClass("active")
-        //         }
-        //     })
-        // })
-        // $(".reveal").click(function(event){
-        //     if ($(this).hasClass("active")){
-        //         event.preventDefault();
-        //         var text = $(this).parents().children("p").children("span.text");
-        //         var preHeight = text.css("height");
-        //         text.css("height","100%");
-        //         var maxHeight = text.css("height");
-        //         text.css("height",preHeight);
-
-        //         if (!text.hasClass("opened")) {
-        //             text.addClass("opened");
-        //             text.stop().a
-        //             text.stop().animate({height: maxHeight}, {duration:400, easing:'easeOutExpo'});
-        //             $(this).children().removeClass("fa-arrow-down");
-        //             $(this).children().addClass("fa-arrow-up");
-        //         }
-        //         else {
-        //             text.removeClass("opened");
-        //             text.stop().animate({height: "60px"}, {duration:400, easing:'easeOutExpo'});
-        //             $(this).children().removeClass("fa-arrow-up");
-        //             $(this).children().addClass("fa-arrow-down");
-        //         }
-        //     }
-        // });
     </script>
 </html>

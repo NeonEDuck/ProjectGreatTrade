@@ -22,7 +22,7 @@ $(window).on("load",function(){
             $(this).parents().children().children("a").children(".section").css("display","none");
             $(this).parents().children().children(".amt").css("display","none");
             $(this).parents().children(".button-group").css("display","none");
-            $(this).parents(".section").css("height","184")
+            $(this).parents(".section").css("height","220")
         }
     })
 })
@@ -53,7 +53,7 @@ $(".reveal").click(function(event){
         }
         else {
             target = $(this).parents(".section");
-            var maxHeight = 184;
+            var maxHeight = 220;
             target.children().children("a").children(".section").each(function(){
                 maxHeight += parseInt($(this).css("height"));
                 maxHeight += parseInt($(this).css("margin-top"))
@@ -79,7 +79,7 @@ $(".reveal").click(function(event){
                 target.children().children("a").children(".section").css("display","none");
                 target.children().children(".amt").css("display","none");
                 target.children(".button-group").css("display","none");
-                target.stop().animate({height: 184}, {duration:400, easing:'easeOutExpo'});
+                target.stop().animate({height: 220}, {duration:400, easing:'easeOutExpo'});
                 $(this).children().removeClass("fa-arrow-up");
                 $(this).children().addClass("fa-arrow-down");
             }

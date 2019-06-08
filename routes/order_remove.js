@@ -8,9 +8,19 @@ const order = require('./utility/order');
 router.post('/', function(req, res, next) {
     var ordno = req.body.ordno;   //取得產品編號
     console.log(req.body.ordno)
-    order.remove(ordno).then(d => {
-        console.log(d)
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        if (req.session.user == req.body.memno){
+            order.remove(ordno).then(d => {
+                console.log(d)
+            })
+        }
+        else {
+            res.render('unAuth');
+        }
+    }
+    else {
+        res.redirect('login_form', {message:'請先登入以檢視您的訂單'});
+    }
 });
 
 module.exports = router;

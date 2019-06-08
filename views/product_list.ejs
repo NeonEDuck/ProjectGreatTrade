@@ -70,8 +70,10 @@
 
                 <% for(var i=0; i<items.data.length; i++) {%>
                     <a href="/product/<%= items.data[i].prono %>"> 
-                        <div class = "section">
-                            <img src = "/<%= items.data[i].picture %>" height="100%">
+                        <div class = "section" >
+                            <div style="max-width:200px;height:134px;overflow: hidden;position: relative;float: left;margin-right: 1em;box-shadow: 0px 0px 3px 0px #000;">
+                                <img src = "/<%= items.data[i].picture %>" height="100%" style="margin: 0px">
+                            </div>
                             <div class = "right">
                                 <span>商品名稱: <%= items.data[i].proname %></span>
                                 <br/>

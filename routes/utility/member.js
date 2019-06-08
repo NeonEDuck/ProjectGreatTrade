@@ -29,16 +29,18 @@ var one = async function(memno){
         }, (error) => {
             result = null;
         });
-    if (result != null) {
+    if (result != null && result != -1) {
         await sql('SELECT payment.* FROM mempayment JOIN payment ON mempayment.payno=payment.payno WHERE mempayment.memno = $1', [memno])
             .then((data) => {
-                if(data.rows.length > 0){
-                    result.payment = data.rows;
-                }else{
-                    result = -1;
-                }    
+                result.payment = data.rows;
             }, (error) => {
-                result = null;
+                result.payment = null;
+            });
+        await sql('SELECT product.* FROM product JOIN member ON member.memno=product.memno WHERE member.memno = $1 ORDER BY "like" LIMIT 4', [memno])
+            .then((data) => {
+                result.product = data.rows;
+            }, (error) => {
+                result.product = null;
             });
     }
     return result;
@@ -90,10 +92,17 @@ var remove = async function(memno){
     return results;
 }
 
-var report = async function(memno){
+var report = async function(newData){
     var results;
+console.log(newData.memno, newData.rptcontent, Date.now())
+    await sql('INSERT INTO report (memno, content, "date") VALUES ($1, $2, to_timestamp($3 / 1000.0))', [newData.memno, newData.rptcontent, Date.now()])
+        .then((data) => {
+            results = 0;  
+        }, (error) => {
+            results = -1;
+        });
 
-    await sql('INSERT INTO impeach (prono, memno, content) VALUES ($1, $2, $3)', [newData.prono, newData.memno, newData.content])
+    return results;
 }
 
 //匯出

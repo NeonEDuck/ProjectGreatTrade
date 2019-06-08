@@ -7,7 +7,7 @@ const fs = require('fs')
 
 //接收GET請求
 router.get('/', function(req, res, next) {
-    if (req.session.user != null || req.session.user != undefined){
+    if (req.session.user != null && req.session.user != undefined){
         order.list(req.session.user).then(data => {
             if(data==null){
                 res.render('error');  //導向錯誤頁面
@@ -20,6 +20,8 @@ router.get('/', function(req, res, next) {
                         data.buy[i][0].nickname = data.buy[i][0].nickname.slice(0,3) + "..";
                     }
                     for (j = 0; j < data.buy[i].length; j++) {
+                        var d = new Date(data.buy[i][j].date);
+                        data.buy[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                         if (fs.existsSync('./public/picture/' + data.buy[i][j].picture)) {
                             data.buy[i][j].picture='picture/' + data.buy[i][j].picture;
                         }
@@ -35,6 +37,8 @@ router.get('/', function(req, res, next) {
                         data.sell[i][0].nickname = data.sell[i][0].nickname.slice(0,3) + "..";
                     }
                     for (j = 0; j < data.sell[i].length; j++) {
+                        var d = new Date(data.sell[i][j].date);
+                        data.sell[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                         if (fs.existsSync('./public/picture/' + data.sell[i][j].picture)) {
                             data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
                         }

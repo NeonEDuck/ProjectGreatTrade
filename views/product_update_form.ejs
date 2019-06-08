@@ -44,8 +44,11 @@
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
                     <form class = "form" id = "remove" action = "/product/remove" method="post">
                         <input type="hidden" name="prono" value="<%= item.prono %>">
+                        <input type="hidden" name="memno" value="<%= item.memno %>">
                     </form>
                     <form class = "form" id = "edit" enctype="multipart/form-data" action = "/product/edit" method = "post">
+                        <input type="hidden" name="memno" value="<%= item.memno %>">
+                        <h1><i class="fa fa-edit" aria-hidden="true"></i>編輯商品</h1>
                         <div class = "inline-block">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class = "left">
@@ -92,11 +95,6 @@
                                     <span class="hint" style = "left: 72px;">(最大字數限制為255個字)</span>
                                 </div>
                                 
-                                <div class = "item">
-                                    <span class="name">付費方式: </span>
-                                    <span class="value"><input type="button" name="paymethod" value="選擇可行付費方式" ></span>
-                                </div>
-
                                 <div class = "item">
                                     <span class="name">上架日期: </span>
                                     <span style = "width: 50px"><%= item.date %></span>

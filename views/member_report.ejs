@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <- include('public/head') ->  
+        <%- include('public/head') -%>  
         <style>
             div.item {
                 border: 2px solid #000;
@@ -31,23 +31,35 @@
 
             <div class = "content">
                 <h1>檢舉會員</h1>
-                <div style="background: var(--main-color); border: var(--darker-color) solid 5px ; padding: 5%;box-sizing: border-box;">
-                    <a href="/member/<%= items[i].memno %>"> 
+                <form action = "/member/report/add" method = "post">
+                    <div class="inline-block">
+                        <div class="left">
+                            <div class="avatar" style="height: 10em;width:10em;margin-right: 0">
+                                <img src="/<%= items.picture %>" height="100%">
+                            </div>
+                            <h2 style="text-align: center;width: auto"><%= items.nickname %></h2>
+                            <input type="hidden" name="memno" value="<%= items.memno %>">
+                        </div>
                         
-                        <input type="checkbox" name="type" value="1">1.商品與實際收到的物品不合
-                        <input type="checkbox" name="type" value="2">2.付款後依舊未收到物品
-                        <input type="checkbox" name="type" value="3">3.詐欺
-                        <input type="checkbox" name="type" value="4">4.隨意取消訂單
-                        <input type="checkbox" name="type" value="5">5.未定期更新進度
-                        <input type="checkbox" name="type" value="6">6.未定期更新進度
-                    </a>
-                </div>
-                
-                <div style="float: right">
-                    <!-- <form action = "/shoppingCart/remove" method = "post"> -->
-                        <div class="value" style="margin-left: 1em;margin-top: 1em;float: right;"><input class="button" type="submit" value="確認"></div>
-                    <!-- </form> -->
-                </div>
+                        <div class="right">
+                            <input type="checkbox" name="type" value="1">1.商品與實際收到的物品不合
+                            <input type="checkbox" name="type" value="2">2.付款後依舊未收到物品
+                            <input type="checkbox" name="type" value="3">3.詐欺
+                        </div>
+                        <div class="right">
+                            <input type="checkbox" name="type" value="4">4.隨意取消訂單
+                            <input type="checkbox" name="type" value="5">5.未定期更新進度
+                            <input type="checkbox" name="type" value="6">6.其他
+                        </div>
+                        <textarea name="content" placeholder="請輸入文字" rows="5" maxlength="255" style = "width:calc(60%);margin-top: 2px; font-size: 16px; line-height: 30px" disabled></textarea>
+
+                    </div>
+                    
+                    <div style="float: right">
+                            <div class="value" style="margin-left: 1em;margin-top: 1em;float: right;"><input class="button" type="submit" value="確認"></div>
+                        
+                    </div>
+                </form>
             </div>
 
             <%- include('public/footer'); -%>
@@ -55,4 +67,15 @@
     </body>
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script>
+        $("input[value=6]").change(function(){
+            if ($(this).prop("checked")) {
+                $("textarea").prop("disabled",false)
+            }
+            else {
+                $("textarea").prop("disabled",true)
+            }
+        })
+    </script>
 </html>

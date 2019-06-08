@@ -131,10 +131,11 @@ var add = async function(newData){
         if (i > 0) {
             masterStr += ",";
         }
-        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp($1 / 1000.0),'"+newData.data[i].request+"')";
+        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp(CURRENT_TIMESTAMP / 1000.0),'"+newData.data[i].request+"')";
     }
     masterStr += " RETURNING ordno";
     console.log('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr)
+    console.log(Date.now())
 
     await sql('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr,[Date.now()])
         .then((data) => {

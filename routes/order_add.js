@@ -23,13 +23,19 @@ router.post('/', function(req, res, next) {
         address:address
     } 
     
-    order.add(newData).then(d => {
-        if (d==0){
-            res.render('addSuccess');  //傳至成功頁面
-        }else{
-            res.render('addFail');     //導向錯誤頁面
-        }  
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        req.session.shoppingCart = []
+        order.add(newData).then(d => {
+            if (d==0){
+                res.render('addSuccess');  //傳至成功頁面
+            }else{
+                res.render('addFail');     //導向錯誤頁面
+            }  
+        })
+    }
+    else {
+        res.render('login_form', {message:'請先登入以下訂單'});
+    }
 });
 
 module.exports = router;

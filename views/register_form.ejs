@@ -4,18 +4,34 @@
     <head>
         <%- include('public/head'); -%>
         <style>
-            h1{
-                margin-left: 400px;
-                font-size: 60px;
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button{ 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+            input{
+                box-sizing: border-box;
             }
 
             div.item{
-                margin-left: 350px;
                 margin-bottom: 30px;
             }
 
             div.btn{
                 margin-left: 430px;
+            }
+            #gallery{
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
+            div.item{
+                margin: 0;
+                padding: 0;
+                margin-bottom: 0.5em;
+            }
+            .hint{
+                color: var(--red)
             }
         </style>   
     </head>
@@ -28,69 +44,82 @@
 
             <div class = "content">
 
-                <h1>註冊</h1>
+                <h1><i class="fa fa-user-plus" aria-hidden="true"></i>註冊</h1>
 
-                <form action = "/user/register" method = "post">
-                    <div class = "item">
-                        <span class="name">帳號: </span>
-                        <span class="value"><input type="text" name="account"></span>
+                <form action = "/user/register" enctype="multipart/form-data" method = "post">
+                    <div class="left" style="width: 320px;">
+                        <div class="avatar" style="width:20em;height: 20em;">
+                            <div id="gallery"></div>
+                        </div>
+                        <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" style = "display: none" /></span>
+                        <input type="button" class="button" style = "width:150px; margin: 0.5em 0 0 85px;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                     </div>
-                    
-                    <div class = "item">
-                        <span class="name">密碼: </span>
-                        <span class="value"><input type="password" name="password"></span>
-                    </div>
+                    <div class="right">
+                        <div class = "item">
+                            <span class="name">帳號: </span>
+                            <span class="value"><input type="text" name="account" placeholder="請輸入您的帳號"></span>
+                        </div>
+                        
+                        <div class = "item">
+                            <span class="name">密碼: </span>
+                            <span class="value"><input type="password" name="password"></span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">密碼確認: </span>
-                        <span class="value"><input type="password" name="password2"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">密碼確認: </span>
+                            <span class="value"><input type="password" name="password2"></span>
+                            <span class="hint passhint" style = "left: 40px;color: var(--red)" hidden>密碼不正確!!</span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">Email: </span>
-                        <span class="value"><input type="text" name="email"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">Email: </span>
+                            <span class="value"><input type="text" name="email" placeholder="請輸入您的email"></span>
+                            <span class="hint emailhint" style = "left: 40px;color: var(--red)" hidden>email格式錯誤!!</span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">備用Email: </span>
-                        <span class="value"><input type="text" name="backupemail"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">備用Email: </span>
+                            <span class="value"><input type="text" name="backupemail" placeholder="此項可選擇不填"></span>
+                            <span class="hint backupemailhint" style = "left: 40px;color: var(--red)" hidden>email格式錯誤!!</span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">名字: </span>
-                        <span class="value"><input type="text" name="memname"></span>
-                    </div>
-                            
-                    <div class = "item">
-                        <span class="name">暱稱: </span>
-                        <span class="value"><input type="text" name="nickname"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">名字: </span>
+                            <span class="value"><input type="text" name="memname" placeholder="請輸入您的姓名"></span>
+                        </div>
+                                
+                        <div class = "item">
+                            <span class="name">暱稱: </span>
+                            <span class="value"><input type="text" name="nickname" placeholder="此項可選擇不填"></span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">生日: </span>
-                        <span class="value"><input class="max-today" id="max" type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" name="birth"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">生日: </span>
+                            <span class="value"><input class="max-today" id="max" type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" name="birth"></span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">性別: </span>
-                        <input type="radio" name="sex" value="M" checked> 男
-                        <input type="radio" name="sex" value="F"> 女
-                    </div>
+                        <div class = "item">
+                            <span class="name">性別: </span>
+                            <input type="radio" name="sex" value="男" checked> 男
+                            <input type="radio" name="sex" value="女"> 女
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">電話: </span>
-                        <span class="value"><input type="text" name="tel"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">電話: </span>
+                            <span class="value"><input type="text" name="tel" maxlength="10" placeholder="請輸入您的電話 例:(0912345678)"></span>
+                            <span class="hint passhint" style = "left: 40px;color: var(--red)" hidden>電話格式錯誤!!</span>
+                        </div>
 
-                    <div class = "item">
-                        <span class="name">地址: </span>
-                        <span class="value"><input type="text" name="address"></span>
-                    </div>
+                        <div class = "item">
+                            <span class="name">地址: </span>
+                            <span class="value"><input type="text" name="address" placeholder="請輸入您的地址"></span>
+                        </div>
 
-                    <div class = "btn">
-                        <span class="name"></span>
-                        <span class="value"><input type="submit" value="註冊" class="button"></span> 
-                    </div>         
+                        <div class = "btn">
+                            <span class="name"></span>
+                            <span class="value"><input type="submit" value="註冊" class="button"></span> 
+                        </div>
+                    </div>    
                 </form>
             </div>
             <%- include('public/footer'); -%>
@@ -101,13 +130,42 @@
 
     <script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script>
-        $(':input').change(function(){
+        $(':input').keyup(function(){
+            var telregex = /^[a-zA-Z]+$/;
+            var emailregex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
             var acot = $(':input[name="account"]').val() != "";
             var pass = $(':input[name="password"]').val() != "" && $(':input[name="password"]').val() == $(':input[name="password2"]').val();
-            var mail = $(':input[name="email"]').val() != "";
+            var mail = $(':input[name="email"]').val() != "" && $(':input[name="email"]').val().match(emailregex) && ($(':input[name="backupemail"]').val().match(emailregex) || $(':input[name="backupemail"]').val().trim() == '');
             var name = $(':input[name="memname"]').val() != "";
-            var tel = $(':input[name="tel"]').val() != "";
+            var tel = $(':input[name="tel"]').val().length == 10 && $(':input[name="tel"]').val().match(regex);
             var add = $(':input[name="address"]').val() != "";
+            if ($(':input[name="password"]').val() != $(':input[name="password2"]').val() && $(':input[name="password"]').val() != "" && $(':input[name="password2"]').val() != ""){
+                $('.passhint').prop('hidden',false);
+            }
+            else {
+                $('.passhint').prop('hidden',true);
+            }
+
+            if (!$(':input[name="tel"]').val().match(telregex)){
+                $('.telhint').prop('hidden',false);
+            }
+            else {
+                $('.telhint').prop('hidden',true);
+            }
+
+            if (!$(':input[name="email"]').val().match(emailregex) && $(':input[name="email"]').val() != ""){
+                $('.emailhint').prop('hidden',false);
+            }
+            else {
+                $('.emailhint').prop('hidden',true);
+            }
+
+            if (!$(':input[name="backupemail"]').val().match(emailregex) && $(':input[name="backupemail"]').val() != ""){
+                $('.backupemailhint').prop('hidden',false);
+            }
+            else {
+                $('.backupemailhint').prop('hidden',true);
+            }
 
             if (acot && pass && mail && name && tel && add) {
                 $(':input[type="submit"]').prop('disabled', false);
@@ -125,5 +183,48 @@
                 return new Date().toJSON().split('T')[0];
             });
         })
+    </script>
+    <script>
+        function previewImage(file) {
+            var galleryId = "gallery";
+
+            var gallery = document.getElementById(galleryId);
+            var imageType = /image.*/;
+
+            if (!file.type.match(imageType)) {
+                throw "File Type must be an image";
+            }
+
+            // var thumb = document.createElement("div");
+            // thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+
+            var img = document.createElement("img");
+            img.file = file;
+            _gw = parseInt($("#gallery").css("width"));
+            img.width = _gw;
+            _img = new Image();
+            var _URL = window.URL || window.webkitURL;
+            _img.src = _URL.createObjectURL(file);
+            _img.onload = function () {
+                var n = this.height * (_gw / this.width);
+                $("#gallery").attr("height" ,_gw);
+                img.attr("height" ,_gw)
+            };
+
+            $(gallery).empty();
+            // thumb.appendChild(img);
+            // gallery.appendChild(thumb);
+            gallery.appendChild(img);
+
+            // Using FileReader to display the image content
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+            reader.readAsDataURL(file);
+        }
+
+        var uploadfiles = document.querySelector('#fileinput');
+        uploadfiles.addEventListener('change', function () {
+            previewImage(this.files[0]);
+        }, false);
     </script>
 </html>

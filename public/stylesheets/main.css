@@ -407,13 +407,14 @@ div.avatar {
     border-radius: 50%;
     margin-top: 4px;
     margin-right: 1em;
+    overflow: hidden;
+    box-shadow:0px 0px 3px 0px #000;
 }
 
 div.avatar img{
     margin: 0 auto;
     float:none;
     display:block;
-    clip-path: circle(50% at 50% 50%);
     box-shadow: none;
 }
 
@@ -577,8 +578,4 @@ div.thumbimg {
     height : 100px;
     overflow: hidden;
     margin-bottom: 0.5em;
-}
-
-div.thumbnail:not(:nth-child(4)){
-    margin-right: 40px; 
 }

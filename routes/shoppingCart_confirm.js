@@ -15,9 +15,15 @@ router.post('/', function(req, res, next) {
         data:data,
         memno:req.session.user
     }
-    order.add(newData).then(d => {
-        res.redirect('back');  //傳至成功頁面
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        req.session.shoppingCart = []
+        order.add(newData).then(d => {
+            res.redirect('back');  //傳至成功頁面
+        })
+    }
+    else {
+        res.render('login_form', {message:'請先登入以下訂單'});
+    }
 });
 
 module.exports = router;

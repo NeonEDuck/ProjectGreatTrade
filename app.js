@@ -30,7 +30,6 @@ var order_update = require('./routes/order_update');
 var buyer_list = require('./routes/buyer_list');
 var seller_list = require('./routes/seller_list');
 var order_show_form = require('./routes/order_show');
-//------------------------------------------------------------
 
 var login_form = require('./routes/login_form');
 var login = require('./routes/login');
@@ -39,13 +38,18 @@ var login_show = require('./routes/login_show');
 var register = require('./routes/register');
 var register_form = require('./routes/register_form');
 var checkAuth = require('./routes/checkAuth');
+
 var member_edit_form = require('./routes/member_edit_form');
 var member_edit = require('./routes/member_edit');
 var member_report = require('./routes/member_report');
+var member_report_add = require('./routes/member_report_add');
 var member_one = require('./routes/member_one');
+
 var feedback = require('./routes/feedback')
 var feedback_add = require('./routes/feedback_add')
+var terms_and_privacy = require('./routes/terms_and_privacy')
 //var shoppingCart = require('./routes/shoppingCart');
+//------------------------------------------------------------
 
 var app = express();
 
@@ -55,7 +59,6 @@ app.set('view engine', 'ejs');
 var session = require('express-session');
 app.use(session({secret: 'MinecraftBruhMoment', cookie: { maxAge: 60*60*1000 },saveUninitialized: false,resave: false}));
 app.use(function(req, res, next) {
-  req.session.shoppingCart = ['P0000001','P0000002','P0000004','P0000024']
   res.locals.user = req.session.user;
   res.locals.username = req.session.username;
   res.locals.userpic = req.session.userpic;
@@ -100,10 +103,11 @@ app.use('/order/show/form', order_show_form);
 app.use('/member/edit/form', member_edit_form);
 app.use('/member/edit', member_edit);
 app.use('/member/report', member_report);
+app.use('/member/report/add', member_report_add);
 app.use('/member', member_one);
 app.use('/feedback', feedback);
 app.use('/feedback/add', feedback_add);
-//app.use('/shopping_cart', shoppingCart);
+app.use('/terms_and_privacy', terms_and_privacy);
 app.use(express.static('public/picture'));
 
 // catch 404 and forward to error handler

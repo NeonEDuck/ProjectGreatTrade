@@ -58,13 +58,23 @@ router.post('/', upload.single('picture'), function(req, res, next) {
         payno:payno
     } 
     
-    member.edit(newData).then(d => {
-        if (d>=0){
-            res.redirect('/member/?user='+memno)
-        }else{
-            res.render('editFail');     //導向錯誤頁面
-        }  
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        if (req.session.user == memno){
+            member.edit(newData).then(d => {
+                if (d>=0){
+                    res.redirect('/member/?user='+memno)
+                }else{
+                    res.render('editFail');     //導向錯誤頁面
+                }  
+            })
+        }
+        else {
+            res.render('unAuth');
+        }
+    }
+    else {
+        res.render('login_form', {message:'請先登入以修改此商品'});
+    }
 });
 
 module.exports = router; 

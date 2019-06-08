@@ -32,6 +32,9 @@
                 margin: 0 auto;
                 display: block
             }
+            a:not(:nth-child(4)) .thumbnail{
+                margin-right: 40px; 
+            }
         </style>
     </head>
 
@@ -70,13 +73,15 @@
                     <p>
                         <div class = "thumbnails">
                             <% for(var i=0; i<item.hot.length; i++) {%>
-                                <div class = "thumbnail">
-                                    <div class="thumbimg">
-                                        <img src = "<%= item.hot[i].picture %>">
+                                <a href="/product/<%= item.hot[i].prono %>">
+                                    <div class = "thumbnail">
+                                        <div class="thumbimg">
+                                            <img src = "<%= item.hot[i].picture %>">
+                                        </div>
+                                        <h1><%= item.hot[i].proname %></h1>
+                                        <p><%= item.hot[i].description %></p>
                                     </div>
-                                    <h1><%= item.hot[i].proname %></h1>
-                                    <p><%= item.hot[i].description %></p>
-                                </div>
+                                </a>
                             <% } %>
                         </div>
                     </p>
@@ -90,13 +95,15 @@
                     <p>
                         <div class = "thumbnails">
                             <% for(var i=0; i<item.new.length; i++) {%>
-                                <div class = "thumbnail">
-                                    <div class="thumbimg">
-                                        <img src = "<%= item.new[i].picture %>">
+                                <a href="/product/<%= item.new[i].prono %>">
+                                    <div class = "thumbnail">
+                                        <div class="thumbimg">
+                                            <img src = "<%= item.new[i].picture %>">
+                                        </div>
+                                        <h1><%= item.new[i].proname %></h1>
+                                        <p><%= item.new[i].description %></p>
                                     </div>
-                                    <h1><%= item.new[i].proname %></h1>
-                                    <p><%= item.new[i].description %></p>
-                                </div>
+                                </a>
                             <% } %>
                         </div>
                     </p>

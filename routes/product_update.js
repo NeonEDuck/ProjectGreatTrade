@@ -36,7 +36,7 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var amt = Number(req.body.amt);
     var description = req.body.description;
     var picture;
-    var lblno = req.body.lblno;
+    var lblno = Array.isArray(req.body.lblno)?req.body.lblno:[req.body.lblno];
 
     if (req.body.picture != 'images/no_pic.jpg'){
         picture = req.body.picture.replace('picture/','');
@@ -56,13 +56,23 @@ router.post('/', upload.single('picture'), function(req, res, next) {
         lblno:lblno
     } 
     
-    product.edit(newData).then(d => {
-        if (d>=0){
-            res.render('editSuccess', {results:d});  //傳至成功頁面
-        }else{
-            res.render('editFail');     //導向錯誤頁面
-        }  
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        if (req.session.user == req.body.memno){
+            product.edit(newData).then(d => {
+                if (d>=0){
+                    res.redirect('/product/'+prono);  //傳至成功頁面
+                }else{
+                    res.render('editFail');     //導向錯誤頁面
+                }  
+            })
+        }
+        else {
+            res.render('unAuth');
+        }
+    }
+    else {
+        res.render('login_form', {message:'請先登入以修改此商品'});
+    }
 });
 
 module.exports = router;

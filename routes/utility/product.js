@@ -32,7 +32,9 @@ var add = async function(newData){
     var prono;
     var list = [];
 
-    await sql('INSERT INTO product (proname, amt, price, description, picture) VALUES ($1, $2, $3, $4, $5) RETURNING prono', [newData.proname, newData.amt, newData.price, newData.description, newData.picture])
+    console.log(newData)
+
+    await sql('INSERT INTO product (proname, amt, price, description, picture, memno) VALUES ($1, $2, $3, $4, $5, $6) RETURNING prono', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.memno])
         .then((data) => {
             prono = data.rows[0].prono;
             result = 0;  
@@ -43,6 +45,7 @@ var add = async function(newData){
     for (var i = 0; i < newData.lblno.length; i++) {
         list.push([prono,newData.lblno[i]])
     }
+    console.log(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
 
     if (result == 0) {
         await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
@@ -109,6 +112,16 @@ var one = async function(prono){
                 }    
             }, (error) => {
                 result.label = null;
+            });
+        await sql('SELECT payment.* FROM mempayment JOIN payment ON mempayment.payno=payment.payno JOIN product ON product.memno=mempayment.memno WHERE product.prono = $1', [prono])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    result.payment = data.rows;
+                }else{
+                    result.payment = -1;
+                }    
+            }, (error) => {
+                result.payment = null;
             });
         await sql('SELECT comment.*,member.memname,member.nickname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [prono])
             .then((data) => {

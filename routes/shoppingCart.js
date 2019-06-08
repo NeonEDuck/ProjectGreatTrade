@@ -15,6 +15,8 @@ router.get('/', function(req, res, next) {
             var results = [];
             var product = [];
             for (var i = 0; i < d.length; i++) {
+                var da = new Date(d[i].date);
+                d[i].date = da.getFullYear() + '/' + (da.getMonth()+1) + '/' + da.getDate() + ' ' + da.getHours() + ':' + da.getMinutes() + ':' + da.getSeconds();
                 if (fs.existsSync('./public/picture/' + d[i].picture)) {
                     d[i].picture='picture/' + d[i].picture;
                 }

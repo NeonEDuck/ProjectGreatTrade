@@ -3,9 +3,32 @@ var router = express.Router();
 
 //增加引用函式
 const user = require('./utility/user');
+//---------------------------
+// 引用multer外掛
+//---------------------------
+const multer  = require('multer');
+
+// 宣告上傳存放空間及檔名更改
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/picture');
+    },
+
+    filename: function (req, file, cb) {
+        cb(null, Date.now()+"--"+file.originalname);    
+    }   
+})
+
+// 產生multer的上傳物件
+var maxSize=1024*1024;  //設定最大可接受圖片大小(1M)
+
+var upload = multer({
+    storage:storage
+})
+//---------------------------
 
 //接收POST請求
-router.post('/', function(req, res, next) {
+router.post('/', upload.single('picture'), function(req, res, next) {
     var account = req.body.account
     var memname = req.body.memname;                                
     var nickname = req.body.nickname;
@@ -15,6 +38,11 @@ router.post('/', function(req, res, next) {
     var password = req.body.password;
     var birth = req.body.birth;
     var tel = req.body.tel;
+    var picture = null;
+
+    if (typeof(req.file) != 'undefined'){
+        picture=req.file.filename;   //取得上傳照片名稱
+    }
 
     // 建立一個新資料物件
     var newData={
@@ -26,8 +54,9 @@ router.post('/', function(req, res, next) {
         account:account,
         password:password,
         birth:birth,
-        tel:tel
-    } 
+        tel:tel,
+        picture:picture
+    }
     
     user.add(newData).then(d => {
         if (d==0){

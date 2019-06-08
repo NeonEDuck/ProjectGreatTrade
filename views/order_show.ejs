@@ -51,6 +51,8 @@
                 <span id='variableJSON' hidden>
                     <%= JSON.stringify(items); %>
                 </span>
+                <h1><i class="fa fa-th-list" aria-hidden="true"></i>訂單</h1>
+                <input id="memno" value="<%= user %>" hidden>
                 <div class="tab-form">
                     <div class="tab">
                         <button class="tablinks" onclick="openTab(event, 'buy')">您下的訂單</button>
@@ -60,7 +62,7 @@
                     <div id="buy" class="tabcontent">
                         <% if (items.buy.length>0){ %>
                             <% for(var i=0;i<items.buy.length;i++){ %>
-                                <div class = "section" style="height: auto; position: relative">
+                                <div id="buy<%= items.buy[i][0].ordno %>" class = "section" style="height: auto; position: relative">
                                     <div style="margin-bottom: 0.5em; display: flow-root;">
                                         <div class = "left" style="color:#000">
                                             <span>訂單編號: <%= items.buy[i][0].ordno %></span>
@@ -69,11 +71,14 @@
                                             <br/>
                                             <span>下單日期: <%= items.buy[i][0].orddate %></span>
                                             <br/>
-                                            <span>備註: <%= items.buy[i][0].request %></span>
+                                            <div>
+                                                <span style="float: left;">備註:</span>
+                                                <textarea placeholder="無備註" textarea rows="2" readonly style = "width:19em; font-size: 16px; line-height: 30px"><%= items.buy[i][0].request %></textarea>
+                                            </div>
                                         </div>
-                                        <a href="#">
-                                            <div class = "avatar" style="float: right; text-align: center;line-height: 1.5em">
-                                                <img src = "/<%= items.buy[i][0].picture %>" height="100%">
+                                        <a href="/member?user=<%= items.buy[i][0].promemno %>">
+                                            <div class = "avatar" style="overflow: inherit;float: right; text-align: center;line-height: 1.5em">
+                                                <img src = "/<%= items.buy[i][0].picture %>" height="100%" style="clip-path: circle(50% at 50% 50%);">
                                                 <span>賣家</span>
                                                 <br>
                                                 <span><%= items.buy[i][0].nickname %></span>
@@ -115,11 +120,11 @@
                                         </div>
                                     <% } %>
                                     <% if(items.buy[i][0].stat=='N' || items.buy[i][0].stat=='A' || items.buy[i][0].stat=='M'){ %>
-                                        <div id="buy<%= items.buy[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                        <div class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
                                             <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="取消訂單">
                                         </div>
                                     <% }else if(items.buy[i][0].stat=='D'){ %>
-                                        <div id="buy<%= items.buy[i][0].ordno %>" class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
+                                        <div class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
                                             <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="刪除訂單">
                                         </div>
                                     <% } %>
@@ -144,11 +149,14 @@
                                             <br/>
                                             <span>下單日期: <%= items.sell[i][0].orddate %></span>
                                             <br/>
-                                            <span>備註: <%= items.sell[i][0].request %></span>
+                                            <div>
+                                                <span style="float: left;">備註:</span>
+                                                <textarea placeholder="無備註" textarea rows="2" readonly style = "width:19em; font-size: 16px; line-height: 30px"><%= items.sell[i][0].request %></textarea>
+                                            </div>
                                         </div>
-                                        <a href="#">
-                                            <div class = "avatar" style="float: right; text-align: center;line-height: 1.5em">
-                                                <img src = "/<%= items.buy[i][0].picture %>" height="100%">
+                                        <a href="/member?user=<%= items.sell[i][0].memno %>">
+                                            <div class = "avatar" style="overflow: inherit;float: right; text-align: center;line-height: 1.5em">
+                                                <img src = "/<%= items.sell[i][0].picture %>" height="100%" style="clip-path: circle(50% at 50% 50%);">
                                                 <span>購買者</span>
                                                 <br>
                                                 <span><%= items.sell[i][0].nickname %></span>
@@ -203,7 +211,7 @@
                             <% } %>
                         <% }else{ %>
                             <h3>尚未有任何訂單</h3>
-                            <p>何不去逛逛有什麼你想買的呢?</p>
+                            <p>何不去去多多推廣你的商品呢?</p>
                         <% } %>
                     </div>
                 </div>
@@ -244,13 +252,13 @@
                         break;
                 }
                 var section = $(this).parent().parent().parent().parent();
-                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: stat});
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: stat, memno:$('#memno').val()});
             }
         });
         $('.button').click(function(){
             if ($(this).hasClass("delete") && confirm("確定要" + $(this).val().slice(0,2) + "?")) {
                 var section =$(this).parent().parent();
-                $.post('/order/remove', {ordno: section.attr("id").slice(3)});
+                $.post('/order/remove', {ordno: section.attr("id").slice(3), memno:$('#memno').val()});
                 section.children().remove();
                 section.append('<h1>訂單已' + $(this).val().slice(0,2) + '<h1>');
                 section.css("height","auto");
@@ -258,7 +266,7 @@
             }
             if ($(this).hasClass("accept") && confirm("確定要接受?")) {
                 var section =$(this).parent().parent();
-                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "A"});
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "A",memno:$('#memno').val()});
                 section.children().children().children(".progress-bar").each(function(){
                     $(this).children("li:first").stop().animate({backgroundColor: "#41b883"},{duration:400});
                     $(this).children("li:nth-child(2)").stop().animate({backgroundColor: "#41b883"},{duration:400});
@@ -273,7 +281,7 @@
             }
             if ($(this).hasClass("deny") && confirm("確定要拒絕?")) {
                 var section =$(this).parent().parent();
-                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "D"});
+                $.post('/order/update', {ordno: section.attr("id").slice(3),stat: "D",memno:$('#memno').val()});
                 section.children().remove();
                 section.append('<h1>訂單已拒絕<h1>');
                 section.css("height","auto");

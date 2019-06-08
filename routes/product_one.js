@@ -17,7 +17,8 @@ router.get('/:prono', function(req, res, next) {
         }else if(data==-1){
             res.render('notFound');  //導向找不到頁面                
         }else{
-            data.inventorydate=moment(data.inventorydate).format("YYYY-MM-DD");
+            var d = new Date(data.date);
+            data.date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             if (fs.existsSync('./public/picture/' + data.picture)) {
                 data.picture='picture/' + data.picture;
             }

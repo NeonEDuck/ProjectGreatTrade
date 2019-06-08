@@ -28,8 +28,9 @@ var login = async function(account, password){
 
 var add = async function(newData){   
     var result;
+    console.log(newData)
     //取得員工資料
-    await sql('INSERT INTO member (memname, nickname, birth, email, backupemail, sex, account, "password", tel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [newData.memname, newData.nickname, newData.birth, newData.email, newData.backupemail, newData.sex, newData.account, newData.password, newData.tel])
+    await sql('INSERT INTO member (memname, nickname, birth, email, backupemail, sex, account, "password", tel, picture) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [newData.memname, newData.nickname, newData.birth, newData.email, newData.backupemail, newData.sex, newData.account, newData.password, newData.tel, newData.picture])
         .then((data) => {
             result = 0;  
         }, (error) => {

@@ -13,9 +13,19 @@ router.post('/', function(req, res, next) {
         ordno:ordno,
         stat:stat
     }
-    order.update(newData).then(d => {
-        console.log(d)
-    })
+    if (req.session.user != null && req.session.user != undefined){
+        if (req.session.user == req.body.memno){
+            order.update(newData).then(d => {
+                console.log(d)
+            })
+        }
+        else {
+            res.render('unAuth');
+        }
+    }
+    else {
+        res.render('login_form', {message:'請先登入以檢視您的訂單'});
+    }
 });
 
 module.exports = router;
