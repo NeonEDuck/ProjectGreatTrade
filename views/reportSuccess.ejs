@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('public/head'); -%>  
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <h2>檢舉理由已傳送，我們將會盡快處理!</h2>
+            </div>
+
+            <%- include('public/footer'); -%>
+        </div>
+    </body>
+    <script>
+        setTimeout(function () {
+            // after 2 seconds
+            window.location = "/";
+        }, 2000)
+    </script>
+</html>

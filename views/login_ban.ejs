@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('public/head'); -%>   
+    </head>
+
+    <body>
+        <div class = "container">
+            <%- include('public/header'); -%>
+
+            <%- include('public/navbar'); -%>
+
+            <div class = "content">
+                <h2>此帳號被禁止使用直到<%= time %></h2>
+            </div>
+
+            <%- include('public/footer'); -%>
+        </div>
+    </body>
+</html>
