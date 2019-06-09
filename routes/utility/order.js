@@ -45,14 +45,14 @@ var remove = async function(ordno){
 var list = async function(memno){
     var result = {buy:null,sell:null};
 	
-    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON product.memno=member.memno WHERE ordmaster.memno=$1 ORDER BY ordno', [memno])
+    await sql('SELECT product.*, product.memno AS promemno, product.picture AS propicture, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON product.memno=member.memno WHERE ordmaster.memno=$1 ORDER BY ordno', [memno])
         .then((data) => {
             result.buy = data.rows;
         }, (error) => {
             result = null;
         });
 
-    await sql('SELECT product.*, product.memno AS promemno, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON ordmaster.memno=member.memno WHERE product.memno=$1 AND ordmaster.stat<>\'D\' ORDER BY ordno', [memno])
+    await sql('SELECT product.*, product.memno AS promemno, product.picture AS propicture, member.*, ordmaster.*, orddetails.amt FROM ordmaster JOIN orddetails ON ordmaster.ordno = orddetails.ordno JOIN product ON orddetails.prono = product.prono JOIN member ON ordmaster.memno=member.memno WHERE product.memno=$1 AND ordmaster.stat<>\'D\' AND ordmaster.stat<>\'S\' ORDER BY ordno', [memno])
         .then((data) => {            
             result.sell = data.rows;  
         }, (error) => {

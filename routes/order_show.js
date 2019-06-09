@@ -28,33 +28,37 @@ router.get('/', function(req, res, next) {
                         else {
                             data.buy[i][j].picture='images/no_avatar.jpg';
                         }
+                        if (fs.existsSync('./public/picture/' + data.buy[i][j].propicture)) {
+                            data.buy[i][j].propicture='picture/' + data.buy[i][j].propicture;
+                        }
+                        else {
+                            data.buy[i][j].propicture='images/no_avatar.jpg';
+                        }
                     }
                 }
-                var _sell = [] 
                 for (var i = 0; i < data.sell.length; i++) {
-                    if (data.sell[i][0].stat == 'S') {
-                        continue
+                    var d = new Date(data.sell[i][0].orddate);
+                    data.sell[i][0].orddate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                    if (data.sell[i][0].nickname.length > 3) {
+                        data.sell[i][0].nickname = data.sell[i][0].nickname.slice(0,3) + "..";
                     }
-                    else {
-                        var d = new Date(data.sell[i][0].orddate);
-                        data.sell[i][0].orddate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                        if (data.sell[i][0].nickname.length > 3) {
-                            data.sell[i][0].nickname = data.sell[i][0].nickname.slice(0,3) + "..";
+                    for (j = 0; j < data.sell[i].length; j++) {
+                        var d = new Date(data.sell[i][j].date);
+                        data.sell[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                        if (fs.existsSync('./public/picture/' + data.sell[i][j].picture)) {
+                            data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
                         }
-                        for (j = 0; j < data.sell[i].length; j++) {
-                            var d = new Date(data.sell[i][j].date);
-                            data.sell[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                            if (fs.existsSync('./public/picture/' + data.sell[i][j].picture)) {
-                                data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
-                            }
-                            else {
-                                data.sell[i][j].picture='images/no_avatar.jpg';
-                            }
+                        else {
+                            data.sell[i][j].picture='images/no_avatar.jpg';
                         }
-                        _sell.push(data.sell[i])
+                        if (fs.existsSync('./public/picture/' + data.sell[i][j].propicture)) {
+                            data.sell[i][j].propicture='picture/' + data.sell[i][j].propicture;
+                        }
+                        else {
+                            data.sell[i][j].propicture='images/no_avatar.jpg';
+                        }
                     }
                 }
-                data.sell=_sell
                 res.render('order_show', {items:data});  //將資料傳給顯示頁面
             }
         })
