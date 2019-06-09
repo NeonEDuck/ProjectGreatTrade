@@ -37,7 +37,10 @@
                             <div id = "<%= i %>" class = "section" style="height: auto">
                                 <h2>賣家: <%= items[i][0].nickname %></h2>
                                 <% for(var j=0; j<items[i].length; j++) {%>
-                                    <div>
+                                    <form class="product" action = "/shoppingCart/remove" method = "post">
+                                        <input name="prono" value="<%= items[i][j].prono %>" hidden>
+                                    </form>
+                                    <div class="prono">
                                         <div class = "amt" id="<%= items[i][j].prono %>" style="position: absolute">
                                             <input type="number" name="amt" style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: calc(820px - 80px - 1em);" value="1" min="1" max="<%= items[i][j].amt %>">
                                         </div>
@@ -172,6 +175,9 @@
         $('.remove').click(function(){
             if (confirm("確定要刪除?")) {
                 removed.push(parseInt($(this).parent().parent().attr('id')))
+                $(this).parent().parent().children('form.product').each(function(){
+                    $(this).submit()
+                })
                 $(this).parent().parent().remove();
                 dataChange();
                 if ($(':input[type=radio]').length <= 0) {

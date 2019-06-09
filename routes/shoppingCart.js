@@ -6,6 +6,8 @@ const fs = require('fs')
 
 //接收GET請求
 router.get('/', function(req, res, next) {
+    
+    console.log(req.session.shoppingCart);
     shoppingCart.one(req.session.shoppingCart).then(d => {
         if (d == null){
             res.render('error');
