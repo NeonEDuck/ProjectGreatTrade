@@ -9,14 +9,21 @@ const product = require('./utility/product');
 //接收GET請求
 router.post('/', function(req, res, next) {
     var prono = req.body.prono;   //取出參數
+    var memno = req.session.user;
     var list = [];
+
+    var newData = {
+        prono:prono,
+        memno:memno
+    }
     
     product.getDropdownData().then(d => {
         list=d.label;
     })
 
     if (req.session.user != null && req.session.user != undefined){
-        product.one(prono).then(data => {
+        product.one(newData).then(data => {
+            console.log(data)
             if (req.session.user == data.memno){
                 if (data==null){
                     res.render('error');  //導向錯誤頁面

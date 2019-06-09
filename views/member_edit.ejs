@@ -6,6 +6,11 @@
             .tag:hover {
                 cursor: pointer;
             }
+            #gallery{
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
         </style>
     </head>
 
@@ -16,15 +21,20 @@
             <%- include('public/navbar'); -%>
 
             <div class = "content">
-                <form action = "/member/edit" method = "post">
+                <form action = "/member/edit" enctype="multipart/form-data" method = "post">
                     <h1><i class="fa fa-edit" aria-hidden="true"></i>編輯會員</h1>
                     <div class = "data" style="padding:20px 20px 0 20px; margin:0">
                         <div class = "inline-block">
                             <div class = "left" style="margin-right:6em">
-                                <div class = "avatar" style="height:10em;width:10em;margin-right:3em">
-                                    <img src = "/<%= items.picture %>" height="100%">
+                                <div class="left" style="width: 200px;">
+                                    <span class="value"><input type="hidden" name="picture" value="<%= items.picture %>"></span>
+                                    <div class="avatar" style="height:10em;width:10em;margin-right:3em">
+                                        <div id="gallery"><img id="preview" src='/<%= items.picture %>' width="100%"></div>
+                                    </div>
+                                    <span class="value"><input type="file" name="picture" id = "fileinput" accept = "image/*" value = "<%= items.picture %>" style = "display: none;" /></span>
+                                    <input type="button" class="button" style = "width:150px; margin: 0.5em 0 0 10px;" value = "選擇圖片" onclick = "document.getElementById('fileinput').click();" />
                                 </div>
-                                <div class="left">
+                                <div class="right">
                                     <div class = "item">
                                         <span style = "font-size: 30px; font-weight: 800;"><%= items.memno %></span>
                                     </div>
@@ -112,6 +122,7 @@
     <script src = "/scripts/jquery/dist/jquery.min.js"></script>
 
     <script>
+        var img = document.getElementById(preview);
         var variableJSON = JSON.parse($('#variableJSON').text());
         $("#variableJSON").remove();
         $(window).on('load',function(){
@@ -119,5 +130,48 @@
                 $("input[value="+variableJSON[i].payno+"]").attr("checked","checked")
             }
         })
+    </script>
+    <script>
+        function previewImage(file) {
+            var galleryId = "gallery";
+
+            var gallery = document.getElementById(galleryId);
+            var imageType = /image.*/;
+
+            if (!file.type.match(imageType)) {
+                throw "File Type must be an image";
+            }
+
+            // var thumb = document.createElement("div");
+            // thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+
+            var img = document.createElement("img");
+            img.file = file;
+            _gw = parseInt($("#gallery").css("width"));
+            img.width = _gw;
+            _img = new Image();
+            var _URL = window.URL || window.webkitURL;
+            _img.src = _URL.createObjectURL(file);
+            _img.onload = function () {
+                var n = this.height * (_gw / this.width);
+                $("#gallery").attr("height" ,_gw);
+                img.attr("height" ,_gw)
+            };
+
+            $(gallery).empty();
+            // thumb.appendChild(img);
+            // gallery.appendChild(thumb);
+            gallery.appendChild(img);
+
+            // Using FileReader to display the image content
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+            reader.readAsDataURL(file);
+        }
+
+        var uploadfiles = document.querySelector('#fileinput');
+        uploadfiles.addEventListener('change', function () {
+            previewImage(this.files[0]);
+        }, false);
     </script>
 </html>

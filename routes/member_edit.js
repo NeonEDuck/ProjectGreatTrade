@@ -42,6 +42,12 @@ router.post('/', upload.single('picture'), function(req, res, next) {
     var address = req.body.address;
     var payno = req.body.payno;
 
+    if (req.body.picture != undefined && req.body.picture != 'images/no_pic.jpg'){
+        picture = req.body.picture.replace('picture/','');
+    }
+    if (typeof(req.file) != 'undefined'){
+        picture = req.file.filename;   //取得上傳照片名稱
+    }
 
     // 建立一個新資料物件
     var newData={

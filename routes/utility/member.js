@@ -54,7 +54,7 @@ var edit = async function(newData){
     var results;
     var list = [];
     console.log(newData)
-    await sql('UPDATE member SET memname=$1, nickname=$2, sex=$3, email=$4, backupemail=$5, tel=$6, address=$7, birth=$8 WHERE memno = $9', [newData.memname, newData.nickname, newData.sex, newData.email, newData.backupemail, newData.tel, newData.address, newData.birth, newData.memno])
+    await sql('UPDATE member SET memname=$1, nickname=$2, sex=$3, email=$4, backupemail=$5, tel=$6, address=$7, birth=$8, picture=$9 WHERE memno = $10', [newData.memname, newData.nickname, newData.sex, newData.email, newData.backupemail, newData.tel, newData.address, newData.birth, newData.picture, newData.memno])
         .then((data) => {
             results = data.rowCount;  
         }, (error) => {
