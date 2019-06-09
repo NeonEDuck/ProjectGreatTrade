@@ -41,13 +41,14 @@ var add = async function(newData){
         }, (error) => {
             result = -1;
         });
-        
-    for (var i = 0; i < newData.lblno.length; i++) {
-        list.push([prono,newData.lblno[i]])
-    }
-    console.log(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
+    
 
-    if (result == 0 && list.length > 0 && list != [[null]]) {
+
+    if (result == 0 && newData.lblno[0] != null && newData.lblno[0] != undefined) {
+        for (var i = 0; i < newData.lblno.length; i++) {
+            list.push([prono,newData.lblno[i]])
+        }
+        console.log(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
         await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
             .then((data) => {
                 result = 0;  
