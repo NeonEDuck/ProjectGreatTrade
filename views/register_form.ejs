@@ -131,13 +131,13 @@
     <script src = "/scripts/jquery/dist/jquery.min.js"></script>
     <script>
         $(':input').keyup(function(){
-            var telregex = /^[a-zA-Z]+$/;
+            var telregex = /\d/g;
             var emailregex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
             var acot = $(':input[name="account"]').val() != "";
             var pass = $(':input[name="password"]').val() != "" && $(':input[name="password"]').val() == $(':input[name="password2"]').val();
             var mail = $(':input[name="email"]').val() != "" && $(':input[name="email"]').val().match(emailregex) && ($(':input[name="backupemail"]').val().match(emailregex) || $(':input[name="backupemail"]').val().trim() == '');
             var name = $(':input[name="memname"]').val() != "";
-            var tel = $(':input[name="tel"]').val().length == 10 && $(':input[name="tel"]').val().match(telregex);
+            var tel = $(':input[name="tel"]').val().match(/\d/g).length===10;
             var add = $(':input[name="address"]').val() != "";
             if ($(':input[name="password"]').val() != $(':input[name="password2"]').val() && $(':input[name="password"]').val() != "" && $(':input[name="password2"]').val() != ""){
                 $('.passhint').prop('hidden',false);
@@ -166,6 +166,7 @@
             else {
                 $('.backupemailhint').prop('hidden',true);
             }
+            console.log({acot:acot,pass:pass,mail:mail,name:name,tel:tel,add:add})
 
             if (acot && pass && mail && name && tel && add) {
                 $(':input[type="submit"]').prop('disabled', false);
