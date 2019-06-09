@@ -36,7 +36,7 @@ var one = async function(memno){
             }, (error) => {
                 result.payment = null;
             });
-        await sql('SELECT product.* FROM product JOIN member ON member.memno=product.memno WHERE member.memno = $1 ORDER BY "like" LIMIT 4', [memno])
+        await sql('SELECT * FROM product WHERE memno = $1 ORDER BY prono DESC LIMIT 3', [memno])
             .then((data) => {
                 result.product = data.rows;
             }, (error) => {
