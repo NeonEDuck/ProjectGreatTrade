@@ -47,7 +47,7 @@ var add = async function(newData){
     }
     console.log(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
 
-    if (result == 0 && list.length > 0) {
+    if (result == 0 && list.length > 0 && list != [[null]]) {
         await sql(format('INSERT INTO prolabel (prono, lblno) VALUES %L', list))
             .then((data) => {
                 result = 0;  
