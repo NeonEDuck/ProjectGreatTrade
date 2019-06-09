@@ -40,6 +40,9 @@
                                     <% }else{ %>
                                         <span style = "font-size: 30px"><%= items.memname %>(<%= items.nickname %>)</span>
                                     <% } %>
+                                    <% if(items.dueto > Date.now()){ %>
+                                        <span style = "font-size: 30px">(此帳號被禁止使用直到<%= items.duetof %>)</span>
+                                    <% } %>
                                 </div>
                             </div>
                             <div style="margin-top:11em">

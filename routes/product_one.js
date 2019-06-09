@@ -25,6 +25,8 @@ router.get('/:prono', function(req, res, next) {
         }else{
             var d = new Date(data.date);
             data.date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            var d2 = new Date(data.member.dueto);
+            data.member.duetof = d.getFullYear() + '/' + (d2.getMonth()+1) + '/' + d2.getDate();
             if (fs.existsSync('./public/picture/' + data.picture)) {
                 data.picture='picture/' + data.picture;
             }

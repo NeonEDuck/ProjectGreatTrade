@@ -114,6 +114,9 @@
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>
                             <div class="value update"><input class="button" type="submit" value="修改"></div>
                         </form>
+                    <% }else if (item.member.dueto > Date.now()){ %>
+                            <div class="value update"><span>此帳號被禁止使用直到<%= item.member.duetof %></span></div>
+                            <div class="value update"><span>造成您的不便還請見諒</span></div>
                     <% }else if (shoppingCart===null || shoppingCart===undefined || !shoppingCart.includes(item.prono)){ %>
                         <form action = "/shoppingCart/add" method = "post">
                             <span class="value"><input type="hidden" name="prono" value="<%= item.prono %>"></span>

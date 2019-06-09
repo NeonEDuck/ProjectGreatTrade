@@ -108,7 +108,7 @@ var one = async function(newData){
             }, (error) => {
                 result.likes = null;
             });
-        await sql('SELECT member.memname,member.nickname,member.picture FROM product JOIN member ON product.memno = member.memno WHERE prono = $1', [newData.prono])
+        await sql('SELECT member.memname,member.nickname,member.picture,member.dueto FROM product JOIN member ON product.memno = member.memno WHERE prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.member = data.rows[0];

@@ -8,19 +8,33 @@ var format = require('pg-format');
 // 使用者登入
 //---------------------------------------------
 var login = async function(account, password){   
-    var result;
-
+    var result = {};
+    var exist;
     //取得員工資料
-    await sql('SELECT * FROM member WHERE account=$1 and password=$2', [account, password])
+    await sql('SELECT * FROM member WHERE account=$1', [account])
         .then((data) => {
             if(data.rows.length > 0){
-                result = data.rows[0];
+                exist = 1;
             }else{
-                result = null;
+               exist = 0;
             } 
         }, (error) => {
-            result = null;
+            exist = 0;
         });
+
+    if (exist == 1) {
+        await sql('SELECT * FROM member WHERE account=$1 and password=$2', [account, password])
+            .then((data) => {
+                if(data.rows.length > 0){
+                    result = data.rows[0];
+                    result.exist = 1;
+                }else{
+                    result.exist = 1;
+                } 
+            }, (error) => {
+                result.exist = 1;
+            });
+    }
     
     //回傳物件
     return result;
