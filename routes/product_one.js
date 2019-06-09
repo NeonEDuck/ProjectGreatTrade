@@ -9,8 +9,14 @@ const product = require('./utility/product');
 //接收GET請求
 router.get('/:prono', function(req, res, next) {
     var prono = req.params.prono;   //取出參數
+    var memno = req.session.user;
 
-    product.one(prono).then(data => {
+    newData = {
+        prono:prono,
+        memno:memno
+    }
+
+    product.one(newData).then(data => {
         console.log(data);
         if (data==null){
             res.render('error');  //導向錯誤頁面

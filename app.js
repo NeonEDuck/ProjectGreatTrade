@@ -14,6 +14,8 @@ var product_one = require('./routes/product_one');
 var product_update_form = require('./routes/product_update_form');
 var product_update = require('./routes/product_update');
 var product_remove = require('./routes/product_remove');
+var like_add = require('./routes/like_add');
+var like_remove = require('./routes/like_remove');
 
 var comment_add = require('./routes/comment_add');
 var reply_add = require('./routes/reply_add');
@@ -81,6 +83,8 @@ app.use('/product/edit/form', product_update_form);
 app.use('/product/edit', product_update);
 app.use('/product/remove', product_remove);
 app.use('/product/', product_one);
+app.use('/like/add', like_add);
+app.use('/like/remove', like_remove);
 app.use('/comment', comment_add);
 app.use('/reply', reply_add);
 app.use('/shoppingCart/add', shoppingCart_add);

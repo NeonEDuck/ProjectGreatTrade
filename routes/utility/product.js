@@ -79,10 +79,10 @@ var list = async function(){
 //------------------------------------------
 //執行資料庫動作的函式-取出單一商品
 //------------------------------------------
-var one = async function(prono){
+var one = async function(newData){
     var result={};
     
-    await sql('SELECT * FROM product WHERE prono = $1', [prono])
+    await sql('SELECT * FROM product WHERE prono = $1', [newData.prono])
         .then((data) => {
             if(data.rows.length > 0){
                 result = data.rows[0];
@@ -93,7 +93,21 @@ var one = async function(prono){
             result = null;
         });
     if (result!=null && result!=-1){
-        await sql('SELECT member.memname,member.nickname,member.picture FROM product JOIN member ON product.memno = member.memno WHERE prono = $1', [prono])
+        result.likes = 0;
+        sql('SELECT count(*) FROM likes WHERE prono = $1', [newData.prono])
+            .then((data) => {
+                result.likes = data.rows[0].count;
+                result.likesyes = '0';
+                sql('SELECT count(*) FROM likes WHERE prono = $1 AND memno = $2', [newData.prono, newData.memno])
+                    .then((data) => {
+                        result.likesyes = data.rows[0].count;
+                    }, (error) => {
+                        result.likesyes = '0';
+                    });
+            }, (error) => {
+                result.likes = null;
+            });
+        await sql('SELECT member.memname,member.nickname,member.picture FROM product JOIN member ON product.memno = member.memno WHERE prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.member = data.rows[0];
@@ -103,7 +117,7 @@ var one = async function(prono){
             }, (error) => {
                 result.member = null;
             });
-        await sql('SELECT label.* FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [prono])
+        await sql('SELECT label.* FROM product JOIN prolabel ON product.prono = prolabel.prono JOIN label ON prolabel.lblno = label.lblno WHERE product.prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.label = data.rows;
@@ -113,7 +127,7 @@ var one = async function(prono){
             }, (error) => {
                 result.label = null;
             });
-        await sql('SELECT payment.* FROM mempayment JOIN payment ON mempayment.payno=payment.payno JOIN product ON product.memno=mempayment.memno WHERE product.prono = $1', [prono])
+        await sql('SELECT payment.* FROM mempayment JOIN payment ON mempayment.payno=payment.payno JOIN product ON product.memno=mempayment.memno WHERE product.prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.payment = data.rows;
@@ -123,7 +137,7 @@ var one = async function(prono){
             }, (error) => {
                 result.payment = null;
             });
-        await sql('SELECT comment.*,member.memname,member.nickname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [prono])
+        await sql('SELECT comment.*,member.memname,member.nickname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.comment = data.rows;
@@ -267,7 +281,7 @@ var indexList = async function(){
     var result={};
     var label;
 	
-    await sql('SELECT * FROM product ORDER BY "like" LIMIT 4')
+    await sql('SELECT * FROM product WHERE prono IN (SELECT prono as likes FROM likes GROUP BY prono ORDER BY SUM(1) DESC LIMIT 4)')
         .then((data) => {            
             result.hot = data.rows;  
         }, (error) => {
@@ -291,5 +305,29 @@ var indexList = async function(){
     return result;
 }
 
+var addLike = async function(newData){
+    var result={};
+    await sql('INSERT INTO likes VALUES ($1, $2)', [newData.prono, newData.memno])
+        .then((data) => {            
+            result = data.rows;
+        }, (error) => {
+            result = -1;
+        });
+
+    return result;
+}
+
+var removeLike = async function(newData){
+    var result={};
+    await sql('DELETE FROM likes WHERE prono=$1 AND memno=$2', [newData.prono, newData.memno])
+        .then((data) => {            
+            result = data.rows;
+        }, (error) => {
+            result = -1;
+        });
+
+    return result;
+}
+
 //匯出
-module.exports = {getDropdownData, add, list, one, page, edit, remove, indexList};
+module.exports = {getDropdownData, add, list, one, page, edit, remove, indexList, addLike, removeLike};

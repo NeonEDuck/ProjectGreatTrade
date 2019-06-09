@@ -2,6 +2,20 @@
 <html>
     <head>
         <%- include('public/head'); -%>
+
+        <style>
+            span.like{
+                color: #444;
+            }
+            .like:hover{
+                background:#66cf9f;
+                color: #ddd;
+                cursor:pointer;
+            }
+            span.click{
+                color: #fff;
+            }
+        </style>
     </head>
 
     <body>
@@ -13,6 +27,7 @@
             <div class = "content">
                 <div class = "data" style="padding:20px 20px 0 20px; margin:0">
                     <div class = "inline-block">
+                        <input id='prono' value="<%= item.prono %>" hidden>
                         <div class = "left">
                             <div id="gallery">
                                 <img id="preview" src='/<%= item.picture %>' width="100%">
@@ -51,6 +66,25 @@
                             <div class = "item">
                                 <span class="name">上架日期: </span>
                                 <span style = "width: 50px"><%= item.date %></span>
+                            </div>
+
+                            <div class = "item">
+                                <% if (user == null || user == undefined){ %>
+                                    <span class="tag" style = "font-size: 20px;color: #444;">
+                                        讚&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;|&nbsp;
+                                        <span id="<%= item.likes %>" class="number"><%= item.likes %></span>
+                                    </span>
+                                <% }else if (item.likesyes == '0'){ %>
+                                    <span class="tag like" style = "font-size: 20px">
+                                        讚&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;|&nbsp;
+                                        <span id="<%= item.likes %>" class="number"><%= item.likes %></span>
+                                    </span>
+                                <% }else{ %>
+                                    <span class="tag like click" style = "font-size: 20px">
+                                        讚&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;|&nbsp;
+                                        <span id="<%= item.likes %>" class="number"><%= item.likes %></span>
+                                    </span>
+                                <% } %>
                             </div>
 
                             <div class = "item">
@@ -193,6 +227,23 @@
     <script>
         var img = document.getElementById(preview);
         $("#gallery").css("height" ,$("#gallery > img").css("height"));
+
+        $(".like").click(function(){
+            if ($(this).hasClass("click")) {
+                $(this).removeClass("click")
+                var n = parseInt($(this).children(".number").attr("id"))
+                console.log($(this).children(".number").attr("id"))
+                $.post('/like/remove', {prono: $("#prono").val()});
+                $(this).children(".number").replaceWith("<span id="+(n-1)+" class=\"number\">"+(n-1)+"</span>")
+            }
+            else {
+                $(this).addClass("click")
+                var n = parseInt($(this).children(".number").attr("id"))
+                console.log($(this).children(".number").attr("id"))
+                $.post('/like/add', {prono: $("#prono").val()});
+                $(this).children(".number").replaceWith("<span id="+(n+1)+" class=\"number\">"+(n+1)+"</span>")
+            }
+        })
         
         
         autosize($('textarea'));
