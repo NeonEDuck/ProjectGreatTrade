@@ -81,7 +81,13 @@
                                                 <img src = "/<%= items.buy[i][0].picture %>" width="100%" style="clip-path: circle(50% at 50% 50%);">
                                                 <span>賣家</span>
                                                 <br>
-                                                <span><%= items.buy[i][0].nickname %></span>
+                                                <span>
+                                                    <% if(items.buy[i][0].nickname != null && items.buy[i][0].nickname != ''){ %>
+                                                        <%= items.buy[i][0].nickname %>
+                                                    <% }else{ %>
+                                                        <%= items.buy[i][0].memname %>
+                                                    <% } %>
+                                                </span>
                                             </div>
                                         </a>
                                         <div style="float: right">
@@ -159,7 +165,13 @@
                                                 <img src = "/<%= items.sell[i][0].picture %>" width="100%" style="clip-path: circle(50% at 50% 50%);">
                                                 <span>購買者</span>
                                                 <br>
-                                                <span><%= items.sell[i][0].nickname %></span>
+                                                <span>
+                                                    <% if(items.sell[i][0].nickname != null && items.sell[i][0].nickname != ''){ %>
+                                                        <%= items.sell[i][0].nickname %>
+                                                    <% }else{ %>
+                                                        <%= items.sell[i][0].memname %>
+                                                    <% } %>
+                                                </span>
                                             </div>
                                         </a>
                                         <div style="float: right">
@@ -181,8 +193,8 @@
                                     </div>
                                     <% for(var j=0; j<items.sell[i].length; j++){ %>
                                         <div>
-                                                <div class = "amt" style="position: absolute;margin-top: 57px;">
-                                                    <span style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: 760px;color: #000">數量x<%= items.sell[i][j].amt %></span>
+                                            <div class = "amt" style="position: absolute;margin-top: 57px;">
+                                                <span style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: 760px;color: #000">數量x<%= items.sell[i][j].amt %></span>
                                             </div>
                                             <a href="/product/<%= items.sell[i][j].prono %>"> 
                                                 <div class = "section">

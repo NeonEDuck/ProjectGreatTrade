@@ -160,7 +160,7 @@
                                     <img src = "/<%= item.comment[i].picture %>" height="100%">
                                 </div>
                                 <h3>
-                                    <% if(item.comment[i].nickname != null){ %>
+                                    <% if(item.comment[i].nickname != null && item.comment[i].nickname != ''){ %>
                                         <%= item.comment[i].nickname %>
                                     <% }else{ %>
                                         <%= item.comment[i].memname %>
@@ -182,7 +182,7 @@
                                     </div>
                                     <h3>
                                         
-                                    <% if(item.member.nickname != null){ %>
+                                    <% if(item.member.nickname != null && item.member.nickname != ''){ %>
                                         <%= item.member.nickname %>
                                     <% }else{ %>
                                         <%= item.member.memname %>
