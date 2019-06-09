@@ -137,7 +137,7 @@
             var pass = $(':input[name="password"]').val() != "" && $(':input[name="password"]').val() == $(':input[name="password2"]').val();
             var mail = $(':input[name="email"]').val() != "" && $(':input[name="email"]').val().match(emailregex) && ($(':input[name="backupemail"]').val().match(emailregex) || $(':input[name="backupemail"]').val().trim() == '');
             var name = $(':input[name="memname"]').val() != "";
-            var tel = $(':input[name="tel"]').val().match(/\d/g).length===10;
+            var tel = $(':input[name="tel"]').val().match(/\d/g) && $(':input[name="tel"]').val().length==10;
             var add = $(':input[name="address"]').val() != "";
             if ($(':input[name="password"]').val() != $(':input[name="password2"]').val() && $(':input[name="password"]').val() != "" && $(':input[name="password2"]').val() != ""){
                 $('.passhint').prop('hidden',false);
