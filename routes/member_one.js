@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
         }else{
             var d = new Date(data.birth);
             data.birth = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate();
-            if (fs.existsSync('./public/picture/' + data.picture)) {
+            if (fs.existsSync('./public/picture/' + data.picture) && data.picture != '' && data.picture != null) {
                 data.picture='picture/' + data.picture;
             }
             else {

@@ -50,9 +50,9 @@ router.post('/', function(req, res, next) {
             if(data==null){
                 res.render('error');  //導向錯誤頁面
             }else if(data == -1){
-                res.render('addFail');  //將資料傳給顯示頁面
+                res.render('reportFail');  //將資料傳給顯示頁面
             }else{
-                res.render('addSuccess');  //導向找不到頁面
+                res.render('reportSuccess');  //導向找不到頁面
             } 
         })
     }

@@ -35,14 +35,14 @@ router.get('/:prono', function(req, res, next) {
                 data.member.picture='picture/' + data.member.picture;
             }
             else {
-                data.member.picture='images/no_pic.jpg';
+                data.member.picture='images/no_avatar.jpg';
             }
             for(var i=0; i < data.comment.length;i++){ 
                 if (fs.existsSync('./public/picture/' + data.comment[i].picture)) {
                     data.comment[i].picture='picture/' + data.comment[i].picture;
                 }
                 else {
-                    data.comment[i].picture='images/no_pic.jpg';
+                    data.comment[i].picture='images/no_avatar.jpg';
                 }
                 if (data.comment[i].cmtdate != null) {
                     var d = new Date(data.comment[i].cmtdate);

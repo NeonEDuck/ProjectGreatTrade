@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
         req.session.shoppingCart = []
         order.add(newData).then(d => {
             if (d == 0) {
-                res.redirect('back');  //傳至成功頁面
+                res.redirect('/order/show/form');  //傳至成功頁面
             }
             else{
                 res.render('addFail');
