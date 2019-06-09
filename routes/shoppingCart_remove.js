@@ -11,14 +11,15 @@ router.post('/', function(req, res, next) {
     var newData={        
         prono:prono
     }
+    console.log(prono);
     if (req.session.shoppingCart === null || req.session.shoppingCart === undefined) {
         req.session.shoppingCart = [];
     }
     if (Array.isArray(prono)) {
-        for (var i = 0; i < prono.length; i++) {
-            if (req.session.shoppingCart.includes(prono[i])) {
+        for (var j = 0; j < prono.length; j++) {
+            if (req.session.shoppingCart.includes(prono[j])) {
                 for (var i = 0; i < req.session.shoppingCart.length; i++) {
-                    if (req.session.shoppingCart[i] == prono[i]) {
+                    if (req.session.shoppingCart[i] == prono[j]) {
                         req.session.shoppingCart.splice(i,1)
                         break;
                     }
