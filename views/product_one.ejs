@@ -156,15 +156,19 @@
                     <% for(var i=0;i < item.comment.length;i++){ %>
                         <div class="comment-group">
                             <div class = "comment section">
-                                <div class = "avatar">
-                                    <img src = "/<%= item.comment[i].picture %>" height="100%">
-                                </div>
+                                <a href="/member?user=<%= item.comment[i].memno %>">
+                                    <div class = "avatar">
+                                        <img src = "/<%= item.comment[i].picture %>" height="100%">
+                                    </div>
+                                </a>
                                 <h3>
-                                    <% if(item.comment[i].nickname != null && item.comment[i].nickname != ''){ %>
-                                        <%= item.comment[i].nickname %>
-                                    <% }else{ %>
-                                        <%= item.comment[i].memname %>
-                                    <% } %>
+                                    <a href="/member?user=<%= item.comment[i].memno %>">
+                                        <% if(item.comment[i].nickname != null && item.comment[i].nickname != ''){ %>
+                                            <%= item.comment[i].nickname %>
+                                        <% }else{ %>
+                                            <%= item.comment[i].memname %>
+                                        <% } %>
+                                    </a>
                                     <span class = "date"> <%= item.comment[i].cmtdate %> </span>
                                 </h3>
                                 <p>
@@ -177,17 +181,20 @@
                             </div>
                             <% if(item.comment[i].rspcontent != null){ %> 
                                 <div class = "reply section">
-                                    <div class = "avatar">
-                                        <img src = "/<%= item.member.picture %>" height="100%">
-                                    </div>
+                                    <a href="/member?user=<%= item.memno %>">
+                                        <div class = "avatar">
+                                            <img src = "/<%= item.member.picture %>" height="100%">
+                                        </div>
+                                    </a>
                                     <h3>
-                                        
-                                    <% if(item.member.nickname != null && item.member.nickname != ''){ %>
-                                        <%= item.member.nickname %>
-                                    <% }else{ %>
-                                        <%= item.member.memname %>
-                                    <% } %>
-                                    <span class = "date"> <%= item.comment[i].rspdate %> </span>
+                                        <a href="/member?user=<%= item.memno %>">
+                                            <% if(item.member.nickname != null && item.member.nickname != ''){ %>
+                                                <%= item.member.nickname %>
+                                            <% }else{ %>
+                                                <%= item.member.memname %>
+                                            <% } %>
+                                        </a>
+                                        <span class = "date"> <%= item.comment[i].rspdate %> </span>
                                     </h3>
                                     <p>
                                         <span class = "text">
