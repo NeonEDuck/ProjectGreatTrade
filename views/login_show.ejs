@@ -6,7 +6,17 @@
 
     <body>
         <div class = "container">
-            <%- include('public/header'); -%>
+            <div class = "header">
+                <a href="/"><img src = "/images/LOGO.png" height="80" style="margin-left: 5%"></a>
+                <ul class="log" style="margin-right: 5%">
+                    <% if(user == null){ %>
+                        <li><a href="/logout">登出</a></li>
+                    <% } else { %>
+                        <li><a href="/member?user=<%= user %>">帳戶</a></li>
+                        <li><a href="/logout">登出</a></li>
+                    <% } %>
+                </ul>
+            </div>
 
             <%- include('public/navbar'); -%>
 
