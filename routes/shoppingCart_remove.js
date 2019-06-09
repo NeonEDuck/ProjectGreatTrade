@@ -14,11 +14,25 @@ router.post('/', function(req, res, next) {
     if (req.session.shoppingCart === null || req.session.shoppingCart === undefined) {
         req.session.shoppingCart = [];
     }
-    if (req.session.shoppingCart.includes(prono)) {
-        for (var i = 0; i < req.session.shoppingCart.length; i++) {
-            if (req.session.shoppingCart[i] == prono) {
-                req.session.shoppingCart.splice(i,1)
-                break;
+    if (Array.isArray(prono)) {
+        for (var i = 0; i < prono.length; i++) {
+            if (req.session.shoppingCart.includes(prono)) {
+                for (var i = 0; i < req.session.shoppingCart.length; i++) {
+                    if (req.session.shoppingCart[i] == prono) {
+                        req.session.shoppingCart.splice(i,1)
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    else {
+        if (req.session.shoppingCart.includes(prono)) {
+            for (var i = 0; i < req.session.shoppingCart.length; i++) {
+                if (req.session.shoppingCart[i] == prono) {
+                    req.session.shoppingCart.splice(i,1)
+                    break;
+                }
             }
         }
     }
