@@ -34,7 +34,7 @@ var add = async function(newData){
 
     console.log(newData)
 
-    await sql('INSERT INTO product (proname, amt, price, description, picture, memno, "date") VALUES ($1, $2, $3, $4, $5, $6, to_timestamp(CURRENT_TIMESTAMP / 1000.0)) RETURNING prono', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.memno])
+    await sql('INSERT INTO product (proname, amt, price, description, picture, memno, "date") VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP) RETURNING prono', [newData.proname, newData.amt, newData.price, newData.description, newData.picture, newData.memno])
         .then((data) => {
             prono = data.rows[0].prono;
             result = 0;  
