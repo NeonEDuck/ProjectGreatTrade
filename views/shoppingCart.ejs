@@ -40,7 +40,7 @@
                                     <% if (j==0){ %>
                                         <form class="product" action = "/shoppingCart/remove" method = "post">
                                             <select name='prono' multiple hidden>
-                                                <% for(var k=0; j<items[i].length; k++) {%>
+                                                <% for(var k=0; k<items[i].length; k++) {%>
                                                     <option value ="<%= items[i][k].prono %>" selected></option>
                                                 <% } %>
                                             </select>
