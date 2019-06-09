@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
                         req.session.userpic='images/no_pic.jpg';
                     }
                     console.log(req.session);
-                    res.render('login_show', {name:req.session.username});   //導向使用者
+                    res.render('login_show', {user:req.session.user, name:req.session.username});   //導向使用者
                 }
             }
             else {
