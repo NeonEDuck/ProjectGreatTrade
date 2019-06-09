@@ -30,23 +30,31 @@ router.get('/', function(req, res, next) {
                         }
                     }
                 }
+                var _sell = [] 
                 for (var i = 0; i < data.sell.length; i++) {
-                    var d = new Date(data.sell[i][0].orddate);
-                    data.sell[i][0].orddate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                    if (data.sell[i][0].nickname.length > 3) {
-                        data.sell[i][0].nickname = data.sell[i][0].nickname.slice(0,3) + "..";
+                    if (data.sell[i][0].stat == 'S') {
+                        continue
                     }
-                    for (j = 0; j < data.sell[i].length; j++) {
-                        var d = new Date(data.sell[i][j].date);
-                        data.sell[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                        if (fs.existsSync('./public/picture/' + data.sell[i][j].picture)) {
-                            data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
+                    else {
+                        var d = new Date(data.sell[i][0].orddate);
+                        data.sell[i][0].orddate = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                        if (data.sell[i][0].nickname.length > 3) {
+                            data.sell[i][0].nickname = data.sell[i][0].nickname.slice(0,3) + "..";
                         }
-                        else {
-                            data.sell[i][j].picture='images/no_avatar.jpg';
+                        for (j = 0; j < data.sell[i].length; j++) {
+                            var d = new Date(data.sell[i][j].date);
+                            data.sell[i][j].date = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                            if (fs.existsSync('./public/picture/' + data.sell[i][j].picture)) {
+                                data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
+                            }
+                            else {
+                                data.sell[i][j].picture='images/no_avatar.jpg';
+                            }
                         }
+                        _sell.push(data.sell[i])
                     }
                 }
+                data.sell=_sell
                 res.render('order_show', {items:data});  //將資料傳給顯示頁面
             }
         })

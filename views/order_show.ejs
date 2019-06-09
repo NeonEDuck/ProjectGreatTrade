@@ -123,7 +123,7 @@
                                         <div class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
                                             <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="取消訂單">
                                         </div>
-                                    <% }else if(items.buy[i][0].stat=='D'){ %>
+                                    <% }else if(items.buy[i][0].stat=='D' || items.buy[i][0].stat=='S'){ %>
                                         <div class="button-group" style="margin-top:0.5em;margin-bottom:0.5em;float:right">
                                             <input class="button delete" style="background:var(--red);margin-top:0.5em;margin-bottom:0.5em;float:right" type="button" value="刪除訂單">
                                         </div>
@@ -252,6 +252,7 @@
                         break;
                 }
                 var section = $(this).parent().parent().parent().parent();
+                section.children(".button-group").remove();
                 $.post('/order/update', {ordno: section.attr("id").slice(3),stat: stat, memno:$('#memno').val()});
             }
         });
