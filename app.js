@@ -25,7 +25,6 @@ var shoppingCart_add = require('./routes/shoppingCart_add');
 var shoppingCart_remove = require('./routes/shoppingCart_remove');
 var shoppingCart_confirm = require('./routes/shoppingCart_confirm');
 
-var order_add_form = require('./routes/order_add_form');
 var order_add = require('./routes/order_add');
 var order_remove = require('./routes/order_remove');
 var order_update = require('./routes/order_update');
@@ -97,7 +96,6 @@ app.use('/logout', logout);
 app.use('/user/login_show', login_show);
 app.use('/register', register_form);
 app.use('/user/register', register)
-app.use('/order/add/form', order_add_form);
 app.use('/order/add', order_add);
 app.use('/order/remove', order_remove);
 app.use('/order/update', order_update);

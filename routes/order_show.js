@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
                             data.buy[i][j].picture='picture/' + data.buy[i][j].picture;
                         }
                         else {
-                            data.buy[i][j].picture='images/no_pic.jpg';
+                            data.buy[i][j].picture='images/no_avatar.jpg';
                         }
                     }
                 }
@@ -43,7 +43,7 @@ router.get('/', function(req, res, next) {
                             data.sell[i][j].picture='picture/' + data.sell[i][j].picture;
                         }
                         else {
-                            data.sell[i][j].picture='images/no_pic.jpg';
+                            data.sell[i][j].picture='images/no_avatar.jpg';
                         }
                     }
                 }

@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
                 data.picture='picture/' + data.picture;
             }
             else {
-                data.picture='images/no_pic.jpg';
+                data.picture='images/no_avatar.jpg';
             }
             for (var i = 0;i<data.product.length; i++) {
                 if (fs.existsSync('./public/picture/' + data.product[i].picture)) {

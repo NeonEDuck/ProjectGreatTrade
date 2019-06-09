@@ -40,7 +40,7 @@ router.get('/:pageNo', function(req, res, next) {
                         d.data[i].picture='picture/' + d.data[i].picture;
                     }
                     else {
-                        d.data[i].picture='images/no_pic.jpg';
+                        d.data[i].picture='images/no_avatar.jpg';
                     }
                 }
                 res.render('member_list', {items:d,search:search,url:url,label:label});  //將資料傳給顯示頁面
