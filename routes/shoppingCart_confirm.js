@@ -18,7 +18,12 @@ router.post('/', function(req, res, next) {
     if (req.session.user != null && req.session.user != undefined){
         req.session.shoppingCart = []
         order.add(newData).then(d => {
-            res.redirect('back');  //傳至成功頁面
+            if (d == 0) {
+                res.redirect('back');  //傳至成功頁面
+            }
+            else{
+                res.render('addFail');
+            }
         })
     }
     else {

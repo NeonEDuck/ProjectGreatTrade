@@ -131,19 +131,19 @@ var add = async function(newData){
         if (i > 0) {
             masterStr += ",";
         }
-        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', to_timestamp(CURRENT_TIMESTAMP / 1000.0),'"+newData.data[i].request+"')";
+        masterStr += "('"+newData.memno+"','"+newData.data[i].payno+"', CURRENT_TIMESTAMP,'"+newData.data[i].request+"')";
     }
     masterStr += " RETURNING ordno";
     console.log('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr)
-    console.log(Date.now())
 
-    await sql('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr,[Date.now()])
+    await sql('INSERT INTO ordmaster (memno, payno, orddate, request) VALUES ' + masterStr)
         .then((data) => {
             ordmaster = data.rows;
             result = 0;  
         }, (error) => {
             result = -1;
         });
+    console.log(ordmaster)
 
     if (result == 0) {
         for (var i = 0; i < ordmaster.length; i++) {
