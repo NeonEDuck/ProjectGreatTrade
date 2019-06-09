@@ -114,6 +114,8 @@ app.use('/feedback/add', feedback_add);
 app.use('/terms_and_privacy', terms_and_privacy);
 app.use(express.static('public/picture'));
 
+app.use('/scripts', express.static(__dirname + '/node_modules'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
