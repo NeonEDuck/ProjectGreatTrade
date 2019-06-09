@@ -62,7 +62,7 @@
                 </span>
                 <span id="label-group">
                     <% for(var i=0; i<items.label.length; i++) {%>
-                        <span id="<%= items.label[i].lblno %>" style="float: left" class="tag"><%= items.label[i].lblname %></span>
+                        <span id="<%= items.label[i].lblno %>" style="float: left" class="tag"><i class="fa fa-tag" aria-hidden="true"></i> <%= items.label[i].lblname %></span>
                     <% } %>
                 </span>
 
@@ -85,7 +85,7 @@
                             </div>
                             <div class = "right">
                                 <% for(var j = 0; j < items.data[i].label.length; j++){ %>
-                                    <span class="tag <%= items.data[i].label[j].lblno %>"><%= items.data[i].label[j].lblname %></span>
+                                    <span class="tag <%= items.data[i].label[j].lblno %>"><i class="fa fa-tag" aria-hidden="true"></i> <%= items.data[i].label[j].lblname %></span>
                                 <% } %>
                             </div>
                         </div>
@@ -120,7 +120,6 @@
         })
         $("select[name=type]").change(function(){
             if ($("select[name=type]").find(":selected").val() == "product") {
-                $("#label-group").css("display","block")
                 $("#label-group").stop().slideDown()
             }
             else {

@@ -30,7 +30,7 @@
             #label-group{
                 overflow: hidden;
                 margin: 0 auto;
-                display: none;
+                display: block;
             }
         </style>
     </head>
@@ -62,7 +62,7 @@
                 </span>
                 <span id="label-group">
                     <% for(var i=0; i<items.label.length; i++) {%>
-                        <span id="<%= items.label[i].lblno %>" style="float: left" class="tag"><%= items.label[i].lblname %></span>
+                        <span id="<%= items.label[i].lblno %>" style="float: left" class="tag"><i class="fa fa-tag" aria-hidden="true"></i> <%= items.label[i].lblname %></span>
                     <% } %>
                 </span>
 
@@ -109,6 +109,7 @@
                 $('#'+ variableJSON[i]).css("background-color","var(--red)");
                 $('#'+ variableJSON[i]).addClass("selected");
             }
+            $("#label-group").css("display","none")
         })
         $("select[name=type]").change(function(){
             if ($("select[name=type]").find(":selected").val() == "product") {
