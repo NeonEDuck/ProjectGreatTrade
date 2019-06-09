@@ -16,9 +16,9 @@ router.post('/', function(req, res, next) {
     }
     if (Array.isArray(prono)) {
         for (var i = 0; i < prono.length; i++) {
-            if (req.session.shoppingCart.includes(prono)) {
+            if (req.session.shoppingCart.includes(prono[i])) {
                 for (var i = 0; i < req.session.shoppingCart.length; i++) {
-                    if (req.session.shoppingCart[i] == prono) {
+                    if (req.session.shoppingCart[i] == prono[i]) {
                         req.session.shoppingCart.splice(i,1)
                         break;
                     }
