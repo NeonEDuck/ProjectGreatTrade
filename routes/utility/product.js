@@ -138,7 +138,7 @@ var one = async function(newData){
             }, (error) => {
                 result.payment = null;
             });
-        await sql('SELECT comment.*,member.memname,member.nickname FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [newData.prono])
+        await sql('SELECT comment.*,member.memname,member.nickname,member.picture FROM member JOIN comment ON member.memno = comment.memno WHERE comment.prono = $1', [newData.prono])
             .then((data) => {
                 if(data.rows.length > 0){
                     result.comment = data.rows;
