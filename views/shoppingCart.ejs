@@ -50,6 +50,7 @@
                                         <div class = "amt" id="<%= items[i][j].prono %>" style="position: absolute">
                                             <input type="number" name="amt" style="font-size: 32px;width: 80px;margin-top: 48px;margin-left: calc(820px - 80px - 1em);" value="1" min="1" max="<%= items[i][j].amt %>">
                                         </div>
+                                        <input class='price' value="<%= items[i][j].price %>" hidden>
                                         <a href="/product/<%= items[i][j].prono %>"> 
                                             <div class = "section">
                                                 <img src = "/<%= items[i][j].picture %>" height="100%">
@@ -85,7 +86,7 @@
                         <% } %>
                     </div>
                     <div style="float: right">
-                        <h1 style="float: left;margin-top: 1em;">總共<%= sum %>$</h1>
+                        <h1 id="sum" style="float: left;margin-top: 1em;">總共<%= sum %>$</h1>
                         <form action = "/shoppingCart/confirm" method = "post">
                             <input name="data" id='data' hidden>
                             <% if (user!=undefined && user!=null){ %> <input name="user" id='user' hidden> <% } %>
@@ -200,6 +201,12 @@
                     $(this).parent().css("background","var(--green)");
                 }
             })
+            var sum = 0;
+            $(":input.price").each(function(){
+                sum += (parseInt($(this).val()) * parseInt($(this).parent().children('div.amt').children(':input[name=amt]').val()))
+            })
+            console.log(sum)
+            $('#sum').replaceWith('<h1 id="sum" style="float: left;margin-top: 1em;">總共'+sum+'$</h1>')
 
             dataChange();
         })
